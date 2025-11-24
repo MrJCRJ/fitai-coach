@@ -16,3 +16,4 @@ package-lock.json
 /.vscode/
 tsconfig.tsbuildinfo
 .idea/
+.vercel
