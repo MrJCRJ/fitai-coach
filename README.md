@@ -4,28 +4,32 @@ Personal trainer inteligente que evolui com você - Uma aplicação PWA moderna 
 
 ## 🚀 Acesse Agora
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel)](https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel)](https://fitai-coach-faaa1a6mo-jose-ciceros-projects.vercel.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/MrJCRJ/fitai-coach)
 
-**🌐 URL de Produção**: https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app
+**🌐 URL de Produção**: https://fitai-coach-faaa1a6mo-jose-ciceros-projects.vercel.app
 
 ## 📱 Instalação Rápida no Celular
 
 ### ⚡ Método Mais Fácil
-1. **Abra o link** no seu celular: [fitai-coach.vercel.app](https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app)
+
+1. **Abra o link** no seu celular: [fitai-coach.vercel.app](https://fitai-coach-faaa1a6mo-jose-ciceros-projects.vercel.app)
 2. **Toque em "Instalar App"** (se aparecer) OU siga as instruções abaixo
 
 ### 📲 Android (Chrome/Edge)
+
 1. Abra o link no navegador
 2. Toque no menu (⋮) → **"Adicionar à tela inicial"**
 3. Confirme: **"Adicionar"**
 
 ### 🍎 iOS (Safari)
+
 1. Abra o link no Safari
 2. Toque no botão compartilhar (□) → **"Adicionar à Tela de Início"**
 3. Toque em **"Adicionar"**
 
 ### ✅ Como Saber se Instalou Corretamente
+
 - ✅ Ícone aparece na tela inicial
 - ✅ Abre como app nativo (sem barra de endereço)
 - ✅ Funciona offline
@@ -33,10 +37,12 @@ Personal trainer inteligente que evolui com você - Uma aplicação PWA moderna 
 ## 🛠️ Desenvolvimento Local
 
 ### Pré-requisitos
+
 - Node.js 18+
 - npm ou yarn
 
 ### Instalação
+
 ```bash
 # Clone o repositório
 git clone https://github.com/MrJCRJ/fitai-coach.git
@@ -53,6 +59,7 @@ npm run dev
 ```
 
 ### Scripts Disponíveis
+
 - `npm run dev` - Servidor de desenvolvimento
 - `npm run build` - Build de produção
 - `npm run start` - Servidor de produção
@@ -90,6 +97,7 @@ src/
 ## 🎯 Funcionalidades
 
 ### MVP Atual
+
 - ✅ Interface moderna e responsiva
 - ✅ Componentes reutilizáveis
 - ✅ Tema dark otimizado
@@ -97,6 +105,7 @@ src/
 - ✅ API stubs para IA
 
 ### Planejado
+
 - 🔄 Sistema de autenticação
 - 🔄 Geração real de treinos
 - 🔄 Dashboard de progresso
