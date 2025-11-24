@@ -1,0 +1,50 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "setup": "bash scripts/init-bootstrap.sh",
+    "estimate-cost": "node scripts/estimate-cost.js",
+    "test": "vitest --run",
+    "lint": "eslint .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.24",
+    "next": "^14.2.33",
+    "next-pwa": "^5.6.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^8.50.0",
+    "eslint-config-next": "^14.2.33",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.7",
+    "postcss": "^8.5.6",
+    "prettier": "^3.4.1",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.9.3",
+    "vitest": "^1.6.1"
+  }
+}
