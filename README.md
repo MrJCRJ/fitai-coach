@@ -2,29 +2,33 @@
 
 Personal trainer inteligente que evolui com você - Uma aplicação PWA moderna para acompanhamento fitness.
 
-## 🚀 Deploy
+## 🚀 Acesse Agora
 
-A aplicação está disponível em produção:
-**https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app**
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel)](https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/MrJCRJ/fitai-coach)
 
-## 📱 Como Instalar no Celular
+**🌐 URL de Produção**: https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app
 
-### Android (Chrome)
-1. Abra o link da aplicação no Chrome
-2. Toque no menu (⋮) no canto superior direito
-3. Selecione "Adicionar à tela inicial" ou "Instalar app"
-4. Confirme a instalação
+## 📱 Instalação Rápida no Celular
 
-### iOS (Safari)
-1. Abra o link da aplicação no Safari
-2. Toque no botão de compartilhamento (□)
-3. Role para baixo e selecione "Adicionar à Tela de Início"
-4. Toque em "Adicionar" no canto superior direito
+### ⚡ Método Mais Fácil
+1. **Abra o link** no seu celular: [fitai-coach.vercel.app](https://fitai-coach-6kk6pd0pk-jose-ciceros-projects.vercel.app)
+2. **Toque em "Instalar App"** (se aparecer) OU siga as instruções abaixo
 
-### Verificação da Instalação
-- O app aparecerá na tela inicial como um ícone nativo
-- Pode ser aberto offline (funcionalidades básicas)
-- Não mostra barra de endereço do navegador
+### 📲 Android (Chrome/Edge)
+1. Abra o link no navegador
+2. Toque no menu (⋮) → **"Adicionar à tela inicial"**
+3. Confirme: **"Adicionar"**
+
+### 🍎 iOS (Safari)
+1. Abra o link no Safari
+2. Toque no botão compartilhar (□) → **"Adicionar à Tela de Início"**
+3. Toque em **"Adicionar"**
+
+### ✅ Como Saber se Instalou Corretamente
+- ✅ Ícone aparece na tela inicial
+- ✅ Abre como app nativo (sem barra de endereço)
+- ✅ Funciona offline
 
 ## 🛠️ Desenvolvimento Local
 

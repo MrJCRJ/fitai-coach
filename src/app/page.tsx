@@ -4,8 +4,11 @@ import { motion } from 'framer-motion'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
+import { usePWAInstall } from '@/lib/usePWAInstall'
 
 export default function HomePage() {
+  const { installPWA, isInstallable } = usePWAInstall()
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="max-w-6xl w-full mx-auto px-4 py-16">
@@ -47,6 +50,27 @@ export default function HomePage() {
               <Badge variant="warning">Framer Motion</Badge>
               <Badge variant="error">Tailwind CSS</Badge>
             </div>
+
+            {/* Install Button */}
+            {isInstallable && (
+              <motion.div
+                className="mb-8"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Button
+                  size="lg"
+                  onClick={installPWA}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl animate-pulse"
+                >
+                  📱 Instalar App Agora
+                </Button>
+                <p className="text-sm text-gray-400 mt-2">
+                  Rápido • Offline • Sem anúncios
+                </p>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
 
@@ -164,7 +188,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button
                   size="lg"
-                  onClick={() => window.open('https://github.com', '_blank')}
+                  onClick={() => window.open('https://github.com/MrJCRJ/fitai-coach', '_blank')}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl"
                 >
                   🔗 Ver no GitHub
