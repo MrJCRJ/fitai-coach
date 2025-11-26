@@ -1,14 +1,70 @@
-import type { WorkoutPlan } from './types'
+import type { WeeklyWorkout } from "./types";
+import type { ChallengeWorkout, ChallengeResult } from "../challengeWorkout";
+import {
+  processAssessmentData,
+  type UserAssessmentData,
+} from "./assessmentProcessor";
+import { type ProgressionCriteria } from "./progressionAnalyzer";
+import { processChallengeResults } from "./challengeProcessor";
+import {
+  generateChallengePrompt,
+  generateWorkoutPlanPrompt,
+  addChallengeResultsToPrompt,
+  addProgressSummaryToPrompt,
+} from "./workoutPrompts";
+import { callDeepSeekApi } from "./apiClient";
 
-export async function generateWorkout(profile: any): Promise<WorkoutPlan> {
-  // This is a lightweight stub for the DeepSeek API.
-  // Replace with actual API integration when ready.
-  return {
-    planId: 'mock-plan-1',
-    exercises: [
-      { name: 'Push-up', reps: 10, sets: 3 },
-      { name: 'Squat', reps: 15, sets: 3 }
-    ],
-    note: 'This is a mocked plan. Integrate DeepSeek API in src/lib/ai/deepseek.ts'
+// Re-export interfaces para manter compatibilidade
+export type { UserAssessmentData, ProgressionCriteria };
+
+export async function generatePersonalizedChallenge(
+  userProfile: Record<string, unknown>
+): Promise<ChallengeWorkout> {
+  // Processar dados da avaliação para formato estruturado
+  const processedData = processAssessmentData(userProfile);
+  const prompt = generateChallengePrompt(processedData);
+
+  const response = await callDeepSeekApi<ChallengeWorkout>({
+    prompt,
+    temperature: 0.7,
+    maxTokens: 1500,
+  });
+
+  if (!response.success) {
+    throw new Error(response.error || "Erro na API DeepSeek");
   }
+
+  return response.data!;
+}
+
+export async function generateWeeklyWorkoutPlan(
+  userProfile: Record<string, unknown>,
+  progressSummary?: string,
+  challengeResults?: ChallengeResult[]
+): Promise<WeeklyWorkout> {
+  // Processar dados da avaliação para formato estruturado
+  const processedData = processAssessmentData(userProfile);
+
+  let prompt = generateWorkoutPlanPrompt(processedData);
+
+  if (challengeResults && challengeResults.length > 0) {
+    const challengeSummary = processChallengeResults(challengeResults);
+    prompt = addChallengeResultsToPrompt(prompt, challengeSummary);
+  }
+
+  if (progressSummary) {
+    prompt = addProgressSummaryToPrompt(prompt, progressSummary);
+  }
+
+  const response = await callDeepSeekApi<WeeklyWorkout>({
+    prompt,
+    temperature: 0.7,
+    maxTokens: 2500,
+  });
+
+  if (!response.success) {
+    throw new Error(response.error || "Erro na API DeepSeek");
+  }
+
+  return response.data!;
 }

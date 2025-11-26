@@ -1,16 +1,16 @@
-'use client'
-import { motion } from 'framer-motion'
-import { forwardRef, InputHTMLAttributes } from 'react'
+"use client";
+import { motion } from "framer-motion";
+import { forwardRef, InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  error?: string
-  icon?: React.ReactNode
-  className?: string
+  label?: string;
+  error?: string;
+  icon?: React.ReactNode;
+  className?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, icon, className = '', ...props }, ref) => {
+  ({ label, error, icon, className = "", ...props }, ref) => {
     return (
       <motion.div
         className="space-y-2"
@@ -32,8 +32,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               transition-all duration-200 ease-in-out
               focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-slate-800/50
               hover:border-gray-500
-              ${error ? 'border-red-300 focus:border-red-500' : 'border-gray-600'}
-              ${icon ? 'pl-12' : ''}
+              ${error ? "border-red-300 focus:border-red-500" : "border-gray-600"}
+              ${icon ? "pl-12" : ""}
               ${className}
             `}
             {...props}
@@ -57,10 +57,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </motion.p>
         )}
       </motion.div>
-    )
-  }
-)
+    );
+  },
+);
 
-Input.displayName = 'Input'
+Input.displayName = "Input";
 
-export default Input
+export default Input;

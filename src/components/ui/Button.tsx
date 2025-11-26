@@ -1,39 +1,41 @@
- 'use client'
-import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
+"use client";
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost'
-type ButtonSize = 'sm' | 'md' | 'lg'
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
-  children: ReactNode
-  onClick?: () => void
-  variant?: ButtonVariant
-  size?: ButtonSize
-  disabled?: boolean
-  className?: string
+  children: ReactNode;
+  onClick?: () => void;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
+  className?: string;
 }
 
 const buttonVariants = {
-  primary: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl',
-  secondary: 'bg-gradient-to-r from-gray-700 to-gray-800 text-gray-100 hover:from-gray-600 hover:to-gray-700',
-  outline: 'border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10',
-  ghost: 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-}
+  primary:
+    "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl",
+  secondary:
+    "bg-gradient-to-r from-gray-700 to-gray-800 text-gray-100 hover:from-gray-600 hover:to-gray-700",
+  outline: "border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10",
+  ghost: "text-gray-300 hover:text-white hover:bg-gray-700/50",
+};
 
 const buttonSizes = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg'
-}
+  sm: "px-4 py-2 text-sm",
+  md: "px-6 py-3 text-base",
+  lg: "px-8 py-4 text-lg",
+};
 
 export default function Button({
   children,
   onClick,
-  variant = 'primary',
-  size = 'md',
+  variant = "primary",
+  size = "md",
   disabled = false,
-  className = ''
+  className = "",
 }: ButtonProps) {
   return (
     <motion.button
@@ -55,13 +57,13 @@ export default function Button({
       {/* Shine effect */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-        initial={{ x: '-100%' }}
-        whileHover={{ x: '100%' }}
+        initial={{ x: "-100%" }}
+        whileHover={{ x: "100%" }}
         transition={{ duration: 0.6 }}
       />
       <span className="relative z-10 flex items-center justify-center gap-2">
         {children}
       </span>
     </motion.button>
-  )
+  );
 }

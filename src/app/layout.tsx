@@ -1,34 +1,44 @@
-import '../styles/globals.css'
-import React from 'react'
+import "../styles/globals.css";
+import React from "react";
 
 export const metadata = {
-  title: 'FitAI Coach',
-  description: 'Personal trainer inteligente que evolui com você',
-  manifest: '/manifest.json',
-  themeColor: '#3b82f6',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+  title: "FitAI Coach",
+  description: "Personal trainer inteligente que evolui com você",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
-    title: 'FitAI Coach',
+    statusBarStyle: "default",
+    title: "FitAI Coach",
   },
   formatDetection: {
     telephone: false,
   },
   openGraph: {
-    type: 'website',
-    siteName: 'FitAI Coach',
-    title: 'FitAI Coach',
-    description: 'Personal trainer inteligente que evolui com você',
+    type: "website",
+    siteName: "FitAI Coach",
+    title: "FitAI Coach",
+    description: "Personal trainer inteligente que evolui com você",
   },
   twitter: {
-    card: 'summary',
-    title: 'FitAI Coach',
-    description: 'Personal trainer inteligente que evolui com você',
+    card: "summary",
+    title: "FitAI Coach",
+    description: "Personal trainer inteligente que evolui com você",
   },
-}
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#3b82f6",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-BR" className="dark">
       <head>
@@ -44,9 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/icon.svg" />
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
       </head>
-      <body className="min-h-screen">
-        {children}
-      </body>
+      <body className="min-h-screen">{children}</body>
     </html>
-  )
+  );
 }

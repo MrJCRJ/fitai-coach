@@ -1,0 +1,58 @@
+import type { Exercise } from "./exerciseTypes";
+
+export const backExercises: Exercise[] = [
+  {
+    id: "superman",
+    name: "Superman",
+    muscleGroup: "back",
+    difficulty: "beginner",
+    sets: 3,
+    reps: "10-15",
+    rest: "45s",
+    instructions:
+      "Deitado de bruços, levante simultaneamente braços e pernas.",
+    tips: "Contraia as costas e segure por 2 segundos no topo.",
+    equipment: [],
+    calories: 5,
+  },
+  {
+    id: "reverse-snow-angel",
+    name: "Anjo Invertido",
+    muscleGroup: "back",
+    difficulty: "beginner",
+    sets: 3,
+    reps: "10-12",
+    rest: "45s",
+    instructions:
+      "Deitado de bruços, mova os braços como se estivesse nadando de costas.",
+    tips: "Mantenha os ombros afastados do chão.",
+    equipment: [],
+    calories: 6,
+  },
+  {
+    id: "pull-up-assisted",
+    name: "Barra Assistida",
+    muscleGroup: "back",
+    difficulty: "intermediate",
+    sets: 3,
+    reps: "6-10",
+    rest: "75s",
+    instructions: "Puxe-se para cima em uma barra usando assistência.",
+    tips: "Use elástico ou máquina para ajudar.",
+    equipment: ["Barra", "Elástico (opcional)"],
+    calories: 12,
+  },
+  {
+    id: "inverted-rows",
+    name: "Remada Invertida",
+    muscleGroup: "back",
+    difficulty: "intermediate",
+    sets: 3,
+    reps: "8-12",
+    rest: "75s",
+    instructions: "Debaixo de uma barra, puxe o peito em direção à barra.",
+    tips: "Mantenha o corpo reto como uma prancha.",
+    equipment: ["Barra"],
+    calories: 10,
+  },
+];

@@ -2,121 +2,112 @@ Project: fitai-coach — AI agent guide
 
 Summary:
 
-- This repo is a Next.js app (app-router layout) organized by feature domains. Key folders:
-  - `src/app/`: pages/route handlers (top-level features: `assessment`, `dashboard`, `premium`, `workout`).
-  - `src/components/`: UI and domain components (mirrors `src/app` naming for features). Shared UI pieces live in `src/components/ui`.
-  - `src/lib/`: service wrappers (AI, auth, payment, storage). Keep server-only logic here.
-  - `public/`: static assets.
+- This repo is a Next.js 14 PWA (Progressive Web App) fitness coaching platform with AI-powered workout generation. Key folders:
+  - `src/app/`: Feature-based pages/routes (assessment, dashboard, premium, workout) using App Router
+  - `src/components/`: Feature-specific components (mirrors `src/app` naming) + shared `ui/` components
+  - `src/lib/`: Service layer with AI integration, workout generation, exercise database, and challenge system
+  - `public/`: Static assets including PWA manifest and service worker files
+
+  Core user flow: Assessment → Challenge Workout → Personalized Workout Generation
 
   Docs & quick refs:
-  - `README.md` - developer quick start (install, setup, dev, build, cost-estimator)
-  - `PROJECT_DOCUMENTATION.md` - product vision, specs, strategy and sprint plan (main project document)
-  - The repository now includes helper scripts and a minimal ESM migration:
-    - `npm run estimate-cost` — runs a simple cost estimator to compute per-user monthly cost with environment-variable overrides.
-  - The repo includes a minimal app skeleton and starter files (ESM-ready):
-    - `src/app/layout.tsx` and `src/app/page.tsx` — minimal App Router skeleton
-    - `src/styles/globals.css` — tailwind CSS entry
-  - `postcss.config.mjs`, `tailwind.config.mjs` — PostCSS and Tailwind configuration (ESM versions used by the project)
-  - Note: A single CJS config remains for tooling compatibility: `.eslintrc.cjs` (ESLint). Other `.cjs` configs were deprecated and removed to standardize on `.mjs`.
-    - `scripts/init-bootstrap.sh` — bootstrap helper (run `npm run setup`)
-    - `scripts/estimate-cost.js` — per-user cost estimator (run `npm run estimate-cost`)
-    - `.env.example` — example environment variables for AI & payment providers
-    - CI: The repo includes a GitHub Actions workflow at `.github/workflows/ci.yml` which runs `npx tsc --noEmit` and `npm run build` on pushes and PRs.
+  - `README.md` - Setup, deployment, and feature overview
+  - `PROJECT_DOCUMENTATION.md` - Product vision, business model, and technical specs
+  - `package.json` - Next.js 14 + TypeScript + Tailwind + Framer Motion + PWA stack
+  - The repository uses ESM throughout (`next.config.mjs`, `postcss.config.mjs`, etc.)
+  - CI: GitHub Actions runs TypeScript checks and production builds on pushes/PRs
 
 What you need to know (actionable):
 
-- Start by reading `package.json` and `src/lib/*` if present — they show integrations and essential services.
-- This project uses `framer-motion` and `next-pwa` in `package.json`. Any component using `framer-motion` must be a client component (`'use client'` at the top).
-- Put shared, pure UI components in `src/components/ui`. Put feature-specific components in `src/components/<feature>` to keep a predictable import path pattern (e.g., `src/components/workout/Timer.tsx`).
-- Keep API/service wrappers in `src/lib` and avoid import cycles. Prefer a single exported client for each integration (e.g., `src/lib/ai/client.ts`, `src/lib/payment/provider.ts`).
-- State & side effects:
-  - Server-only logic, long-running or secret-key usages (AI, payment, auth) belong in `src/lib` and server-side contexts (fetches inside the app server or API routes).
-  - Client-side UI, effects, event handlers, and animation belong in `src/components` under `use client` components.
+- **Architecture**: Feature-driven with domain separation. Each feature (`assessment`, `workout`, etc.) has corresponding folders in `src/app/` and `src/components/`
+- **Data Flow**: Assessment answers + Challenge results → AI-powered workout generation → localStorage persistence
+- **Challenge System**: Real fitness assessment via 3-exercise challenge (push-ups, plank, squats) with performance tracking and difficulty rating
+- **AI Integration**: DeepSeek API for workout generation (live implementation, not mocked - requires DEEPSEEK_API_KEY)
+- **PWA Setup**: Fully implemented with `next-pwa` - service workers generated to `public/` on build, disabled in dev
+- **Client Components**: Any component using `framer-motion` must be `'use client'` (animations require client-side rendering)
+- **State Management**: localStorage-based persistence with utility functions in `src/lib/` (no global state library)
+- **Language**: Portuguese UI with English code comments
 
 Routing & pages:
 
-- Use the app router pattern: add a folder under `src/app/<feature>`, export default component named `page` (e.g., `src/app/workout/page.tsx`) when adding a new route.
-- For API routes put server handlers under `src/app/api/*` (for the app router) or `pages/api` when using pages router. Verify which router is active before choosing.
+- App Router structure: `src/app/[feature]/page.tsx` for each route
+- API routes: `src/app/api/[service]/route.ts` (e.g., `src/app/api/deepseek/route.ts`)
+- Feature components: `src/components/[feature]/` (e.g., `src/components/workout/Timer.tsx`)
 
-Dev workflows & checks an agent should run:
+Dev workflows & checks:
 
-- Check `package.json` for `scripts`. If missing, verify project's package manager and confirm dev/run/build conventions before adding scripts. Common defaults:
-  - `npm run dev` (start dev server)
-  - `npm run build && npm run start` (production)
-  - This repo provides helper scripts:
-  - `npm run setup` — installs Next.js, TypeScript, Tailwind, and PWA toolchain and initializes config files.
-  - `npm run dev`, `npm run build`, `npm run start` — standard Next commands.
-  - `npm run test` — run unit tests with Vitest
-    - `npm run estimate-cost` — runs a simple cost estimator to compute per-user monthly cost with environment-variable overrides.
-- If tests or linters appear later, run them and add/adjust as needed. Do not introduce new global tooling without noting it in a PR description.
+- `npm run dev` - Development server with hot reload
+- `npm run build` - Production build (includes PWA service worker generation)
+- `npm run start` - Production server (test PWA functionality here)
+- `npm run test` - Vitest unit tests (run tests for AI integration and API routes)
+- `npm run test:deepseek` - Test DeepSeek API integration specifically
+- `npm run estimate-cost` - Custom script calculating per-user monthly costs
+- `npm run lint` - ESLint with Prettier (auto-fix enabled)
+- `npm run setup` - Initial project setup (runs bootstrap script)
+- Pre-commit hooks: Husky + lint-staged for code quality
+- PWA testing: Build locally and serve with `npm run start` to test installability
 
-Conventions & patterns to follow when changing code:
+Conventions & patterns:
 
-- Keep features self-contained: mirror `src/app` and `src/components` naming and folders.
-- Server and client separation: avoid importing directly from server-only modules into client-side components.
-- Small utilities: place pure helpers in `src/lib/utils` or add `index.ts` barrel exports in each feature folder.
-- Animation & UI: prefer `framer-motion` only in `use client` components. Example:
-  - `src/components/workout/AnimatedButton.tsx` should start with `'use client'` and import `motion` from `framer-motion`.
+- **Feature Boundaries**: Keep features self-contained - mirror `src/app` and `src/components` folder structure
+- **Component Naming**: PascalCase React components, camelCase utilities
+- **Client/Server Separation**: Server logic (API calls, data processing) in `src/lib/`, UI logic in `src/components/`
+- **Animation Pattern**: `'use client'` + `framer-motion` imports for animated components
+- **Data Persistence**: localStorage utilities with error handling (check `typeof window !== "undefined"`)
+- **Exercise Database**: Structured by muscle groups and difficulty levels in `src/lib/exercisesDatabase.ts`
+- **Workout Generation**: Assessment + Challenge results determine fitness level, then filter exercises by goal/muscle group
+- **Challenge Assessment**: Performance-based leveling (push-up/plank/squat scores) overrides self-reported fitness level
 
-Integration points and external dependencies:
+Integration points:
 
-- Payment: `src/lib/payment` likely holds wrappers to payment provider (e.g., Stripe). Check for API keys in environment variables before adding or using secrets.
-- AI: `src/lib/ai` is the place for model wrappers. Keep API keys and tokens in environment variables, and do not commit them.
-- Auth: `src/lib/auth` will handle session checks and tokens.
+- **AI Service**: `src/lib/ai/deepseek.ts` - Live DeepSeek API integration (requires API key in `.env.local`)
+- **Payment**: Planned integration (Stripe/Mercado Pago) in `src/lib/payment/` (not yet implemented)
+- **Auth**: Planned user authentication in `src/lib/auth/` (not yet implemented)
+- **PWA**: `next-pwa` configuration in `next.config.mjs` with service worker generation to `public/`
 
-How to propose/implement larger changes (notes for agents):
+How to implement features:
 
-- For any change that adds or changes server-side integrations (AI, payment, auth), update `src/lib/<integration>` in a single place, add or update environment variable documentation, and add server-side tests/mocks.
-- When adding UI elements, mirror naming patterns and place styles in `src/components/<feature>/styles` or central `styles/` if shared.
-- If you add PWA behavior or service-worker configs, update `next.config.mjs` (use `next.config.cjs` if you prefer CommonJS) and `next-pwa` settings, then verify production `build` & `start` commands work locally.
+- **New Assessment Questions**: Add to `assessmentQuestions` array in `src/app/assessment/page.tsx`
+- **New Exercises**: Add to `exercisesDatabase` object in `src/lib/exercisesDatabase.ts` with proper muscle group/difficulty
+- **New Workout Goals**: Create new goal logic in AI integration (`src/lib/ai/deepseek.ts`)
+- **Challenge Exercises**: Modify `defaultChallengeWorkout` in `src/lib/challengeWorkout.ts`
+- **UI Components**: Add to `src/components/ui/` for shared components, feature-specific in `src/components/[feature]/`
+- **API Routes**: Create `src/app/api/[endpoint]/route.ts` for new backend endpoints
 
-Examples to reference:
+Examples from codebase:
 
-- Feature page: `src/app/workout` (route) ↔ `src/components/workout` (UI). If you add a new page `src/app/assessment`, create `src/components/assessment` for UI building blocks.
-- Shared UI: `src/components/ui` for Buttons, Input, Layout wrappers.
+- **Assessment Flow**: `src/app/assessment/page.tsx` - Multi-step form with progress tracking and localStorage persistence
+- **Challenge Modal**: `src/components/ChallengeWorkoutModal.tsx` - Real-time exercise timing with difficulty rating
+- **Workout Display**: `src/app/workout/page.tsx` - Shows monthly AI-generated workout plans
+- **Dashboard Logic**: `src/app/dashboard/page.tsx` - State-driven UI showing assessment → challenge → workout progression
+- **Exercise Filtering**: Goal-based exercise selection handled by AI in `src/lib/ai/deepseek.ts`
+- **Level Calculation**: `calculateLevelFromChallenge()` in `src/lib/challengeWorkout.ts` - Performance-based leveling
+
+Common patterns to follow:
+
+- **Error Handling**: Check localStorage availability with `typeof window !== "undefined"`
+- **Loading States**: Use React `useState` for async operations and loading UI
+- **Responsive Design**: Mobile-first with Tailwind responsive classes
+- **Animation**: `motion.div` from framer-motion with `initial`/`animate` props
+- **Data Validation**: TypeScript interfaces for all data structures (see `src/lib/ai/types.ts`)
+- **Component Props**: Destructure props in function parameters for cleaner code
+- **API Error Handling**: DeepSeek API calls include proper error handling and JSON parsing
+- **Environment Variables**: Use `.env.local` for API keys (DeepSeek), check for existence before API calls
+
+Final notes:
+
+- **User Flow Priority**: Assessment → Challenge → Workout is the core conversion funnel
+- **Performance Focus**: Challenge system provides real fitness data vs self-reported
+- **Scalability**: Exercise database designed for easy expansion by muscle group/difficulty
+- **Business Model**: Hybrid freemium (ads) + premium (subscription) architecture
+- **Testing**: Vitest for unit tests, focus on workout generation logic and challenge calculations
+- **Deployment**: Vercel-optimized with PWA support for mobile app-like experience
+- **API Keys**: DeepSeek integration requires `DEEPSEEK_API_KEY` in `.env.local` for real functionality
 
 If something is unclear:
 
-- Confirm the chosen router (app or pages) and targeted environment (Next.js vX). If `package.json` lacks scripts or `next` dependency, ask maintainers before assuming commands.
-
-Final note:
-
-- This repo is scaffolded with domain-first layout. Prioritize changes that respect feature boundaries (`src/app` + `src/components`) and central service wrappers (`src/lib`). Keep PRs focused — refactors that span many files should be broken into small steps.
-
-If anything above is missing or seems inconsistent with the current project, ask a clarification question before making structural changes.
-
-Next.js MVP config (PWA + app router):
-
-- The project uses `next-pwa` and is intended to run with the `appDir` enabled in Next.js. Add a `next.config.mjs` in the repo root if not present. Example MVP config (place the file at repo root):
-  - The project uses `next-pwa` and is intended to run with the `appDir` enabled in Next.js. This repository now uses ESM `next.config.mjs` as the Next.js config; if converting back to CommonJS, prefer `next.config.cjs`. Example MVP config (ESM, add to `next.config.mjs`):
-
-```javascript
-/** @type {import('next').NextConfig} */
-import nextPWA from "next-pwa";
-
-const withPWA = nextPWA({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === "development",
-});
-
-const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-};
-
-export default withPWA(nextConfig);
-```
-
-- Notes on the snippet above:
-  - `appDir: true` enables the app router. Keep this if the code uses `src/app/*` routes.
-  - `typescript.ignoreBuildErrors: false` enforces that `next build` fails with type errors — keep it to maintain type safety.
-  - `next-pwa` will generate service worker assets into `public/`. `disable` is true during development to avoid PWA caching during local development.
-  - Ensure `next` (Next.js) is present as a dependency in `package.json`. If missing, add an explicit Next.js dependency and standard `scripts`:
-    - `dev`: `next dev`
-    - `build`: `next build`
-    - `start`: `next start`
-
-If you add PWA behavior or service-worker configs, follow the `next-pwa` docs and test production builds locally (`npm run build && npm run start`) because `next-pwa` behavior depends on a production build.
+- Check `PROJECT_DOCUMENTATION.md` for business context and product vision
+- Review `src/lib/workoutGenerator.ts` for core business logic
+- Test PWA functionality by building and serving locally (`npm run build && npm run start`)
+- For new features, start by understanding the assessment → challenge → workout data flow
+- Check existing tests in `*.test.ts` files for testing patterns

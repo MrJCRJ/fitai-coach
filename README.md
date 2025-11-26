@@ -51,6 +51,10 @@ cd fitai-coach
 # Instale as dependências
 npm install
 
+# Configure as variáveis de ambiente
+cp .env.example .env.local
+# Edite .env.local e adicione sua chave da API DeepSeek
+
 # Execute o setup inicial
 npm run setup
 
@@ -58,14 +62,24 @@ npm run setup
 npm run dev
 ```
 
+### Configuração da API DeepSeek
+
+1. **Obtenha uma chave da API** em [DeepSeek Platform](https://platform.deepseek.com/)
+2. **Configure no arquivo `.env.local`**:
+   ```env
+   DEEPSEEK_API_KEY=sua_chave_aqui
+   ```
+3. **A aplicação detectará automaticamente** e começará a usar a IA real em vez de dados mockados
+
 ### Scripts Disponíveis
 
 - `npm run dev` - Servidor de desenvolvimento
 - `npm run build` - Build de produção
 - `npm run start` - Servidor de produção
-- `npm run lint` - Verificação de código
 - `npm run test` - Executar testes
+- `npm run test:deepseek` - Testar integração com API DeepSeek
 - `npm run estimate-cost` - Estimativa de custos
+- `npm run lint` - Verificação de código
 
 ## 🏗️ Arquitetura
 

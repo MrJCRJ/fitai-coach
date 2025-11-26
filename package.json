@@ -5,9 +5,10 @@
     "build": "next build",
     "start": "next start",
     "setup": "bash scripts/init-bootstrap.sh",
-    "estimate-cost": "node scripts/estimate-cost.js",
     "test": "vitest --run",
-    "lint": "eslint .",
+    "test:deepseek": "node scripts/test-deepseek.js",
+    "estimate-cost": "node scripts/estimate-cost.js",
+    "lint": "eslint src/ --max-warnings 0",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -33,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",
     "autoprefixer": "^10.4.22",
+    "dotenv": "^17.2.3",
     "eslint": "^8.50.0",
     "eslint-config-next": "^14.2.33",
     "eslint-config-prettier": "^9.1.0",
