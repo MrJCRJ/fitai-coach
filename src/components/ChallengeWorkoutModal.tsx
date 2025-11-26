@@ -97,7 +97,7 @@ export default function ChallengeWorkoutModal({
 
   const loadChallengeAsync = async () => {
     console.log(
-      "🎯 ChallengeModal: Iniciando carregamento do desafio personalizado",
+      "🎯 ChallengeModal: Iniciando carregamento do desafio personalizado"
     );
     setIsLoading(true);
     setError(null);
@@ -147,7 +147,7 @@ export default function ChallengeWorkoutModal({
             timeLimit,
             measurementUnit,
           };
-        },
+        }
       );
 
       const processedChallenge = {
@@ -157,7 +157,7 @@ export default function ChallengeWorkoutModal({
 
       console.log(
         "✅ ChallengeModal: Desafio personalizado gerado com sucesso",
-        processedChallenge,
+        processedChallenge
       );
       setWorkout(processedChallenge);
 
@@ -343,6 +343,21 @@ export default function ChallengeWorkoutModal({
                             </div>
                             <p className="text-sm text-gray-400">
                               Tempo restante
+                            </p>
+                          </div>
+                        )}
+
+                      {/* Mensagem quando tempo acabou */}
+                      {exercise &&
+                        detectExerciseType(exercise) === "timed_max_effort" &&
+                        exerciseTimeLeft === 0 && (
+                          <div className="mb-6">
+                            <div className="text-4xl font-mono text-red-400 mb-2">
+                              ⏰
+                            </div>
+                            <p className="text-sm text-gray-400">
+                              Tempo acabou! Insira suas repetições abaixo e
+                              clique em Finalizar
                             </p>
                           </div>
                         )}

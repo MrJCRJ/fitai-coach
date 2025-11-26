@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start",
     "deploy": "bash scripts/deploy-vercel.sh",
     "setup": "bash scripts/init-bootstrap.sh",
@@ -22,6 +23,9 @@
     ]
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
     "framer-motion": "^12.23.24",
     "next": "^14.2.33",
     "next-pwa": "^5.6.0",
@@ -29,7 +33,6 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "zod": "^4.1.13",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -49,6 +52,7 @@
     "prettier": "^3.4.1",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.9.3",
-    "vitest": "^1.6.1"
+    "vitest": "^1.6.1",
+    "zod": "^4.1.13"
   }
 }

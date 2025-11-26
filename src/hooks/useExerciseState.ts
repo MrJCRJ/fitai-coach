@@ -18,11 +18,11 @@ export function useExerciseState({
   const [restStartTime, setRestStartTime] = useState<number | null>(null);
   const [isPerforming, setIsPerforming] = useState(false);
   const [currentResult, setCurrentResult] = useState<Partial<ChallengeResult>>(
-    {},
+    {}
   );
   const [exerciseTimeLeft, setExerciseTimeLeft] = useState(0);
   const [exerciseStartTime, setExerciseStartTime] = useState<number | null>(
-    null,
+    null
   );
 
   const exercise = workout?.exercises[currentExercise];
@@ -100,8 +100,7 @@ export function useExerciseState({
         interval = setInterval(() => {
           setExerciseTimeLeft((prev) => {
             if (prev <= 1) {
-              // Tempo acabou, finalizar exercício
-              finishExercise();
+              // Tempo acabou, apenas parar o timer - usuário pode inserir repetições e clicar em finalizar
               return 0;
             }
             return prev - 1;
@@ -111,7 +110,7 @@ export function useExerciseState({
     }
 
     return () => clearInterval(interval);
-  }, [isPerforming, exercise, exerciseTimeLeft, finishExercise]);
+  }, [isPerforming, exercise, exerciseTimeLeft]);
 
   // Timer para exercício de tempo (contagem crescente)
   useEffect(() => {
