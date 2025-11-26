@@ -24,6 +24,7 @@ What you need to know (actionable):
 - **Challenge System**: Real fitness assessment via 3-exercise challenge (push-ups, plank, squats) with performance tracking and difficulty rating
 - **AI Integration**: DeepSeek API for workout generation (live implementation, not mocked - requires DEEPSEEK_API_KEY)
 - **PWA Setup**: Fully implemented with `next-pwa` - service workers generated to `public/` on build, disabled in dev
+- **ESM Configuration**: All config files use `.mjs` extension (next.config.mjs, postcss.config.mjs, tailwind.config.mjs)
 - **Client Components**: Any component using `framer-motion` must be `'use client'` (animations require client-side rendering)
 - **State Management**: localStorage-based persistence with utility functions in `src/lib/` (no global state library)
 - **Language**: Portuguese UI with English code comments
@@ -57,6 +58,8 @@ Conventions & patterns:
 - **Exercise Database**: Structured by muscle groups and difficulty levels in `src/lib/exercises/` (modular files per muscle group, with `src/lib/exercises/index.ts` as the main exporter)
 - **Workout Generation**: Assessment + Challenge results determine fitness level, then filter exercises by goal/muscle group
 - **Challenge Assessment**: Performance-based leveling (push-up/plank/squat scores) overrides self-reported fitness level
+- **Testing Pattern**: Vitest with descriptive test names, focus on utility functions and data transformations
+- **Input Sanitization**: Use `sanitizeInput()` from `src/lib/utils.ts` for user-generated text content
 
 Integration points:
 
@@ -64,15 +67,17 @@ Integration points:
 - **Payment**: Planned integration (Stripe/Mercado Pago) in `src/lib/payment/` (not yet implemented)
 - **Auth**: Planned user authentication in `src/lib/auth/` (not yet implemented)
 - **PWA**: `next-pwa` configuration in `next.config.mjs` with service worker generation to `public/`
+- **AdMob**: Rewarded ads for freemium model (optional, with simulation fallback)
 
 How to implement features:
 
-- **New Assessment Questions**: Add to `assessmentQuestions` array in `src/app/assessment/page.tsx`
+- **New Assessment Questions**: Add to `assessmentQuestions` array in `src/lib/assessmentData.ts`
 - **New Exercises**: Add to the appropriate file under `src/lib/exercises/` (e.g., `src/lib/exercises/chestExercises.ts`) and export it from `src/lib/exercises/index.ts` with proper muscle group/difficulty
 - **New Workout Goals**: Create new goal logic in AI integration (`src/lib/ai/deepseek.ts`)
 - **Challenge Exercises**: Modify `defaultChallengeWorkout` in `src/lib/challengeWorkout.ts`
 - **UI Components**: Add to `src/components/ui/` for shared components, feature-specific in `src/components/[feature]/`
 - **API Routes**: Create `src/app/api/[endpoint]/route.ts` for new backend endpoints
+- **New Tests**: Add `.test.ts` files alongside implementation files, use Vitest describe/it/expect pattern
 
 Examples from codebase:
 
@@ -82,6 +87,7 @@ Examples from codebase:
 - **Dashboard Logic**: `src/app/dashboard/page.tsx` - State-driven UI showing assessment → challenge → workout progression
 - **Exercise Filtering**: Goal-based exercise selection handled by AI in `src/lib/ai/deepseek.ts`
 - **Level Calculation**: `calculateLevelFromChallenge()` in `src/lib/challengeWorkout.ts` - Performance-based leveling
+- **Testing Example**: `src/lib/exercises/index.test.ts` - Tests utility functions with Vitest
 
 Common patterns to follow:
 
@@ -93,6 +99,8 @@ Common patterns to follow:
 - **Component Props**: Destructure props in function parameters for cleaner code
 - **API Error Handling**: DeepSeek API calls include proper error handling and JSON parsing
 - **Environment Variables**: Use `.env.local` for API keys (DeepSeek), check for existence before API calls
+- **Input Validation**: Sanitize user inputs with `sanitizeInput()` to prevent injection attacks
+- **Hook Patterns**: Custom hooks in `src/hooks/` for complex state logic (e.g., `useAssessmentState`, `useExerciseState`)
 
 Final notes:
 
@@ -103,6 +111,7 @@ Final notes:
 - **Testing**: Vitest for unit tests, focus on workout generation logic and challenge calculations
 - **Deployment**: Vercel-optimized with PWA support for mobile app-like experience
 - **API Keys**: DeepSeek integration requires `DEEPSEEK_API_KEY` in `.env.local` for real functionality
+- **Security**: Input sanitization required for all user-generated content to prevent prompt injection
 
 If something is unclear:
 
@@ -111,3 +120,4 @@ If something is unclear:
 - Test PWA functionality by building and serving locally (`npm run build && npm run start`)
 - For new features, start by understanding the assessment → challenge → workout data flow
 - Check existing tests in `*.test.ts` files for testing patterns
+- Review `src/lib/ai/deepseek_v2.ts` for current AI integration implementation
