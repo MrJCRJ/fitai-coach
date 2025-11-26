@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generatePersonalizedChallenge } from "@/lib/ai/deepseek";
+import { generatePersonalizedChallenge } from "@/lib/ai/deepseek_v2";
 
 export async function POST(request: NextRequest) {
   try {

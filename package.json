@@ -4,6 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "deploy": "bash scripts/deploy-vercel.sh",
     "setup": "bash scripts/init-bootstrap.sh",
     "test": "vitest --run",
     "test:deepseek": "node scripts/test-deepseek.js",
@@ -28,6 +29,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "zod": "^4.22.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

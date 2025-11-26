@@ -26,12 +26,12 @@ export function getExercisesByMuscleGroup(muscleGroup: string): Exercise[] {
 }
 
 export function getExercisesByDifficulty(
-  difficulty: "beginner" | "intermediate" | "advanced"
+  difficulty: "beginner" | "intermediate" | "advanced",
 ): Exercise[] {
   const allExercises: Exercise[] = [];
   Object.values(exercisesDatabase).forEach((exercises) => {
     allExercises.push(
-      ...exercises.filter((ex: Exercise) => ex.difficulty === difficulty)
+      ...exercises.filter((ex: Exercise) => ex.difficulty === difficulty),
     );
   });
   return allExercises;

@@ -10,6 +10,8 @@
   "scope": "/",
   "lang": "pt-BR",
   "categories": ["health", "fitness", "lifestyle", "sports"],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
   "icons": [
     {
       "src": "/icon.svg",

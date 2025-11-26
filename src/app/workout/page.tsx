@@ -16,25 +16,47 @@ import {
 import type { WeeklyWorkout, WorkoutExercise } from "@/lib/ai/types";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { createWeeklySchedule } from "@/lib/weeklySchedule";
+import { PaymentModal } from "@/components/PaymentModal";
 
 export default function WorkoutPage() {
-  const [assessmentCompleted] = useState(() => isAssessmentCompleted());
-  const [challengeCompleted] = useState(() => isChallengeCompleted());
+  const [assessmentCompleted, setAssessmentCompleted] = useState(false);
+  const [challengeCompleted, setChallengeCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [workoutPlan, setWorkoutPlan] = useLocalStorage<WeeklyWorkout | null>(
     "fitai-weekly-workout-plan",
-    null
+    null,
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
-  // Carregar plano salvo ao montar o componente
+  // Carregar dados do cliente após hidratação
+  useEffect(() => {
+    setAssessmentCompleted(isAssessmentCompleted());
+    setChallengeCompleted(isChallengeCompleted());
+    setIsLoading(false);
+  }, []);
+
+  // Carregar dados do cliente após hidratação
+  useEffect(() => {
+    setAssessmentCompleted(isAssessmentCompleted());
+    setChallengeCompleted(isChallengeCompleted());
+    setIsLoading(false);
+  }, []);
+
   const generateWorkoutPlan = useCallback(async () => {
+    console.log("🚀 WorkoutPage: Iniciando geração do plano");
     setLoading(true);
     setError(null);
 
     try {
       const assessmentAnswers = getAssessmentAnswers();
       const challengeResults = loadChallengeResults();
+
+      console.log("📊 WorkoutPage: Dados carregados", {
+        assessmentAnswers: !!assessmentAnswers,
+        challengeResults: !!challengeResults,
+      });
 
       if (!assessmentAnswers) {
         throw new Error("Dados da avaliação não encontrados");
@@ -56,29 +78,77 @@ export default function WorkoutPage() {
       }
 
       const plan = await response.json();
+      console.log("✅ WorkoutPage: Plano gerado com sucesso", plan);
       setWorkoutPlan(plan);
     } catch (err) {
-      console.error("Erro ao gerar plano:", err);
+      console.error("❌ WorkoutPage: Erro ao gerar plano:", err);
       setError(err instanceof Error ? err.message : "Erro desconhecido");
     } finally {
       setLoading(false);
     }
   }, [setWorkoutPlan]);
 
+  const handlePaymentSuccess = useCallback(() => {
+    console.log("💰 WorkoutPage: Pagamento bem-sucedido, gerando plano");
+    setShowPaymentModal(false);
+    generateWorkoutPlan();
+  }, [generateWorkoutPlan]);
+
+  const handleAdSuccess = useCallback(() => {
+    console.log("📺 WorkoutPage: Anúncio assistido, gerando plano");
+    setShowPaymentModal(false);
+    generateWorkoutPlan();
+  }, [generateWorkoutPlan]);
+
+  const requestWorkoutGeneration = useCallback(() => {
+    console.log("🎯 WorkoutPage: Mostrando modal de pagamento");
+    setShowPaymentModal(true);
+  }, []);
+
   useEffect(() => {
-    if (assessmentCompleted && challengeCompleted && !workoutPlan) {
-      generateWorkoutPlan();
+    if (
+      assessmentCompleted &&
+      challengeCompleted &&
+      !workoutPlan &&
+      !isLoading
+    ) {
+      console.log("🎯 WorkoutPage: Condições atendidas para gerar plano", {
+        assessmentCompleted,
+        challengeCompleted,
+        workoutPlan: !!workoutPlan,
+        isLoading,
+      });
+      requestWorkoutGeneration();
+    } else {
+      console.log("⏳ WorkoutPage: Aguardando condições", {
+        assessmentCompleted,
+        challengeCompleted,
+        workoutPlan: !!workoutPlan,
+        isLoading,
+      });
     }
   }, [
     assessmentCompleted,
     challengeCompleted,
     workoutPlan,
-    generateWorkoutPlan,
+    isLoading,
+    requestWorkoutGeneration,
   ]);
 
   // Generate workout plan is defined above as useCallback
 
   // Se não completou avaliação ou desafio, mostrar mensagem
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!assessmentCompleted || !challengeCompleted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -265,7 +335,7 @@ export default function WorkoutPage() {
               </p>
               <div className="space-x-4">
                 <Button
-                  onClick={generateWorkoutPlan}
+                  onClick={requestWorkoutGeneration}
                   className="bg-blue-600 hover:bg-blue-700"
                 >
                   Tentar Novamente
@@ -442,7 +512,7 @@ export default function WorkoutPage() {
                       )}
                     </Card>
                   </motion.div>
-                )
+                ),
               )}
             </div>
 
@@ -524,26 +594,42 @@ export default function WorkoutPage() {
               </p>
 
               <Button
-                onClick={generateWorkoutPlan}
+                onClick={requestWorkoutGeneration}
                 className="bg-blue-600 hover:bg-blue-700"
               >
                 🚀 Gerar Plano Agora
               </Button>
+
+              <p className="text-xs text-gray-400 mt-4">
+                Se o modal não aparecer automaticamente, clique acima
+              </p>
             </Card>
           </motion.div>
         </div>
       </div>
     );
   } // Fallback
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-      <Card className="p-8 text-center">
-        <div className="text-6xl mb-4">🔄</div>
-        <h2 className="text-2xl font-bold text-white mb-4">Carregando...</h2>
-        <Link href="/dashboard">
-          <Button variant="outline">Voltar ao Dashboard</Button>
-        </Link>
-      </Card>
-    </div>
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+        <Card className="p-8 text-center">
+          <div className="text-6xl mb-4">🔄</div>
+          <h2 className="text-2xl font-bold text-white mb-4">Carregando...</h2>
+          <Link href="/dashboard">
+            <Button variant="outline">Voltar ao Dashboard</Button>
+          </Link>
+        </Card>
+      </div>
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => {
+          console.log("❌ WorkoutPage: Modal fechado sem sucesso");
+          setShowPaymentModal(false);
+        }}
+        onPaymentSuccess={handlePaymentSuccess}
+        onAdSuccess={handleAdSuccess}
+      />
+    </>
   );
 }

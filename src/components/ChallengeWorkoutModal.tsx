@@ -7,6 +7,7 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import LoadingState from "@/components/ui/LoadingState";
 import ErrorState from "@/components/ui/ErrorState";
+import { RewardedAd } from "@/components/RewardedAd";
 import {
   ChallengeWorkout,
   ChallengeExercise,
@@ -39,6 +40,7 @@ export default function ChallengeWorkoutModal({
   const [workout, setWorkout] = useState<ChallengeWorkout | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [adWatched, setAdWatched] = useState(false);
 
   const {
     currentExercise,
@@ -58,20 +60,45 @@ export default function ChallengeWorkoutModal({
   } = useExerciseState({
     workout,
     onExerciseComplete: (result) => {
-      const newResults = [...results, result];
-      saveChallengeResults(newResults);
-      onComplete(newResults);
+      console.log("🎯 Exercise completed:", result);
+      // Check if this is the last exercise
+      if (currentExercise >= (workout?.exercises.length ?? 0) - 1) {
+        console.log("🎯 Challenge completed, saving results");
+        saveChallengeResults([...results, result]);
+        onComplete([...results, result]);
+      }
     },
   });
 
-  // Carregar desafio personalizado quando o modal abrir
+  // Reset state when modal opens
   useEffect(() => {
-    if (isOpen && !workout) {
-      loadChallengeAsync();
+    if (isOpen) {
+      console.log("🔄 ChallengeModal: Modal aberto");
+      setWorkout(null);
+      setIsLoading(false);
+      setError(null);
+      setAdWatched(false);
     }
-  }, [isOpen, workout]);
+  }, [isOpen]);
+
+  const handleAdComplete = () => {
+    console.log("✅ ChallengeModal: Anúncio assistido com sucesso");
+    setAdWatched(true);
+    // Agora pode gerar o desafio
+    loadChallengeAsync();
+  };
+
+  const handleAdError = (error: unknown) => {
+    console.error("❌ ChallengeModal: Erro no anúncio:", error);
+    // Mesmo com erro, permitir continuar (fallback)
+    setAdWatched(true);
+    loadChallengeAsync();
+  };
 
   const loadChallengeAsync = async () => {
+    console.log(
+      "🎯 ChallengeModal: Iniciando carregamento do desafio personalizado",
+    );
     setIsLoading(true);
     setError(null);
 
@@ -79,10 +106,13 @@ export default function ChallengeWorkoutModal({
       // Primeiro tentar carregar desafio personalizado salvo
       const savedChallenge = loadPersonalizedChallenge();
       if (savedChallenge) {
+        console.log("🎯 ChallengeModal: Usando desafio salvo encontrado");
         setWorkout(savedChallenge);
         setIsLoading(false);
         return;
       }
+
+      console.log("🎯 ChallengeModal: Nenhum desafio salvo, gerando novo");
 
       // Se não houver desafio salvo, gerar um novo
       const profile = getAssessmentAnswers();
@@ -125,14 +155,19 @@ export default function ChallengeWorkoutModal({
         exercises: processedExercises,
       };
 
+      console.log(
+        "✅ ChallengeModal: Desafio personalizado gerado com sucesso",
+        processedChallenge,
+      );
       setWorkout(processedChallenge);
 
       // Salvar o desafio gerado para uso futuro
       savePersonalizedChallenge(processedChallenge);
     } catch (err) {
-      console.error("Erro ao carregar desafio:", err);
+      console.error("❌ ChallengeModal: Erro ao carregar desafio:", err);
       setError(err instanceof Error ? err.message : "Erro desconhecido");
       // Fallback para desafio padrão
+      console.log("🎯 ChallengeModal: Usando desafio padrão como fallback");
       setWorkout(defaultChallengeWorkout);
       savePersonalizedChallenge(defaultChallengeWorkout);
     } finally {
@@ -151,6 +186,45 @@ export default function ChallengeWorkoutModal({
         className="w-full max-w-2xl max-h-[90vh] overflow-y-auto"
       >
         <Card className="p-6 bg-slate-900 border-slate-700">
+          {/* Ad Screen - Show before challenge */}
+          {!adWatched && !isLoading && !error && (
+            <div className="text-center py-8">
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              >
+                <span className="text-3xl">🤖</span>
+              </motion.div>
+
+              <h2 className="text-2xl font-bold text-white mb-4">
+                Seu Treino IA Personalizado
+              </h2>
+
+              <p className="text-gray-300 mb-8 leading-relaxed max-w-md mx-auto">
+                Nossa IA analisou seu perfil e criou um desafio personalizado
+                para avaliar seu nível físico atual. Assista um anúncio rápido
+                para liberar seu treino!
+              </p>
+
+              <div className="mb-6">
+                <RewardedAd
+                  onAdComplete={handleAdComplete}
+                  onAdError={handleAdError}
+                />
+              </div>
+
+              <Button
+                variant="outline"
+                onClick={onClose}
+                className="border-gray-600 text-gray-300 hover:bg-gray-700/50"
+              >
+                Cancelar
+              </Button>
+            </div>
+          )}
+
           {/* Loading State */}
           {isLoading && (
             <LoadingState
@@ -161,7 +235,7 @@ export default function ChallengeWorkoutModal({
           )}
 
           {/* Error State */}
-          {error && !isLoading && (
+          {error && !isLoading && adWatched && (
             <ErrorState
               title="Erro ao carregar desafio"
               message={error}
@@ -177,12 +251,12 @@ export default function ChallengeWorkoutModal({
           )}
 
           {/* Challenge Content */}
-          {!isLoading && !error && workout && (
+          {!isLoading && !error && workout && adWatched && (
             <>
               {/* Header */}
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-white mb-2">
-                  🏋️ {workout.name}
+                  ��️ {workout.name}
                 </h2>
                 <p className="text-gray-300">
                   Exercício {currentExercise + 1} de {workout.exercises.length}

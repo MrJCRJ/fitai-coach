@@ -18,11 +18,11 @@ export function useExerciseState({
   const [restStartTime, setRestStartTime] = useState<number | null>(null);
   const [isPerforming, setIsPerforming] = useState(false);
   const [currentResult, setCurrentResult] = useState<Partial<ChallengeResult>>(
-    {}
+    {},
   );
   const [exerciseTimeLeft, setExerciseTimeLeft] = useState(0);
   const [exerciseStartTime, setExerciseStartTime] = useState<number | null>(
-    null
+    null,
   );
 
   const exercise = workout?.exercises[currentExercise];

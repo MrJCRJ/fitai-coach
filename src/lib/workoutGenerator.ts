@@ -11,6 +11,7 @@ export interface AssessmentAnswers {
   goal: string;
   limitations: string;
   fitness_level: number;
+  personalGoals?: string; // Campo opcional para objetivos pessoais
 }
 
 export interface Workout {
@@ -51,7 +52,14 @@ export function isAssessmentCompleted(): boolean {
 export function getAssessmentAnswers(): AssessmentAnswers | null {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem("fitai-assessment-answers");
-    return saved ? JSON.parse(saved) : null;
+    const personalGoals = localStorage.getItem(
+      "fitai-assessment-personal-goals",
+    );
+    const answers = saved ? JSON.parse(saved) : null;
+    if (answers && personalGoals) {
+      answers.personalGoals = personalGoals;
+    }
+    return answers;
   }
   return null;
 }

@@ -23,7 +23,7 @@ export interface ApiResponse<T = unknown> {
  * Faz chamada para a API DeepSeek
  */
 export async function callDeepSeekApi<T = unknown>(
-  config: ApiCallConfig
+  config: ApiCallConfig,
 ): Promise<ApiResponse<T>> {
   if (!API_KEY) {
     return {

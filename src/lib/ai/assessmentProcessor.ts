@@ -1,4 +1,5 @@
 import { calculateAge } from "../assessmentData";
+import type { RawAssessment } from "./schemas";
 
 // Interface para dados estruturados da avaliação
 export interface UserAssessmentData {
@@ -19,6 +20,7 @@ export interface UserAssessmentData {
   goal: string;
   frequency: string;
   preferredDays: number;
+  personalGoals: string; // Campo opcional para objetivos pessoais
 
   // Limitações e saúde
   limitations: string;
@@ -63,7 +65,7 @@ const LIMITATIONS_MAP: { [key: string]: string } = {
  */
 export function calculateBMI(
   weight: number,
-  heightCm: number
+  heightCm: number,
 ): { bmi: number; category: string } {
   const height = heightCm / 100; // converter cm para metros
   const bmi = Math.round((weight / (height * height)) * 10) / 10;
@@ -90,7 +92,7 @@ export function getFitnessLevelDescription(fitnessLevel: number): string {
  * Determina a intensidade de treino baseada no nível de condicionamento
  */
 export function getTrainingIntensity(
-  fitnessLevel: number
+  fitnessLevel: number,
 ): "low" | "medium" | "high" {
   if (fitnessLevel <= 3) return "low";
   if (fitnessLevel >= 8) return "high";
@@ -100,24 +102,12 @@ export function getTrainingIntensity(
 /**
  * Função para processar e estruturar dados da avaliação
  */
-export interface RawAssessmentAnswers {
-  birth_date: string;
-  weight: number;
-  height: number;
-  experience: string;
-  fitness_level: number;
-  frequency: string;
-  goal: string;
-  limitations: string;
-  time_per_session: string;
-}
-
 export function processAssessmentData(
-  rawAnswers: RawAssessmentAnswers
+  rawAnswers: RawAssessment,
 ): UserAssessmentData {
   const { bmi, category: bmiCategory } = calculateBMI(
     rawAnswers.weight,
-    rawAnswers.height
+    rawAnswers.height,
   );
 
   const fitnessLevel = rawAnswers.fitness_level;
@@ -136,6 +126,7 @@ export function processAssessmentData(
     goal: rawAnswers.goal,
     frequency: rawAnswers.frequency,
     preferredDays: Math.floor(weeklyFrequency),
+    personalGoals: rawAnswers.personalGoals || "",
     limitations: rawAnswers.limitations,
     limitationsDescription:
       LIMITATIONS_MAP[rawAnswers.limitations] || rawAnswers.limitations,

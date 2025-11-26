@@ -1,4 +1,4 @@
-import { generateWeeklyWorkoutPlan } from "../../../lib/ai/deepseek";
+import { generateWeeklyWorkoutPlan } from "../../../lib/ai/deepseek_v2";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));

@@ -10,6 +10,7 @@ import {
   isFirstQuestion,
   calculateProgress,
 } from "@/lib/assessmentData";
+import { sanitizeInput } from "@/lib/utils";
 
 export interface UseAssessmentStateReturn {
   // Estado
@@ -17,6 +18,7 @@ export interface UseAssessmentStateReturn {
   answers: AssessmentAnswers;
   showLimitationsDetail: boolean;
   completed: boolean;
+  personalGoals: string;
 
   // Dados calculados
   currentQuestion: AssessmentQuestion | null;
@@ -31,11 +33,13 @@ export interface UseAssessmentStateReturn {
   previousQuestion: () => void;
   resetAssessment: () => void;
   completeAssessment: () => void;
+  setPersonalGoals: (goals: string) => void;
 }
 
 const STORAGE_KEYS = {
   ANSWERS: "fitai-assessment-answers",
   COMPLETED: "fitai-assessment-completed",
+  PERSONAL_GOALS: "fitai-assessment-personal-goals",
 } as const;
 
 export function useAssessmentState(): UseAssessmentStateReturn {
@@ -49,6 +53,12 @@ export function useAssessmentState(): UseAssessmentStateReturn {
     return {};
   });
   const [showLimitationsDetail, setShowLimitationsDetail] = useState(false);
+  const [personalGoals, setPersonalGoalsState] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(STORAGE_KEYS.PERSONAL_GOALS) || "";
+    }
+    return "";
+  });
   const [completed, setCompleted] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem(STORAGE_KEYS.COMPLETED) === "true";
@@ -78,6 +88,12 @@ export function useAssessmentState(): UseAssessmentStateReturn {
     }
   }, [completed]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEYS.PERSONAL_GOALS, personalGoals);
+    }
+  }, [personalGoals]);
+
   // Handlers
   const handleAnswer = useCallback((questionId: string, answer: unknown) => {
     setAnswers((prev) => {
@@ -98,6 +114,10 @@ export function useAssessmentState(): UseAssessmentStateReturn {
 
       return newAnswers;
     });
+  }, []);
+
+  const setPersonalGoals = useCallback((goals: string) => {
+    setPersonalGoalsState(sanitizeInput(goals));
   }, []);
 
   const completeAssessment = useCallback(() => {
@@ -151,10 +171,12 @@ export function useAssessmentState(): UseAssessmentStateReturn {
     setAnswers({});
     setShowLimitationsDetail(false);
     setCompleted(false);
+    setPersonalGoalsState("");
 
     if (typeof window !== "undefined") {
       localStorage.removeItem(STORAGE_KEYS.ANSWERS);
       localStorage.removeItem(STORAGE_KEYS.COMPLETED);
+      localStorage.removeItem(STORAGE_KEYS.PERSONAL_GOALS);
     }
   }, []);
 
@@ -164,6 +186,7 @@ export function useAssessmentState(): UseAssessmentStateReturn {
     answers,
     showLimitationsDetail,
     completed,
+    personalGoals,
 
     // Dados calculados
     currentQuestion,
@@ -178,5 +201,6 @@ export function useAssessmentState(): UseAssessmentStateReturn {
     previousQuestion,
     resetAssessment,
     completeAssessment,
+    setPersonalGoals,
   };
 }

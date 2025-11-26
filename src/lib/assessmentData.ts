@@ -151,7 +151,7 @@ export function calculateProgress(currentIndex: number): number {
 
 export function validateAnswer(
   question: AssessmentQuestion,
-  answer: unknown
+  answer: unknown,
 ): boolean {
   if (!question.required) return true;
   if (!answer) return false;

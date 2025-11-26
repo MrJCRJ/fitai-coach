@@ -21,15 +21,15 @@ describe("generateWeeklyWorkoutPlan", () => {
     // Mock da função para lançar erro quando não há API key
     vi.mocked(generateWeeklyWorkoutPlan).mockRejectedValueOnce(
       new Error(
-        "DEEPSEEK_API_KEY não configurada. Configure a variável de ambiente DEEPSEEK_API_KEY no arquivo .env.local"
-      )
+        "DEEPSEEK_API_KEY não configurada. Configure a variável de ambiente DEEPSEEK_API_KEY no arquivo .env.local",
+      ),
     );
 
     await expect(
       generateWeeklyWorkoutPlan({
         birth_date: "1999-01-01",
         level: "beginner",
-      })
+      }),
     ).rejects.toThrow("DEEPSEEK_API_KEY não configurada");
   });
 
@@ -77,14 +77,14 @@ describe("generateWeeklyWorkoutPlan", () => {
   it("throws error when API request fails", async () => {
     // Mock de erro de API
     vi.mocked(generateWeeklyWorkoutPlan).mockRejectedValueOnce(
-      new Error("API request failed: 401")
+      new Error("API request failed: 401"),
     );
 
     await expect(
       generateWeeklyWorkoutPlan({
         birth_date: "1999-01-01",
         level: "beginner",
-      })
+      }),
     ).rejects.toThrow("API request failed: 401");
   });
 });

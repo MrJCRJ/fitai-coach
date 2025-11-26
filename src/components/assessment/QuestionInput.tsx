@@ -66,7 +66,7 @@ export function QuestionInput({
                 String(
                   ((answer as Record<string, unknown>)?.limitations_detail as
                     | string
-                    | undefined) ?? ""
+                    | undefined) ?? "",
                 ) as string
               }
               onChange={(e) => onAnswer("limitations_detail", e.target.value)}

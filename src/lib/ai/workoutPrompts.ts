@@ -17,6 +17,7 @@ PERFIL DO USUÁRIO:
 - Objetivo principal: ${processedData.goal}
 - Limitações: ${processedData.limitationsDescription}
 - Tempo por sessão: ${processedData.timePerSession}
+${processedData.personalGoals ? `- Objetivos pessoais: ${processedData.personalGoals}` : ""}
 
 INSTRUÇÕES IMPORTANTES:
 1. Crie EXATAMENTE 8 exercícios de avaliação para uma avaliação mais precisa
@@ -65,6 +66,7 @@ PERFIL DO USUÁRIO:
 - Foco recomendado: ${processedData.recommendedFocus.join(", ")}
 - Limitações: ${processedData.limitationsDescription}
 - Tempo por sessão: ${processedData.timePerSession}
+${processedData.personalGoals ? `- Objetivos pessoais: ${processedData.personalGoals}` : ""}
 
 INSTRUÇÕES IMPORTANTES:
 1. Considere o nível de condicionamento real do usuário

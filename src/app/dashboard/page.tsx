@@ -29,15 +29,11 @@ interface DashboardCard {
 }
 
 export default function DashboardPage() {
-  const [assessmentCompleted] = useState<boolean | undefined>(() =>
-    typeof window !== "undefined" ? isAssessmentCompleted() : undefined
+  const [assessmentCompleted] = useState(isAssessmentCompleted());
+  const [challengeCompleted, setChallengeCompleted] = useState(
+    isChallengeCompleted(),
   );
-  const [challengeCompleted, setChallengeCompleted] = useState<
-    boolean | undefined
-  >(() => (typeof window !== "undefined" ? isChallengeCompleted() : undefined));
   const [showChallengeModal, setShowChallengeModal] = useState(false);
-
-  // Evitar erro de hidratação: estados são inicializados com lazy initializers
 
   const handleChallengeComplete = () => {
     setChallengeCompleted(true);
@@ -46,11 +42,6 @@ export default function DashboardPage() {
   };
 
   const getDashboardCards = (): DashboardCard[] => {
-    // Durante hidratação, não renderizar nada para evitar mismatch
-    if (assessmentCompleted === undefined || challengeCompleted === undefined) {
-      return [];
-    }
-
     if (!assessmentCompleted) {
       return [
         {
@@ -97,11 +88,6 @@ export default function DashboardPage() {
   };
 
   const getStatsData = () => {
-    // Durante hidratação, não renderizar nada para evitar mismatch
-    if (assessmentCompleted === undefined || challengeCompleted === undefined) {
-      return [];
-    }
-
     if (!assessmentCompleted) {
       return [
         {
@@ -199,18 +185,6 @@ export default function DashboardPage() {
 
   const dashboardCards = getDashboardCards();
   const statsData = getStatsData();
-
-  // Mostrar loading enquanto os dados não estão disponíveis
-  if (assessmentCompleted === undefined || challengeCompleted === undefined) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-300">Carregando...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">

@@ -71,6 +71,44 @@ npm run dev
    ```
 3. **A aplicação detectará automaticamente** e começará a usar a IA real em vez de dados mockados
 
+### Configuração do AdMob (Opcional)
+
+Para ativar anúncios rewarded reais:
+
+1. **Crie uma conta** no [Google AdMob](https://admob.google.com/)
+2. **Configure um app web** e obtenha seu Publisher ID
+3. **Crie um bloco de anúncios rewarded** com as seguintes configurações:
+   - **Nome**: `FitAI_Workout_Reward`
+   - **Formato**: Premiado (Rewarded)
+   - **Valor do prêmio**: 1
+   - **Item do prêmio**: "Treino Gratuito"
+   - **Tipo**: Vídeo
+   - **Conjuntos**: Interativo
+4. **Configure no arquivo `.env.local`** (valores de exemplo já incluídos):
+   ```env
+
+   ```
+5. **A aplicação usará anúncios reais** em vez da simulação
+
+> **Nota**: Sem configurar o AdMob, a aplicação funcionará normalmente com anúncios simulados para desenvolvimento.
+
+### 🚀 Resolvendo Limitações do AdMob
+
+Para aumentar os limites de veiculação e remover restrições do AdMob:
+
+1. **Faça deploy em produção**:
+
+   ```bash
+   npm run deploy
+   ```
+
+2. **Configure no AdMob**:
+   - URL do site: `https://fitai-coach.vercel.app`
+   - Configure pagamentos para verificar conta
+   - Aguarde aprovação (pode levar alguns dias)
+
+3. **Para desenvolvimento local**: anúncios simulados são ativados automaticamente
+
 ### Scripts Disponíveis
 
 - `npm run dev` - Servidor de desenvolvimento
