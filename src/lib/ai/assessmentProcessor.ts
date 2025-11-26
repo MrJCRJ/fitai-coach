@@ -100,8 +100,20 @@ export function getTrainingIntensity(
 /**
  * Função para processar e estruturar dados da avaliação
  */
+export interface RawAssessmentAnswers {
+  birth_date: string;
+  weight: number;
+  height: number;
+  experience: string;
+  fitness_level: number;
+  frequency: string;
+  goal: string;
+  limitations: string;
+  time_per_session: string;
+}
+
 export function processAssessmentData(
-  rawAnswers: Record<string, any>
+  rawAnswers: RawAssessmentAnswers
 ): UserAssessmentData {
   const { bmi, category: bmiCategory } = calculateBMI(
     rawAnswers.weight,

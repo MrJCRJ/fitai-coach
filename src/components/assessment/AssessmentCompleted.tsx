@@ -73,24 +73,26 @@ export function AssessmentCompleted({
               <div className="flex justify-between items-center py-2 border-b border-gray-700">
                 <span className="text-gray-300">Data de nascimento:</span>
                 <span className="text-white font-medium">
-                  {formatBirthDate(answers.birth_date)} (
-                  {calculateAge(answers.birth_date)} anos)
+                  {formatBirthDate(String(answers.birth_date))} (
+                  {calculateAge(String(answers.birth_date))} anos)
                 </span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-gray-700">
                 <span className="text-gray-300">Objetivo:</span>
-                <span className="text-white font-medium">{answers.goal}</span>
+                <span className="text-white font-medium">
+                  {String(answers.goal)}
+                </span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-gray-700">
                 <span className="text-gray-300">Frequência desejada:</span>
                 <span className="text-white font-medium">
-                  {answers.frequency}
+                  {String(answers.frequency)}
                 </span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-gray-700">
                 <span className="text-gray-300">Nível de condicionamento:</span>
                 <span className="text-white font-medium">
-                  {answers.fitness_level}/10
+                  {Number(answers.fitness_level)}/10
                 </span>
               </div>
             </div>

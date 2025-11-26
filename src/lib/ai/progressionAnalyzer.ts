@@ -19,7 +19,7 @@ export interface ProgressionAnalysis {
  * Analisa se o usuário deve progredir no treino baseado em critérios de performance
  */
 export function analyzeProgressionNeeds(
-  progressionData: ProgressionCriteria
+  progressionData: ProgressionCriteria,
 ): ProgressionAnalysis {
   const {
     weeksCompleted,

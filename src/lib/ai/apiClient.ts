@@ -13,7 +13,7 @@ export interface ApiCallConfig {
 /**
  * Interface para resposta da API
  */
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -22,7 +22,7 @@ export interface ApiResponse<T = any> {
 /**
  * Faz chamada para a API DeepSeek
  */
-export async function callDeepSeekApi<T = any>(
+export async function callDeepSeekApi<T = unknown>(
   config: ApiCallConfig
 ): Promise<ApiResponse<T>> {
   if (!API_KEY) {

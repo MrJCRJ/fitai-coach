@@ -11,7 +11,7 @@ export interface AssessmentQuestion {
 }
 
 export interface AssessmentAnswers {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -151,7 +151,7 @@ export function calculateProgress(currentIndex: number): number {
 
 export function validateAnswer(
   question: AssessmentQuestion,
-  answer: any,
+  answer: unknown
 ): boolean {
   if (!question.required) return true;
   if (!answer) return false;
@@ -164,7 +164,7 @@ export function validateAnswer(
   }
 
   if (question.type === "date") {
-    const date = new Date(answer);
+    const date = new Date(String(answer));
     if (isNaN(date.getTime())) return false;
 
     // Não aceitar datas futuras
@@ -215,7 +215,7 @@ export function formatBirthDate(dateString: string): string {
         return date.toLocaleDateString("pt-BR");
       }
     }
-  } catch (error) {
+  } catch {
     // Em caso de erro, retorna a string original
   }
 

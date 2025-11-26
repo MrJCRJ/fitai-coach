@@ -4,7 +4,7 @@ import type { ChallengeResult } from "../challengeWorkout";
  * Processa os resultados de um desafio e gera um resumo detalhado
  */
 export function processChallengeResults(
-  challengeResults: ChallengeResult[]
+  challengeResults: ChallengeResult[],
 ): string {
   if (!challengeResults || challengeResults.length === 0) {
     return "Nenhum resultado de desafio disponível ainda.";
@@ -59,11 +59,11 @@ export function processChallengeResults(
 
   const totalTime = completedResults.reduce(
     (sum, r) => sum + (r.completedTime || r.timeUsed || 0),
-    0
+    0,
   );
   const totalRestTime = completedResults.reduce(
     (sum, r) => sum + (r.restTime || 0),
-    0
+    0,
   );
 
   const statsSummary = `\n\nEstatísticas Gerais:
@@ -90,12 +90,12 @@ export function calculateChallengeStats(challengeResults: ChallengeResult[]) {
 
   const totalTime = completedResults.reduce(
     (sum, r) => sum + (r.completedTime || r.timeUsed || 0),
-    0
+    0,
   );
 
   const totalRestTime = completedResults.reduce(
     (sum, r) => sum + (r.restTime || 0),
-    0
+    0,
   );
 
   return {

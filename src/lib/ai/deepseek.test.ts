@@ -6,6 +6,7 @@ vi.mock("./deepseek", () => ({
 }));
 
 import { generateWeeklyWorkoutPlan } from "./deepseek";
+import type { WeeklyWorkout } from "./types";
 
 describe("generateWeeklyWorkoutPlan", () => {
   beforeEach(() => {
@@ -18,23 +19,23 @@ describe("generateWeeklyWorkoutPlan", () => {
 
   it("throws error when API key is not configured", async () => {
     // Mock da função para lançar erro quando não há API key
-    (generateWeeklyWorkoutPlan as any).mockRejectedValueOnce(
+    vi.mocked(generateWeeklyWorkoutPlan).mockRejectedValueOnce(
       new Error(
-        "DEEPSEEK_API_KEY não configurada. Configure a variável de ambiente DEEPSEEK_API_KEY no arquivo .env.local",
-      ),
+        "DEEPSEEK_API_KEY não configurada. Configure a variável de ambiente DEEPSEEK_API_KEY no arquivo .env.local"
+      )
     );
 
     await expect(
       generateWeeklyWorkoutPlan({
         birth_date: "1999-01-01",
         level: "beginner",
-      }),
+      })
     ).rejects.toThrow("DEEPSEEK_API_KEY não configurada");
   });
 
   it("returns a valid WeeklyWorkout when API key is configured", async () => {
     // Mock da resposta bem-sucedida
-    const mockWeeklyPlan = {
+    const mockWeeklyPlan: WeeklyWorkout = {
       week: 1,
       workouts: [
         {
@@ -61,7 +62,7 @@ describe("generateWeeklyWorkoutPlan", () => {
       ],
     };
 
-    (generateWeeklyWorkoutPlan as any).mockResolvedValueOnce(mockWeeklyPlan);
+    vi.mocked(generateWeeklyWorkoutPlan).mockResolvedValueOnce(mockWeeklyPlan);
 
     const plan = await generateWeeklyWorkoutPlan({
       birth_date: "1999-01-01",
@@ -75,15 +76,15 @@ describe("generateWeeklyWorkoutPlan", () => {
 
   it("throws error when API request fails", async () => {
     // Mock de erro de API
-    (generateWeeklyWorkoutPlan as any).mockRejectedValueOnce(
-      new Error("API request failed: 401"),
+    vi.mocked(generateWeeklyWorkoutPlan).mockRejectedValueOnce(
+      new Error("API request failed: 401")
     );
 
     await expect(
       generateWeeklyWorkoutPlan({
         birth_date: "1999-01-01",
         level: "beginner",
-      }),
+      })
     ).rejects.toThrow("API request failed: 401");
   });
 });

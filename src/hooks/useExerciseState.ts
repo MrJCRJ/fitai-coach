@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { ChallengeResult, ChallengeWorkout } from "@/lib/challengeWorkout";
 import { detectExerciseType, extractTimeLimit } from "@/lib/exerciseUtils";
 
@@ -18,15 +18,65 @@ export function useExerciseState({
   const [restStartTime, setRestStartTime] = useState<number | null>(null);
   const [isPerforming, setIsPerforming] = useState(false);
   const [currentResult, setCurrentResult] = useState<Partial<ChallengeResult>>(
-    {},
+    {}
   );
   const [exerciseTimeLeft, setExerciseTimeLeft] = useState(0);
   const [exerciseStartTime, setExerciseStartTime] = useState<number | null>(
-    null,
+    null
   );
 
   const exercise = workout?.exercises[currentExercise];
 
+  const finishExercise = useCallback(() => {
+    if (!exercise) return;
+
+    setIsPerforming(false);
+
+    // Calcular tempo realmente usado para exercícios timed_max_effort
+    let timeUsed: number | undefined;
+    const exerciseType = detectExerciseType(exercise);
+    if (exerciseType === "timed_max_effort" && exerciseStartTime) {
+      const timeLimit = extractTimeLimit(exercise.target);
+      if (timeLimit) {
+        timeUsed = timeLimit - exerciseTimeLeft;
+      }
+    }
+
+    setExerciseTimeLeft(0);
+    setExerciseStartTime(null);
+
+    const finalResult: ChallengeResult = {
+      ...currentResult,
+      perceivedDifficulty: currentResult.perceivedDifficulty || 3,
+    } as ChallengeResult;
+
+    // Adicionar timeUsed apenas se tiver valor
+    if (timeUsed !== undefined) {
+      finalResult.timeUsed = timeUsed;
+    }
+
+    const newResults = [...results, finalResult];
+    setResults(newResults);
+
+    // Se não é o último exercício, mostrar tela de descanso
+    if (currentExercise < (workout?.exercises.length ?? 0) - 1) {
+      setIsResting(true);
+      setRestTimeLeft(0); // Começar a contar do zero
+      setRestStartTime(Date.now());
+    } else {
+      // Finalizar desafio
+      onExerciseComplete(finalResult);
+    }
+  }, [
+    exercise,
+    exerciseStartTime,
+    exerciseTimeLeft,
+    currentResult,
+    results,
+    currentExercise,
+    workout,
+    onExerciseComplete,
+  ]);
   // Timer para descanso (contagem crescente)
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -61,7 +111,7 @@ export function useExerciseState({
     }
 
     return () => clearInterval(interval);
-  }, [isPerforming, exercise, exerciseTimeLeft]);
+  }, [isPerforming, exercise, exerciseTimeLeft, finishExercise]);
 
   // Timer para exercício de tempo (contagem crescente)
   useEffect(() => {
@@ -143,48 +193,6 @@ export function useExerciseState({
 
     // Pular diretamente para o próximo exercício
     finishExercise();
-  };
-
-  const finishExercise = () => {
-    if (!exercise) return;
-
-    setIsPerforming(false);
-
-    // Calcular tempo realmente usado para exercícios timed_max_effort
-    let timeUsed: number | undefined;
-    const exerciseType = detectExerciseType(exercise);
-    if (exerciseType === "timed_max_effort" && exerciseStartTime) {
-      const timeLimit = extractTimeLimit(exercise.target);
-      if (timeLimit) {
-        timeUsed = timeLimit - exerciseTimeLeft;
-      }
-    }
-
-    setExerciseTimeLeft(0);
-    setExerciseStartTime(null);
-
-    const finalResult: ChallengeResult = {
-      ...currentResult,
-      perceivedDifficulty: currentResult.perceivedDifficulty || 3,
-    } as ChallengeResult;
-
-    // Adicionar timeUsed apenas se tiver valor
-    if (timeUsed !== undefined) {
-      finalResult.timeUsed = timeUsed;
-    }
-
-    const newResults = [...results, finalResult];
-    setResults(newResults);
-
-    // Se não é o último exercício, mostrar tela de descanso
-    if (currentExercise < workout!.exercises.length - 1) {
-      setIsResting(true);
-      setRestTimeLeft(0); // Começar a contar do zero
-      setRestStartTime(Date.now());
-    } else {
-      // Finalizar desafio
-      onExerciseComplete(finalResult);
-    }
   };
 
   const nextExercise = () => {

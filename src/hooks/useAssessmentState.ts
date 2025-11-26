@@ -26,7 +26,7 @@ export interface UseAssessmentStateReturn {
   isLastQuestion: boolean;
 
   // Ações
-  handleAnswer: (questionId: string, answer: any) => void;
+  handleAnswer: (questionId: string, answer: unknown) => void;
   nextQuestion: () => void;
   previousQuestion: () => void;
   resetAssessment: () => void;
@@ -44,7 +44,7 @@ export function useAssessmentState(): UseAssessmentStateReturn {
   const [answers, setAnswers] = useState<AssessmentAnswers>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(STORAGE_KEYS.ANSWERS);
-      return saved ? JSON.parse(saved) : {};
+      return saved ? (JSON.parse(saved) as AssessmentAnswers) : {};
     }
     return {};
   });
@@ -79,7 +79,7 @@ export function useAssessmentState(): UseAssessmentStateReturn {
   }, [completed]);
 
   // Handlers
-  const handleAnswer = useCallback((questionId: string, answer: any) => {
+  const handleAnswer = useCallback((questionId: string, answer: unknown) => {
     setAnswers((prev) => {
       const newAnswers = { ...prev, [questionId]: answer };
 

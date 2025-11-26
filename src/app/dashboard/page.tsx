@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
@@ -30,20 +29,15 @@ interface DashboardCard {
 }
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [assessmentCompleted, setAssessmentCompleted] = useState<
-    boolean | undefined
-  >(undefined);
+  const [assessmentCompleted] = useState<boolean | undefined>(() =>
+    typeof window !== "undefined" ? isAssessmentCompleted() : undefined
+  );
   const [challengeCompleted, setChallengeCompleted] = useState<
     boolean | undefined
-  >(undefined);
+  >(() => (typeof window !== "undefined" ? isChallengeCompleted() : undefined));
   const [showChallengeModal, setShowChallengeModal] = useState(false);
 
-  // Evitar erro de hidratação - definir estado após montagem do componente
-  useEffect(() => {
-    setAssessmentCompleted(isAssessmentCompleted());
-    setChallengeCompleted(isChallengeCompleted());
-  }, []);
+  // Evitar erro de hidratação: estados são inicializados com lazy initializers
 
   const handleChallengeComplete = () => {
     setChallengeCompleted(true);
@@ -409,7 +403,8 @@ export default function DashboardPage() {
         >
           <Card className="p-8 max-w-2xl mx-auto">
             <blockquote className="text-xl text-gray-300 italic mb-4">
-              "A única maneira ruim de fazer exercícios é não fazê-los."
+              &ldquo;A única maneira ruim de fazer exercícios é não
+              fazê-los.&rdquo;
             </blockquote>
             <cite className="text-gray-400">— Jerry Seinfeld</cite>
           </Card>

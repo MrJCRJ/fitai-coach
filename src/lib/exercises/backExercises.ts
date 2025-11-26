@@ -9,8 +9,7 @@ export const backExercises: Exercise[] = [
     sets: 3,
     reps: "10-15",
     rest: "45s",
-    instructions:
-      "Deitado de bruços, levante simultaneamente braços e pernas.",
+    instructions: "Deitado de bruços, levante simultaneamente braços e pernas.",
     tips: "Contraia as costas e segure por 2 segundos no topo.",
     equipment: [],
     calories: 5,

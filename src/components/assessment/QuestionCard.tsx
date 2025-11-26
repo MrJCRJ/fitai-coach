@@ -6,8 +6,8 @@ import { QuestionInput } from "./QuestionInput";
 
 interface QuestionCardProps {
   question: AssessmentQuestion;
-  answer: any;
-  onAnswer: (questionId: string, answer: any) => void;
+  answer: unknown;
+  onAnswer: (questionId: string, answer: unknown) => void;
   showLimitationsDetail?: boolean;
   onNext: () => void;
   onPrevious: () => void;

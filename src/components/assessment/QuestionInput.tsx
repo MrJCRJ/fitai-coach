@@ -5,8 +5,8 @@ import { AssessmentQuestion } from "@/lib/assessmentData";
 
 interface QuestionInputProps {
   question: AssessmentQuestion;
-  answer: any;
-  onAnswer: (questionId: string, answer: any) => void;
+  answer: unknown;
+  onAnswer: (questionId: string, answer: unknown) => void;
   showLimitationsDetail?: boolean;
 }
 
@@ -62,7 +62,13 @@ export function QuestionInput({
               Descreva suas limitações:
             </label>
             <textarea
-              value={answer?.limitations_detail || ""}
+              value={
+                String(
+                  ((answer as Record<string, unknown>)?.limitations_detail as
+                    | string
+                    | undefined) ?? ""
+                ) as string
+              }
               onChange={(e) => onAnswer("limitations_detail", e.target.value)}
               className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none resize-none"
               rows={3}
@@ -81,7 +87,7 @@ export function QuestionInput({
           type="number"
           min={question.min || 0}
           max={question.max || 999}
-          value={answer || ""}
+          value={String(answer ?? "")}
           onChange={(e) => handleNumberInput(e.target.value)}
           className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none"
           placeholder={`Digite ${question.unit ? `em ${question.unit}` : ""}`}
@@ -104,13 +110,13 @@ export function QuestionInput({
           type="range"
           min={question.min || 1}
           max={question.max || 10}
-          value={answer || 5}
+          value={Number(answer ?? 5)}
           onChange={(e) => handleScaleInput(e.target.value)}
           className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
         />
         <div className="text-center">
           <Badge variant="info" className="text-lg px-4 py-2">
-            Nível {answer || 5} de 10
+            Nível {Number(answer ?? 5)} de 10
           </Badge>
         </div>
       </div>
@@ -130,7 +136,7 @@ export function QuestionInput({
       <div className="space-y-4">
         <input
           type="date"
-          value={answer || ""}
+          value={String(answer ?? "")}
           onChange={(e) => handleDateInput(e.target.value)}
           min={minDateString}
           max={maxDate}

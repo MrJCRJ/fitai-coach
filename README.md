@@ -106,6 +106,16 @@ src/
 │   ├── ai/              # Integrações IA
 │   └── [service]/       # Outros serviços
 └── styles/              # Estilos globais
+
+## 🏋️ Exercise Database (modular)
+
+Exercises are now organized as modular files under `src/lib/exercises/` with one file per muscle group (e.g., `chestExercises.ts`, `legsExercises.ts`) and an index at `src/lib/exercises/index.ts` that aggregates them and exposes utility functions (getExercisesByMuscleGroup, getExerciseById, getAllExercises).
+
+To add a new exercise:
+1. Create a new file in `src/lib/exercises/` for the appropriate muscle group and export the array.
+2. Update `src/lib/exercises/index.ts` to import and include the exercise array.
+3. Add tests in `src/lib/exercises/` to validate the exercise is present and exported correctly.
+
 ```
 
 ## 🎯 Funcionalidades

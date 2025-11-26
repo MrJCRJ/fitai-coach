@@ -1,4 +1,4 @@
-import type { Exercise, ExercisesDatabase, MuscleGroup } from "./exerciseTypes";
+import type { Exercise, ExercisesDatabase } from "./exerciseTypes";
 import { chestExercises } from "./chestExercises";
 import { backExercises } from "./backExercises";
 import { legsExercises } from "./legsExercises";
@@ -26,11 +26,13 @@ export function getExercisesByMuscleGroup(muscleGroup: string): Exercise[] {
 }
 
 export function getExercisesByDifficulty(
-  difficulty: "beginner" | "intermediate" | "advanced",
+  difficulty: "beginner" | "intermediate" | "advanced"
 ): Exercise[] {
   const allExercises: Exercise[] = [];
   Object.values(exercisesDatabase).forEach((exercises) => {
-    allExercises.push(...exercises.filter((ex: Exercise) => ex.difficulty === difficulty));
+    allExercises.push(
+      ...exercises.filter((ex: Exercise) => ex.difficulty === difficulty)
+    );
   });
   return allExercises;
 }

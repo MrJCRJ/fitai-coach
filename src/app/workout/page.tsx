@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -22,19 +22,13 @@ export default function WorkoutPage() {
   const [challengeCompleted] = useState(() => isChallengeCompleted());
   const [workoutPlan, setWorkoutPlan] = useLocalStorage<WeeklyWorkout | null>(
     "fitai-weekly-workout-plan",
-    null,
+    null
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Carregar plano salvo ao montar o componente
-  useEffect(() => {
-    if (assessmentCompleted && challengeCompleted && !workoutPlan) {
-      generateWorkoutPlan();
-    }
-  }, [assessmentCompleted, challengeCompleted, workoutPlan]);
-
-  const generateWorkoutPlan = async () => {
+  const generateWorkoutPlan = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -69,7 +63,20 @@ export default function WorkoutPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [setWorkoutPlan]);
+
+  useEffect(() => {
+    if (assessmentCompleted && challengeCompleted && !workoutPlan) {
+      generateWorkoutPlan();
+    }
+  }, [
+    assessmentCompleted,
+    challengeCompleted,
+    workoutPlan,
+    generateWorkoutPlan,
+  ]);
+
+  // Generate workout plan is defined above as useCallback
 
   // Se não completou avaliação ou desafio, mostrar mensagem
   if (!assessmentCompleted || !challengeCompleted) {
@@ -435,7 +442,7 @@ export default function WorkoutPage() {
                       )}
                     </Card>
                   </motion.div>
-                ),
+                )
               )}
             </div>
 

@@ -54,7 +54,7 @@ Conventions & patterns:
 - **Client/Server Separation**: Server logic (API calls, data processing) in `src/lib/`, UI logic in `src/components/`
 - **Animation Pattern**: `'use client'` + `framer-motion` imports for animated components
 - **Data Persistence**: localStorage utilities with error handling (check `typeof window !== "undefined"`)
-- **Exercise Database**: Structured by muscle groups and difficulty levels in `src/lib/exercisesDatabase.ts`
+- **Exercise Database**: Structured by muscle groups and difficulty levels in `src/lib/exercises/` (modular files per muscle group, with `src/lib/exercises/index.ts` as the main exporter)
 - **Workout Generation**: Assessment + Challenge results determine fitness level, then filter exercises by goal/muscle group
 - **Challenge Assessment**: Performance-based leveling (push-up/plank/squat scores) overrides self-reported fitness level
 
@@ -68,7 +68,7 @@ Integration points:
 How to implement features:
 
 - **New Assessment Questions**: Add to `assessmentQuestions` array in `src/app/assessment/page.tsx`
-- **New Exercises**: Add to `exercisesDatabase` object in `src/lib/exercisesDatabase.ts` with proper muscle group/difficulty
+- **New Exercises**: Add to the appropriate file under `src/lib/exercises/` (e.g., `src/lib/exercises/chestExercises.ts`) and export it from `src/lib/exercises/index.ts` with proper muscle group/difficulty
 - **New Workout Goals**: Create new goal logic in AI integration (`src/lib/ai/deepseek.ts`)
 - **Challenge Exercises**: Modify `defaultChallengeWorkout` in `src/lib/challengeWorkout.ts`
 - **UI Components**: Add to `src/components/ui/` for shared components, feature-specific in `src/components/[feature]/`

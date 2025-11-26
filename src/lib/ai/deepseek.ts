@@ -3,6 +3,7 @@ import type { ChallengeWorkout, ChallengeResult } from "../challengeWorkout";
 import {
   processAssessmentData,
   type UserAssessmentData,
+  type RawAssessmentAnswers,
 } from "./assessmentProcessor";
 import { type ProgressionCriteria } from "./progressionAnalyzer";
 import { processChallengeResults } from "./challengeProcessor";
@@ -21,7 +22,9 @@ export async function generatePersonalizedChallenge(
   userProfile: Record<string, unknown>
 ): Promise<ChallengeWorkout> {
   // Processar dados da avaliação para formato estruturado
-  const processedData = processAssessmentData(userProfile);
+  const processedData = processAssessmentData(
+    userProfile as unknown as RawAssessmentAnswers
+  );
   const prompt = generateChallengePrompt(processedData);
 
   const response = await callDeepSeekApi<ChallengeWorkout>({
@@ -43,7 +46,9 @@ export async function generateWeeklyWorkoutPlan(
   challengeResults?: ChallengeResult[]
 ): Promise<WeeklyWorkout> {
   // Processar dados da avaliação para formato estruturado
-  const processedData = processAssessmentData(userProfile);
+  const processedData = processAssessmentData(
+    userProfile as unknown as RawAssessmentAnswers
+  );
 
   let prompt = generateWorkoutPlanPrompt(processedData);
 

@@ -4,7 +4,7 @@ import type { UserAssessmentData } from "./assessmentProcessor";
  * Gera o prompt para criação de desafio personalizado
  */
 export function generateChallengePrompt(
-  processedData: UserAssessmentData
+  processedData: UserAssessmentData,
 ): string {
   return `Você é um treinador pessoal especialista. Crie um desafio físico personalizado de 3 exercícios para avaliar o nível real de condicionamento do usuário.
 
@@ -49,7 +49,7 @@ Retorne APENAS um objeto JSON válido com esta estrutura exata:
  * Gera o prompt base para plano de treino semanal
  */
 export function generateWorkoutPlanPrompt(
-  processedData: UserAssessmentData
+  processedData: UserAssessmentData,
 ): string {
   return `Você é um treinador pessoal especialista. Crie um plano de treino semanal personalizado baseado no perfil abaixo:
 
@@ -111,7 +111,7 @@ Retorne APENAS um objeto JSON válido com esta estrutura exata:
  */
 export function addChallengeResultsToPrompt(
   basePrompt: string,
-  challengeSummary: string
+  challengeSummary: string,
 ): string {
   return `${basePrompt}\n\nRESULTADOS DO DESAFIO REALIZADO:\n${challengeSummary}\n\nIMPORTANTE: Use estes resultados reais do desafio para ajustar a intensidade e dificuldade dos exercícios. Os valores de dificuldade percebida e desempenho real devem guiar suas recomendações, não apenas a auto-avaliação inicial.`;
 }
@@ -121,7 +121,7 @@ export function addChallengeResultsToPrompt(
  */
 export function addProgressSummaryToPrompt(
   basePrompt: string,
-  progressSummary: string
+  progressSummary: string,
 ): string {
   return `${basePrompt}\n\nAJUSTE BASEADO NO PROGRESSO ANTERIOR:\n${progressSummary}\n\nAdapte a intensidade e exercícios considerando o progresso relatado.`;
 }
