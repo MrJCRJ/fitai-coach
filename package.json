@@ -8,8 +8,6 @@
     "deploy": "bash scripts/deploy-vercel.sh",
     "setup": "bash scripts/init-bootstrap.sh",
     "test": "vitest --run",
-    "test:deepseek": "node scripts/test-deepseek.js",
-    "estimate-cost": "node scripts/estimate-cost.js",
     "lint": "eslint src/ --max-warnings 0",
     "prepare": "husky install"
   },
@@ -52,7 +50,6 @@
     "prettier": "^3.4.1",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.9.3",
-    "vitest": "^1.6.1",
-    "zod": "^4.1.13"
+    "vitest": "^1.6.1"
   }
 }

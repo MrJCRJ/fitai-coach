@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import React from "react";
+import { PWAWrapper } from "@/components/PWAWrapper";
 
 export const metadata = {
   title: "FitAI Coach",
@@ -54,7 +55,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon.svg" />
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
       </head>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen">
+        <PWAWrapper>{children}</PWAWrapper>
+      </body>
     </html>
   );
 }

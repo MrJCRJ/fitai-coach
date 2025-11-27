@@ -12,8 +12,18 @@ export function usePWAInstall() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
+    // Check if already installed
+    if (typeof window !== "undefined") {
+      const isStandalone = window.matchMedia(
+        "(display-mode: standalone)"
+      ).matches;
+      const isInWebAppiOS = (window.navigator as any).standalone === true;
+      setIsInstalled(isStandalone || isInWebAppiOS);
+    }
+
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
@@ -22,8 +32,16 @@ export function usePWAInstall() {
 
     window.addEventListener("beforeinstallprompt", handler);
 
+    // Listen for successful installation
+    window.addEventListener("appinstalled", () => {
+      setIsInstalled(true);
+      setIsInstallable(false);
+      setDeferredPrompt(null);
+    });
+
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener("appinstalled", () => {});
     };
   }, []);
 
@@ -35,6 +53,7 @@ export function usePWAInstall() {
 
     if (outcome === "accepted") {
       console.log("User accepted the install prompt");
+      setIsInstalled(true);
     } else {
       console.log("User dismissed the install prompt");
     }
@@ -43,5 +62,5 @@ export function usePWAInstall() {
     setIsInstallable(false);
   };
 
-  return { installPWA, isInstallable };
+  return { installPWA, isInstallable, isInstalled };
 }

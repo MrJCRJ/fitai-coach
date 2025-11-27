@@ -1,635 +1,454 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import {
-  isAssessmentCompleted,
-  getAssessmentAnswers,
-} from "@/lib/workoutGenerator";
+  WorkoutTimers,
+  WorkoutNavbar,
+  ExerciseCarousel,
+  RestTimer,
+} from "@/components/workout";
 import {
-  isChallengeCompleted,
-  loadChallengeResults,
-} from "@/lib/challengeWorkout";
-import type { WeeklyWorkout, WorkoutExercise } from "@/lib/ai/types";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { createWeeklySchedule } from "@/lib/weeklySchedule";
-import { PaymentModal } from "@/components/PaymentModal";
+  pushUpVariations,
+  pullUpVariations,
+  squatVariations,
+} from "@/lib/exercisesDatabase";
+import { workoutSaver } from "@/lib/workoutSaver";
+import { DetailedWorkoutSession } from "@/lib/workoutTypes";
+
+// Desabilitar prerendering para esta página
+export const dynamic = "force-dynamic";
+
+interface WindowWithTimers {
+  timerIntervals?: Record<string, NodeJS.Timeout>;
+}
 
 export default function WorkoutPage() {
-  const [assessmentCompleted, setAssessmentCompleted] = useState(false);
-  const [challengeCompleted, setChallengeCompleted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [workoutPlan, setWorkoutPlan] = useLocalStorage<WeeklyWorkout | null>(
-    "fitai-weekly-workout-plan",
-    null,
-  );
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const router = useRouter();
+  const [currentSession, setCurrentSession] = useState<{
+    [key: string]: {
+      sets: {
+        reps: number;
+        time: number;
+        level: number;
+        exerciseName: string;
+        restTime?: number;
+      }[];
+      totalTime: number;
+    };
+  }>({});
+  const [timers, setTimers] = useState<{ [key: string]: number }>({});
+  const [activeTimer, setActiveTimer] = useState<string | null>(null);
+  const [workoutStartTime, setWorkoutStartTime] = useState<Date | null>(null);
+  const [totalWorkoutTime, setTotalWorkoutTime] = useState(0);
+  const [restTime, setRestTime] = useState(0);
+  const [isResting, setIsResting] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("peito");
 
-  // Carregar dados do cliente após hidratação
+  // Estados para os níveis calculados
+  const [currentPushUpLevel, setCurrentPushUpLevel] = useState<number>(1);
+  const [currentPullUpLevel, setCurrentPullUpLevel] = useState<number>(1);
+  const [currentSquatLevel, setCurrentSquatLevel] = useState<number>(1);
+
+  // Estados para os níveis selecionados em cada carrossel
+  const [selectedPushUpLevel, setSelectedPushUpLevel] = useState<number>(1);
+  const [selectedPullUpLevel, setSelectedPullUpLevel] = useState<number>(1);
+  const [selectedSquatLevel, setSelectedSquatLevel] = useState<number>(1);
+
   useEffect(() => {
-    setAssessmentCompleted(isAssessmentCompleted());
-    setChallengeCompleted(isChallengeCompleted());
-    setIsLoading(false);
-  }, []);
+    // Verificar se estamos no cliente
+    if (typeof window === "undefined") return;
 
-  // Carregar dados do cliente após hidratação
-  useEffect(() => {
-    setAssessmentCompleted(isAssessmentCompleted());
-    setChallengeCompleted(isChallengeCompleted());
-    setIsLoading(false);
-  }, []);
+    // Iniciar treino automaticamente
+    setWorkoutStartTime(new Date());
+    setTotalWorkoutTime(0);
 
-  const generateWorkoutPlan = useCallback(async () => {
-    console.log("🚀 WorkoutPage: Iniciando geração do plano");
-    setLoading(true);
-    setError(null);
+    // Iniciar sessão detalhada
+    workoutSaver.startSession();
 
-    try {
-      const assessmentAnswers = getAssessmentAnswers();
-      const challengeResults = loadChallengeResults();
+    // Calcular níveis baseados no progresso usando detailedWorkoutSessions
+    const calculateLevel = (exerciseKey: string) => {
+      const savedDetailed = localStorage.getItem("detailedWorkoutSessions");
+      if (!savedDetailed) return 1;
 
-      console.log("📊 WorkoutPage: Dados carregados", {
-        assessmentAnswers: !!assessmentAnswers,
-        challengeResults: !!challengeResults,
+      const sessions: DetailedWorkoutSession[] = JSON.parse(savedDetailed);
+      let totalSets = 0;
+
+      sessions.forEach((session) => {
+        const exercise = session.exercises.find(
+          (ex) => ex.exerciseId === exerciseKey
+        );
+        if (exercise) {
+          totalSets += exercise.sets.length;
+        }
       });
 
-      if (!assessmentAnswers) {
-        throw new Error("Dados da avaliação não encontrados");
-      }
+      if (totalSets < 10) return 1;
+      if (totalSets < 25) return 2;
+      if (totalSets < 50) return 3;
+      if (totalSets < 100) return 4;
+      if (totalSets < 200) return 5;
+      if (totalSets < 400) return 6;
+      if (totalSets < 800) return 7;
+      return 8;
+    };
 
-      const response = await fetch("/api/deepseek", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    const pushUpLevel = calculateLevel("flexao");
+    const pullUpLevel = calculateLevel("barra");
+    const squatLevel = calculateLevel("agachamento");
+
+    setSelectedPushUpLevel(pushUpLevel);
+    setSelectedPullUpLevel(pullUpLevel);
+    setSelectedSquatLevel(squatLevel);
+
+    // Definir níveis calculados
+    setCurrentPushUpLevel(pushUpLevel);
+    setCurrentPullUpLevel(pullUpLevel);
+    setCurrentSquatLevel(squatLevel);
+  }, []);
+
+  // Timer para o tempo total do treino
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (workoutStartTime) {
+      interval = setInterval(() => {
+        const elapsed = Math.floor(
+          (Date.now() - workoutStartTime.getTime()) / 1000
+        );
+        setTotalWorkoutTime(elapsed);
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [workoutStartTime]);
+
+  // Timer para descanso
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (isResting) {
+      interval = setInterval(() => {
+        setRestTime((prev) => prev + 1);
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [isResting]);
+
+  // Funções auxiliares para o sistema detalhado
+  const getExerciseName = (exerciseId: string, activeTab: string): string => {
+    const variations =
+      activeTab === "peito"
+        ? pushUpVariations
+        : activeTab === "costas"
+          ? pullUpVariations
+          : squatVariations;
+
+    const level =
+      activeTab === "peito"
+        ? selectedPushUpLevel
+        : activeTab === "costas"
+          ? selectedPullUpLevel
+          : selectedSquatLevel;
+
+    return variations[level]?.name || `${exerciseId} - Nível ${level}`;
+  };
+
+  const getCurrentLevel = (activeTab: string): number => {
+    return activeTab === "peito"
+      ? selectedPushUpLevel
+      : activeTab === "costas"
+        ? selectedPullUpLevel
+        : selectedSquatLevel;
+  };
+
+  const getMuscleGroup = (activeTab: string): "pushup" | "pullup" | "squat" => {
+    return activeTab === "peito"
+      ? "pushup"
+      : activeTab === "costas"
+        ? "pullup"
+        : "squat";
+  };
+
+  const startTimer = (exerciseId: string) => {
+    if (activeTimer) return; // Só um timer por vez
+
+    setActiveTimer(exerciseId);
+    setTimers((prev) => ({ ...prev, [exerciseId]: 0 }));
+
+    // Parar descanso quando iniciar exercício
+    setIsResting(false);
+    setRestTime(0);
+
+    // Iniciar exercício no sistema detalhado
+    const exerciseName = getExerciseName(exerciseId, activeTab);
+    const level = getCurrentLevel(activeTab);
+    workoutSaver.startExercise(
+      exerciseId,
+      exerciseName,
+      getMuscleGroup(activeTab),
+      level
+    );
+
+    const interval = setInterval(() => {
+      setTimers((prev) => {
+        const newTime = (prev[exerciseId] || 0) + 1;
+        return { ...prev, [exerciseId]: newTime };
+      });
+    }, 1000);
+
+    // Salvar interval para limpar depois
+    const windowWithTimers = window as WindowWithTimers;
+    const timerIntervals = windowWithTimers.timerIntervals || {};
+    timerIntervals[exerciseId] = interval;
+    windowWithTimers.timerIntervals = timerIntervals;
+  };
+
+  const stopTimer = (exerciseId: string) => {
+    const windowWithTimers = window as WindowWithTimers;
+    const timerIntervals = windowWithTimers.timerIntervals || {};
+    if (timerIntervals[exerciseId]) {
+      clearInterval(timerIntervals[exerciseId]);
+      delete timerIntervals[exerciseId];
+      windowWithTimers.timerIntervals = timerIntervals;
+    }
+    setActiveTimer(null);
+  };
+
+  const saveProgress = (exerciseId: string, reps: number) => {
+    const time = timers[exerciseId] || 0;
+
+    // Salvar no sistema detalhado
+    const variations =
+      activeTab === "peito"
+        ? pushUpVariations
+        : activeTab === "costas"
+          ? pullUpVariations
+          : squatVariations;
+    const level = getCurrentLevel(activeTab);
+    const targetReps = variations[level]?.reps?.split("-")[0] || "10";
+
+    workoutSaver.saveDetailedSet(
+      reps,
+      parseInt(targetReps),
+      time,
+      undefined, // restTime será definido no finishRest
+      undefined, // perceivedDifficulty
+      undefined // notes
+    );
+
+    // Manter compatibilidade com o sistema antigo
+    setCurrentSession((prev) => {
+      const current = prev[exerciseId] || { sets: [], totalTime: 0 };
+      const exerciseName = getExerciseName(exerciseId, activeTab);
+      const newSet = { reps, time, level, exerciseName };
+      return {
+        ...prev,
+        [exerciseId]: {
+          sets: [...current.sets, newSet],
+          totalTime: current.totalTime + time,
         },
-        body: JSON.stringify({
-          profile: assessmentAnswers,
-          challengeResults: challengeResults || [],
-        }),
-      });
+      };
+    });
 
-      if (!response.ok) {
-        throw new Error(`Erro na API: ${response.status}`);
+    stopTimer(exerciseId);
+
+    // Iniciar descanso
+    setRestTime(0);
+    setIsResting(true);
+  };
+
+  const finishRest = () => {
+    // Atualizar último set com tempo de descanso no sistema detalhado
+    workoutSaver.updateLastSetRestTime(restTime);
+
+    workoutSaver.finishExercise();
+
+    // Manter compatibilidade com sistema antigo
+    setCurrentSession((prev) => {
+      const lastExerciseId = Object.keys(prev).pop();
+      if (lastExerciseId) {
+        const current = prev[lastExerciseId];
+        if (current && current.sets.length > 0) {
+          const lastSetIndex = current.sets.length - 1;
+          const lastSet = current.sets[lastSetIndex];
+          if (lastSet) {
+            // Atualizar o último set com o tempo de descanso
+            const updatedSets = [...current.sets];
+            updatedSets[lastSetIndex] = {
+              reps: lastSet.reps,
+              time: lastSet.time,
+              level: lastSet.level,
+              exerciseName: lastSet.exerciseName,
+              restTime: restTime,
+            };
+
+            return {
+              ...prev,
+              [lastExerciseId]: {
+                ...current,
+                sets: updatedSets,
+              },
+            };
+          }
+        }
       }
+      return prev;
+    });
 
-      const plan = await response.json();
-      console.log("✅ WorkoutPage: Plano gerado com sucesso", plan);
-      setWorkoutPlan(plan);
-    } catch (err) {
-      console.error("❌ WorkoutPage: Erro ao gerar plano:", err);
-      setError(err instanceof Error ? err.message : "Erro desconhecido");
-    } finally {
-      setLoading(false);
-    }
-  }, [setWorkoutPlan]);
+    setIsResting(false);
+    setRestTime(0);
+  };
 
-  const handlePaymentSuccess = useCallback(() => {
-    console.log("💰 WorkoutPage: Pagamento bem-sucedido, gerando plano");
-    setShowPaymentModal(false);
-    generateWorkoutPlan();
-  }, [generateWorkoutPlan]);
+  const finishWorkout = () => {
+    if (Object.keys(currentSession).length === 0) return;
 
-  const handleAdSuccess = useCallback(() => {
-    console.log("📺 WorkoutPage: Anúncio assistido, gerando plano");
-    setShowPaymentModal(false);
-    generateWorkoutPlan();
-  }, [generateWorkoutPlan]);
-
-  const requestWorkoutGeneration = useCallback(() => {
-    console.log("🎯 WorkoutPage: Mostrando modal de pagamento");
-    setShowPaymentModal(true);
-  }, []);
-
-  useEffect(() => {
-    if (
-      assessmentCompleted &&
-      challengeCompleted &&
-      !workoutPlan &&
-      !isLoading
-    ) {
-      console.log("🎯 WorkoutPage: Condições atendidas para gerar plano", {
-        assessmentCompleted,
-        challengeCompleted,
-        workoutPlan: !!workoutPlan,
-        isLoading,
-      });
-      requestWorkoutGeneration();
-    } else {
-      console.log("⏳ WorkoutPage: Aguardando condições", {
-        assessmentCompleted,
-        challengeCompleted,
-        workoutPlan: !!workoutPlan,
-        isLoading,
-      });
-    }
-  }, [
-    assessmentCompleted,
-    challengeCompleted,
-    workoutPlan,
-    isLoading,
-    requestWorkoutGeneration,
-  ]);
-
-  // Generate workout plan is defined above as useCallback
-
-  // Se não completou avaliação ou desafio, mostrar mensagem
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-300">Carregando...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!assessmentCompleted || !challengeCompleted) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          {/* Header */}
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center justify-center mb-6">
-              <motion.div
-                className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-2xl"
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <svg
-                  className="w-10 h-10 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </motion.div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-orange-200 to-red-200 bg-clip-text text-transparent mb-4">
-              Treinos Indisponíveis
-            </h1>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Para acessar treinos personalizados, primeiro precisamos conhecer
-              seu nível físico atual através da avaliação e do desafio
-            </p>
-          </motion.div>
-
-          {/* Assessment Required Card */}
-          <motion.div
-            className="max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Card
-              className="p-8 text-center bg-gradient-to-r from-orange-900/50 to-red-900/50 border-orange-500/30"
-              glow
-            >
-              <div className="text-6xl mb-6">📊</div>
-              <h2 className="text-2xl font-bold text-white mb-4">
-                Avaliação Física Necessária
-              </h2>
-              <p className="text-gray-300 mb-8 leading-relaxed">
-                Antes de começar seus treinos, vamos fazer uma avaliação rápida
-                e um desafio físico para entender seu nível atual, objetivos e
-                criar um plano personalizado que realmente funcione para você.
-              </p>
-
-              <div className="space-y-4">
-                <div className="flex items-center justify-center gap-3 text-sm text-gray-300">
-                  <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                  <span>Avaliação rápida (5-10 minutos)</span>
-                </div>
-                <div className="flex items-center justify-center gap-3 text-sm text-gray-300">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                  <span>Desafio físico para testar seu nível real</span>
-                </div>
-                <div className="flex items-center justify-center gap-3 text-sm text-gray-300">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                  <span>Treinos personalizados baseados nos resultados</span>
-                </div>
-                <div className="flex items-center justify-center gap-3 text-sm text-gray-300">
-                  <span className="w-2 h-2 bg-pink-400 rounded-full"></span>
-                  <span>Acompanhamento do seu progresso</span>
-                </div>
-              </div>
-
-              <div className="mt-8 space-y-4">
-                <Link href="/assessment">
-                  <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-lg py-4">
-                    🚀 Fazer Avaliação Agora
-                  </Button>
-                </Link>
-                <Link href="/dashboard">
-                  <Button
-                    variant="outline"
-                    className="w-full border-gray-600 text-gray-300 hover:bg-gray-700/50"
-                  >
-                    ← Voltar ao Dashboard
-                  </Button>
-                </Link>
-              </div>
-            </Card>
-          </motion.div>
-
-          {/* Motivational Quote */}
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Card className="p-6 max-w-xl mx-auto">
-              <blockquote className="text-lg text-gray-300 italic mb-3">
-                &ldquo;A única maneira ruim de fazer exercícios é não
-                fazê-los.&rdquo;
-              </blockquote>
-              <cite className="text-gray-400 text-sm">— Jerry Seinfeld</cite>
-            </Card>
-          </motion.div>
-        </div>
-      </div>
-    );
-  }
-
-  // Se tem avaliação e desafio completos, mostrar plano de treino
-  if (assessmentCompleted && challengeCompleted) {
-    // Estado de carregamento
-    if (loading) {
-      return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="max-w-4xl mx-auto px-4 py-16">
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center justify-center mb-6">
-                <motion.div
-                  className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                >
-                  <svg
-                    className="w-10 h-10 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                    />
-                  </svg>
-                </motion.div>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent mb-4">
-                Gerando Seu Plano
-              </h1>
-              <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-                Nossa IA está analisando seus dados e criando um plano semanal
-                personalizado...
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      );
+    // Finalizar e salvar sessão detalhada
+    const detailedSession = workoutSaver.finishSession();
+    if (detailedSession) {
+      workoutSaver.saveToStorage(detailedSession);
     }
 
-    // Estado de erro
-    if (error) {
-      return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="max-w-4xl mx-auto px-4 py-16">
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="text-6xl mb-6">⚠️</div>
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-red-200 to-red-200 bg-clip-text text-transparent mb-4">
-                Erro ao Gerar Plano
-              </h1>
-              <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-                {error}
-              </p>
-              <div className="space-x-4">
-                <Button
-                  onClick={requestWorkoutGeneration}
-                  className="bg-blue-600 hover:bg-blue-700"
-                >
-                  Tentar Novamente
-                </Button>
-                <Link href="/dashboard">
-                  <Button variant="outline">Voltar ao Dashboard</Button>
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      );
+    // Redirecionar para dashboard
+    router.push("/dashboard");
+  };
+
+  const cancelWorkout = () => {
+    // Redirecionar para dashboard sem salvar
+    router.push("/dashboard");
+  };
+
+  const renderActiveCarousel = () => {
+    switch (activeTab) {
+      case "peito":
+        return (
+          <ExerciseCarousel
+            exerciseType="pushup"
+            selectedLevel={selectedPushUpLevel}
+            currentLevel={currentPushUpLevel}
+            onLevelChange={setSelectedPushUpLevel}
+            variations={pushUpVariations}
+            activeTimer={activeTimer}
+            timers={timers}
+            currentSession={currentSession}
+            onStartTimer={startTimer}
+            onStopTimer={stopTimer}
+            onSaveProgress={saveProgress}
+          />
+        );
+      case "costas":
+        return (
+          <ExerciseCarousel
+            exerciseType="pullup"
+            selectedLevel={selectedPullUpLevel}
+            currentLevel={currentPullUpLevel}
+            onLevelChange={setSelectedPullUpLevel}
+            variations={pullUpVariations}
+            activeTimer={activeTimer}
+            timers={timers}
+            currentSession={currentSession}
+            onStartTimer={startTimer}
+            onStopTimer={stopTimer}
+            onSaveProgress={saveProgress}
+          />
+        );
+      case "pernas":
+        return (
+          <ExerciseCarousel
+            exerciseType="squat"
+            selectedLevel={selectedSquatLevel}
+            currentLevel={currentSquatLevel}
+            onLevelChange={setSelectedSquatLevel}
+            variations={squatVariations}
+            activeTimer={activeTimer}
+            timers={timers}
+            currentSession={currentSession}
+            onStartTimer={startTimer}
+            onStopTimer={stopTimer}
+            onSaveProgress={saveProgress}
+          />
+        );
+      default:
+        return null;
     }
-
-    // Plano gerado com sucesso
-    if (workoutPlan) {
-      return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="max-w-6xl mx-auto px-4 py-16">
-            {/* Header */}
-            <motion.div
-              className="text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent mb-4">
-                Seu Plano Semanal - Semana {workoutPlan.week}
-              </h1>
-              <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-                Plano personalizado baseado na sua avaliação e desempenho no
-                desafio
-              </p>
-            </motion.div>
-
-            {/* Weekly Schedule */}
-            <div className="space-y-4">
-              {createWeeklySchedule(workoutPlan.workouts).map(
-                (daySchedule, index) => (
-                  <motion.div
-                    key={daySchedule.day}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
-                    <Card
-                      className={`p-6 ${
-                        daySchedule.isRestDay
-                          ? "bg-gradient-to-r from-slate-800/30 to-slate-900/30 border-slate-700/30"
-                          : daySchedule.isToday
-                            ? "bg-gradient-to-r from-green-900/60 to-blue-900/60 border-green-400/50 shadow-lg shadow-green-500/20"
-                            : "bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-500/30"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div className="text-2xl">{daySchedule.emoji}</div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <h3 className="text-lg font-bold text-white">
-                                {daySchedule.day}
-                              </h3>
-                              {daySchedule.isToday && (
-                                <span className="px-2 py-1 bg-green-500 text-black text-xs font-bold rounded-full">
-                                  HOJE
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-400">
-                              {daySchedule.date}
-                            </p>
-                          </div>
-                        </div>
-
-                        {daySchedule.isRestDay ? (
-                          <div className="text-center">
-                            <div className="text-2xl mb-1">😴</div>
-                            <p className="text-sm text-gray-400">
-                              Dia de Descanso
-                            </p>
-                          </div>
-                        ) : (
-                          <div className="text-right">
-                            <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
-                              <span>⏱️ {daySchedule.workout?.duration}</span>
-                              <span>•</span>
-                              <span>
-                                🔥 {daySchedule.workout?.calories} cal
-                              </span>
-                            </div>
-                            <div
-                              className={`px-3 py-1 rounded-full text-xs font-medium inline-block ${
-                                daySchedule.workout?.difficulty === "Iniciante"
-                                  ? "bg-green-500/20 text-green-400"
-                                  : daySchedule.workout?.difficulty ===
-                                      "Intermediário"
-                                    ? "bg-yellow-500/20 text-yellow-400"
-                                    : "bg-red-500/20 text-red-400"
-                              }`}
-                            >
-                              {daySchedule.workout?.difficulty}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {!daySchedule.isRestDay && (
-                        <div className="mt-4 pt-4 border-t border-slate-700/50">
-                          <h4 className="font-semibold text-white mb-2">
-                            {daySchedule.workout?.name}
-                          </h4>
-                          <p className="text-sm text-gray-300 mb-3 leading-relaxed">
-                            {daySchedule.workout?.description}
-                          </p>
-
-                          <div className="grid md:grid-cols-2 gap-4 mb-4">
-                            <div>
-                              <p className="text-xs text-gray-400 mb-1">
-                                🎯 Grupos musculares:
-                              </p>
-                              <p className="text-xs text-gray-300">
-                                {daySchedule.workout?.targetMuscles.join(", ")}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-400 mb-1">
-                                🏋️ Tipo:
-                              </p>
-                              <p className="text-xs text-gray-300">
-                                {daySchedule.workout?.type}
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="border-t border-slate-700/50 pt-3">
-                            <h5 className="text-sm font-medium text-white mb-2">
-                              Exercícios (
-                              {daySchedule.workout?.exercises.length}
-                              ):
-                            </h5>
-                            <div className="space-y-1">
-                              {daySchedule.workout?.exercises
-                                .slice(0, 3)
-                                .map((exercise: WorkoutExercise) => (
-                                  <div
-                                    key={exercise.id}
-                                    className="text-xs text-gray-300 flex justify-between"
-                                  >
-                                    <span className="font-medium">
-                                      {exercise.name}
-                                    </span>
-                                    <span className="text-gray-500">
-                                      {exercise.sets}x {exercise.reps}
-                                    </span>
-                                  </div>
-                                ))}
-                              {daySchedule.workout &&
-                                daySchedule.workout.exercises &&
-                                daySchedule.workout.exercises.length > 3 && (
-                                  <div className="text-xs text-gray-500">
-                                    +{daySchedule.workout.exercises.length - 3}{" "}
-                                    exercícios&hellip;
-                                  </div>
-                                )}
-                            </div>
-                          </div>
-
-                          <div className="mt-4">
-                            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-sm">
-                              Ver Treino Completo
-                            </Button>
-                          </div>
-                        </div>
-                      )}
-                    </Card>
-                  </motion.div>
-                ),
-              )}
-            </div>
-
-            {/* Actions */}
-            <motion.div
-              className="text-center mt-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Link href="/dashboard">
-                <Button variant="outline">← Voltar ao Dashboard</Button>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      );
-    }
-
-    // Fallback - plano ainda não gerado
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          {/* Header */}
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center justify-center mb-6">
-              <motion.div
-                className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl"
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <svg
-                  className="w-10 h-10 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                  />
-                </svg>
-              </motion.div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent mb-4">
-              Preparando Seu Plano
-            </h1>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Com base na sua avaliação e desempenho no desafio, estamos criando
-              um plano semanal personalizado.
-            </p>
-          </motion.div>
-
-          {/* Loading Card */}
-          <motion.div
-            className="max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Card
-              className="p-8 text-center bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-500/30"
-              glow
-            >
-              <div className="text-6xl mb-6">🤖</div>
-              <h2 className="text-2xl font-bold text-white mb-4">
-                Gerando Plano Personalizado
-              </h2>
-              <p className="text-gray-300 mb-8 leading-relaxed">
-                Analisando seus dados de avaliação e desafio para criar treinos
-                perfeitos para seu nível e objetivos.
-              </p>
-
-              <Button
-                onClick={requestWorkoutGeneration}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                🚀 Gerar Plano Agora
-              </Button>
-
-              <p className="text-xs text-gray-400 mt-4">
-                Se o modal não aparecer automaticamente, clique acima
-              </p>
-            </Card>
-          </motion.div>
-        </div>
-      </div>
-    );
-  } // Fallback
+  };
 
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <Card className="p-8 text-center">
-          <div className="text-6xl mb-4">🔄</div>
-          <h2 className="text-2xl font-bold text-white mb-4">Carregando...</h2>
-          <Link href="/dashboard">
-            <Button variant="outline">Voltar ao Dashboard</Button>
-          </Link>
-        </Card>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent mb-4">
+            Treino em Andamento
+          </h1>
+          <p className="text-gray-300">Selecione um grupo muscular</p>
+        </motion.div>
+
+        {/* Workout Timers */}
+        <WorkoutTimers
+          workoutStartTime={workoutStartTime}
+          totalWorkoutTime={totalWorkoutTime}
+          currentSession={currentSession}
+        />
+
+        {/* Workout Navbar */}
+        <WorkoutNavbar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          currentSession={currentSession}
+        />
+
+        {/* Active Exercise Carousel */}
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          {renderActiveCarousel()}
+        </motion.div>
+
+        {/* Rest Timer */}
+        <RestTimer
+          isResting={isResting}
+          restTime={restTime}
+          onFinishRest={finishRest}
+        />
+
+        {/* Workout Controls */}
+        <motion.div
+          className="text-center mb-8 space-y-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <Button
+            onClick={finishWorkout}
+            size="lg"
+            disabled={Object.keys(currentSession).length === 0}
+            className="bg-green-600 hover:bg-green-700"
+          >
+            Finalizar Treino
+          </Button>
+          <div>
+            <Button
+              onClick={cancelWorkout}
+              variant="outline"
+              className="text-red-400 border-red-400 hover:bg-red-400/10"
+            >
+              Cancelar Treino
+            </Button>
+          </div>
+        </motion.div>
       </div>
-      <PaymentModal
-        isOpen={showPaymentModal}
-        onClose={() => {
-          console.log("❌ WorkoutPage: Modal fechado sem sucesso");
-          setShowPaymentModal(false);
-        }}
-        onPaymentSuccess={handlePaymentSuccess}
-        onAdSuccess={handleAdSuccess}
-      />
-    </>
+    </div>
   );
 }
