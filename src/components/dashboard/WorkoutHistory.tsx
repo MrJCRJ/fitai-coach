@@ -14,7 +14,7 @@ interface WorkoutHistoryProps {
 export function WorkoutHistory({ workoutSessions }: WorkoutHistoryProps) {
   const [showAll, setShowAll] = useState(false);
   const [expandedSessions, setExpandedSessions] = useState<Set<string>>(
-    new Set()
+    new Set(),
   );
 
   const INITIAL_SESSIONS = 5;
@@ -58,7 +58,7 @@ export function WorkoutHistory({ workoutSessions }: WorkoutHistoryProps) {
               session={session}
               index={index}
               isExpanded={expandedSessions.has(
-                session.id || `session-${index}`
+                session.id || `session-${index}`,
               )}
               onToggleExpansion={() =>
                 toggleSessionExpansion(session.id || `session-${index}`)

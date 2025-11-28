@@ -53,8 +53,8 @@ export default function WorkoutTimers({
             {formatTime(
               Object.values(currentSession).reduce(
                 (sum, ex) => sum + ex.totalTime,
-                0
-              )
+                0,
+              ),
             )}
           </div>
           <div className="text-sm text-gray-400 mt-1">Tempo em exercícios</div>

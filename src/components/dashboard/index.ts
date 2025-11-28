@@ -8,3 +8,5 @@ export { WorkoutHistory } from "./WorkoutHistory";
 export { WorkoutSessionCard } from "./WorkoutSessionCard";
 export { ExerciseCard } from "./ExerciseCard";
 export { SetBadge } from "./SetBadge";
+export { AchievementDisplay } from "./AchievementDisplay";
+export { DataManagement } from "./DataManagement";

@@ -1,0 +1,428 @@
+import { Exercise } from "/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types";
+import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
+
+// ====================
+// EXERCÍCIOS DE PULL - NÍVEL EXTREME
+// ====================
+
+export const extremePull: Record<number, Exercise> = {
+  33: createPullExerciseWithGamification(
+    {
+      id: "one_arm_pull_up_full",
+      name: "One-Arm Pull-up (Completo)",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "1-3 por lado",
+      rest: "300s",
+      instructions:
+        "Execute pull-ups completos usando apenas um braço. Sem qualquer assistência. Movimento de elite absoluta.",
+      tips: "Força unilateral máxima da humanidade. Técnica perfeita obrigatória. Dominar este movimento é alcançar o topo da calistenia.",
+      equipment: ["Barra"],
+      calories: 45,
+      xpReward: 100,
+      estimatedTime: 1200,
+      rarity: "legendary",
+      category: "unilateral",
+      emoji: "💪",
+    },
+    33,
+    100,
+    1200,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 25600,
+        description: "Complete 25600 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  34: createPullExerciseWithGamification(
+    {
+      id: "weighted_pull_up_heavy",
+      name: "Weighted Pull-up (Pesado)",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "3-5",
+      rest: "240s",
+      instructions:
+        "Execute pull-ups com peso significativo (20kg+). Técnica impecável mesmo com carga máxima.",
+      tips: "Aumente peso gradualmente. Força máxima absoluta. Técnica CrossFit/powerlifting combinada.",
+      equipment: ["Barra", "Cinto de peso pesado"],
+      calories: 40,
+      xpReward: 85,
+      estimatedTime: 960,
+      rarity: "legendary",
+      category: "weighted",
+      emoji: "🏋️‍♂️",
+    },
+    34,
+    85,
+    960,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 28000,
+        description: "Complete 28000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  35: createPullExerciseWithGamification(
+    {
+      id: "ring_muscle_up",
+      name: "Ring Muscle-up",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "2-4",
+      rest: "240s",
+      instructions:
+        "Execute muscle-ups em argolas. As argolas se movem, exigindo estabilização máxima durante a transição.",
+      tips: "Instabilidade extrema. Coordenação perfeita. Combina força, controle e propriocepção máxima.",
+      equipment: ["Argolas"],
+      calories: 42,
+      xpReward: 90,
+      estimatedTime: 1020,
+      rarity: "legendary",
+      category: "compound",
+      emoji: "🔗",
+    },
+    35,
+    90,
+    1020,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 30000,
+        description: "Complete 30000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  36: createPullExerciseWithGamification(
+    {
+      id: "front_lever_full",
+      name: "Front Lever (Completo)",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "15-30s",
+      rest: "180s",
+      instructions:
+        "Mantenha o corpo completamente horizontal ao chão em front lever. Pernas totalmente estendidas.",
+      tips: "Corpo reto como prancha. Ombros girados. Força isométrica máxima da calistenia. Movimento lendário.",
+      equipment: ["Barra"],
+      calories: 25,
+      xpReward: 55,
+      estimatedTime: 600,
+      rarity: "legendary",
+      category: "isometric",
+      emoji: "🤸‍♂️",
+    },
+    36,
+    55,
+    600,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 32000,
+        description: "Complete 32000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  37: createPullExerciseWithGamification(
+    {
+      id: "pull_up_front_lever",
+      name: "Pull-up to Front Lever",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "1-2",
+      rest: "300s",
+      instructions:
+        "Do topo do pull-up, transite para front lever completo. Mantenha por alguns segundos antes de descer.",
+      tips: "Transição suave. Controle absoluto. Combina força dinâmica com isométrica. Movimento de mestre.",
+      equipment: ["Barra"],
+      calories: 35,
+      xpReward: 75,
+      estimatedTime: 900,
+      rarity: "legendary",
+      category: "transition",
+      emoji: "🔄",
+    },
+    37,
+    75,
+    900,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 34000,
+        description: "Complete 34000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  38: createPullExerciseWithGamification(
+    {
+      id: "front_lever_raises",
+      name: "Front Lever Raises",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "3-5",
+      rest: "240s",
+      instructions:
+        "Do front lever tuck, levante as pernas para posição completa. Movimento dinâmico em lever.",
+      tips: "Controle preciso. Força excepcional. Combina isometria com movimento. Técnica muito avançada.",
+      equipment: ["Barra"],
+      calories: 32,
+      xpReward: 70,
+      estimatedTime: 840,
+      rarity: "legendary",
+      category: "dynamic",
+      emoji: "⬆️",
+    },
+    38,
+    70,
+    840,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 36000,
+        description: "Complete 36000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  39: createPullExerciseWithGamification(
+    {
+      id: "rotational_pull_up_180",
+      name: "Rotational Pull-up 180°",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "2-3 por lado",
+      rest: "240s",
+      instructions:
+        "Execute pull-up e gire 180° no topo, pousando de costas para a barra. Controle total necessário.",
+      tips: "Coordenação extrema. Força e controle. Movimento muito técnico. Risco de lesão alto.",
+      equipment: ["Barra"],
+      calories: 38,
+      xpReward: 80,
+      estimatedTime: 960,
+      rarity: "legendary",
+      category: "rotational",
+      emoji: "🔄",
+    },
+    39,
+    80,
+    960,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 38000,
+        description: "Complete 38000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  40: createPullExerciseWithGamification(
+    {
+      id: "clap_pull_up",
+      name: "Clap Pull-up (Com Batida)",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "3-5",
+      rest: "240s",
+      instructions:
+        "Execute pull-up explosivo, solte a barra no topo e bata palmas antes de pegar novamente.",
+      tips: "Potência máxima. Tempo de voo significativo. Coordenação excepcional. Técnica CrossFit extrema.",
+      equipment: ["Barra"],
+      calories: 40,
+      xpReward: 85,
+      estimatedTime: 1020,
+      rarity: "legendary",
+      category: "explosive",
+      emoji: "👏",
+    },
+    40,
+    85,
+    1020,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 40000,
+        description: "Complete 40000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  41: createPullExerciseWithGamification(
+    {
+      id: "double_clap_pull_up",
+      name: "Double Clap Pull-up",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "2-3",
+      rest: "300s",
+      instructions:
+        "Execute pull-up explosivo, solte a barra e bata palmas duas vezes antes de pegar novamente.",
+      tips: "Potência sobre-humana. Tempo de voo extremo. Coordenação máxima. Movimento de elite absoluta.",
+      equipment: ["Barra"],
+      calories: 45,
+      xpReward: 95,
+      estimatedTime: 1200,
+      rarity: "legendary",
+      category: "explosive",
+      emoji: "👏👏",
+    },
+    41,
+    95,
+    1200,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 42000,
+        description: "Complete 42000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  42: createPullExerciseWithGamification(
+    {
+      id: "360_pull_up",
+      name: "360° Pull-up",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "1-2",
+      rest: "360s",
+      instructions:
+        "Execute pull-up e gire completamente 360° no ar antes de pegar a barra novamente.",
+      tips: "Coordenação máxima. Força explosiva extrema. Movimento muito perigoso. Técnica perfeita obrigatória.",
+      equipment: ["Barra"],
+      calories: 50,
+      xpReward: 110,
+      estimatedTime: 1440,
+      rarity: "legendary",
+      category: "rotational",
+      emoji: "🔄",
+    },
+    42,
+    110,
+    1440,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 44000,
+        description: "Complete 44000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  43: createPullExerciseWithGamification(
+    {
+      id: "victorian_pull",
+      name: "Victorian Pull (Cruz Vitoriana)",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "1",
+      rest: "420s",
+      instructions:
+        "Do front lever, puxe o corpo para cima passando completamente por cima da barra. Movimento lendário.",
+      tips: "Força total do corpo. Coordenação perfeita. Movimento histórico da calistenia. Risco muito alto.",
+      equipment: ["Barra"],
+      calories: 55,
+      xpReward: 120,
+      estimatedTime: 1680,
+      rarity: "legendary",
+      category: "legendary",
+      emoji: "👑",
+    },
+    43,
+    120,
+    1680,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 46000,
+        description: "Complete 46000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+
+  44: createPullExerciseWithGamification(
+    {
+      id: "planche_to_invert",
+      name: "Planche to Inverted",
+      muscleGroup: "back",
+      difficulty: "extreme",
+      sets: 4,
+      reps: "1",
+      rest: "480s",
+      instructions:
+        "Da posição de planche nas mãos, inverta o corpo completamente para ficar de cabeça para baixo.",
+      tips: "Força máxima absoluta. Controle total. Movimento que desafia todos os limites humanos. Extremo perigo.",
+      equipment: ["Barra"],
+      calories: 60,
+      xpReward: 130,
+      estimatedTime: 1920,
+      rarity: "legendary",
+      category: "transitional",
+      emoji: "🔄",
+    },
+    44,
+    130,
+    1920,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 48000,
+        description: "Complete 48000 séries de exercícios extremos",
+      },
+    ],
+    undefined,
+    "extreme"
+  ),
+};

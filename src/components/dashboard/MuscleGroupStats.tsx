@@ -23,9 +23,9 @@ export function MuscleGroupStats({ stats }: MuscleGroupStatsProps) {
             <div className="text-center">
               <div className="text-sm font-medium text-gray-300 capitalize mb-1">
                 {group === "pushup"
-                  ? "Peito"
+                  ? "Empurrar"
                   : group === "pullup"
-                    ? "Costas"
+                    ? "Puxar"
                     : "Pernas"}
               </div>
               <div className="text-lg font-bold text-blue-400">
@@ -34,6 +34,11 @@ export function MuscleGroupStats({ stats }: MuscleGroupStatsProps) {
               <div className="text-xs text-gray-400">
                 {data.totalSets} sets • {data.sessions} sessões
               </div>
+              {data.avgWeightPerSet && data.avgWeightPerSet > 0 && (
+                <div className="text-xs text-purple-400 mt-1">
+                  Média: {data.avgWeightPerSet.toFixed(1)}kg/set
+                </div>
+              )}
             </div>
           </Card>
         ))}

@@ -3,7 +3,6 @@ import {
   DetailedExercise,
   DetailedWorkoutSession,
 } from "./workoutTypes";
-import { Exercise } from "./exercisesDatabase";
 
 // Utilitários para gerar IDs únicos
 export const generateId = (): string => {
@@ -45,7 +44,7 @@ export class WorkoutSaver {
     this.currentSession.duration = Math.floor(
       (new Date(now).getTime() -
         new Date(this.currentSession.startTime).getTime()) /
-        1000
+        1000,
     );
     this.currentSession.completed = true;
 
@@ -64,8 +63,8 @@ export class WorkoutSaver {
   startExercise(
     exerciseId: string,
     exerciseName: string,
-    muscleGroup: "pushup" | "pullup" | "squat",
-    level: number
+    muscleGroup: "pushup" | "pullup" | "squat" | "dip",
+    level: number,
   ): DetailedExercise {
     if (!this.currentSession) {
       throw new Error("Nenhuma sessão ativa. Chame startSession() primeiro.");
@@ -98,11 +97,12 @@ export class WorkoutSaver {
     duration: number,
     restTime?: number,
     perceivedDifficulty?: 1 | 2 | 3 | 4 | 5,
-    notes?: string
+    notes?: string,
+    weight?: number,
   ): DetailedSet | null {
     if (!this.currentExercise || !this.currentSession) {
       throw new Error(
-        "Nenhum exercício ativo. Chame startExercise() primeiro."
+        "Nenhum exercício ativo. Chame startExercise() primeiro.",
       );
     }
 
@@ -115,6 +115,7 @@ export class WorkoutSaver {
       reps,
       targetReps,
       duration,
+      ...(weight !== undefined && { weight }),
       restTime: restTime || undefined,
       startTime: new Date(Date.now() - duration * 1000).toISOString(), // Estimativa
       endTime: now,
@@ -166,7 +167,7 @@ export class WorkoutSaver {
         this.currentSession.totalSets > 0
           ? this.currentSession.exercises.reduce(
               (sum, ex) => sum + ex.totalDuration,
-              0
+              0,
             ) / this.currentSession.totalSets
           : 0,
     };
@@ -178,7 +179,7 @@ export class WorkoutSaver {
 
     const totalDuration = this.currentSession.exercises.reduce(
       (sum, ex) => sum + ex.totalDuration,
-      0
+      0,
     );
 
     this.currentSession.averageSetDuration =
@@ -196,14 +197,14 @@ export class WorkoutSaver {
           }, 0)
         );
       },
-      0
+      0,
     );
   }
 
   // Salvar sessão no localStorage
   saveToStorage(session: DetailedWorkoutSession) {
     const existing = JSON.parse(
-      localStorage.getItem("detailedWorkoutSessions") || "[]"
+      localStorage.getItem("detailedWorkoutSessions") || "[]",
     );
     existing.unshift(session); // Adicionar no início
 

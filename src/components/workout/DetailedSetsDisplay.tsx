@@ -10,7 +10,10 @@ interface DetailedSetsDisplayProps {
   exerciseName: string;
 }
 
-export default function DetailedSetsDisplay({ sets, exerciseName }: DetailedSetsDisplayProps) {
+export default function DetailedSetsDisplay({
+  sets,
+  exerciseName,
+}: DetailedSetsDisplayProps) {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -27,7 +30,14 @@ export default function DetailedSetsDisplay({ sets, exerciseName }: DetailedSets
 
   const getDifficultyLabel = (difficulty?: number) => {
     if (!difficulty) return "N/A";
-    const labels = ["", "Muito Fácil", "Fácil", "Médio", "Difícil", "Muito Difícil"];
+    const labels = [
+      "",
+      "Muito Fácil",
+      "Fácil",
+      "Médio",
+      "Difícil",
+      "Muito Difícil",
+    ];
     return labels[difficulty] || "N/A";
   };
 
@@ -72,7 +82,9 @@ export default function DetailedSetsDisplay({ sets, exerciseName }: DetailedSets
 
                 {set.perceivedDifficulty && (
                   <div className="flex items-center gap-1">
-                    <div className={`w-2 h-2 rounded-full ${getDifficultyColor(set.perceivedDifficulty)}`} />
+                    <div
+                      className={`w-2 h-2 rounded-full ${getDifficultyColor(set.perceivedDifficulty)}`}
+                    />
                     <span className="text-xs text-gray-400">
                       {getDifficultyLabel(set.perceivedDifficulty)}
                     </span>
@@ -110,7 +122,7 @@ export default function DetailedSetsDisplay({ sets, exerciseName }: DetailedSets
                     {new Date(set.startTime).toLocaleTimeString("pt-BR", {
                       hour: "2-digit",
                       minute: "2-digit",
-                      second: "2-digit"
+                      second: "2-digit",
                     })}
                   </div>
                 </div>
@@ -119,9 +131,7 @@ export default function DetailedSetsDisplay({ sets, exerciseName }: DetailedSets
               {set.notes && (
                 <div className="mt-2 pt-2 border-t border-slate-600">
                   <span className="text-gray-400 text-xs">Notas:</span>
-                  <div className="text-white text-sm mt-1">
-                    {set.notes}
-                  </div>
+                  <div className="text-white text-sm mt-1">{set.notes}</div>
                 </div>
               )}
             </motion.div>
@@ -146,7 +156,7 @@ export default function DetailedSetsDisplay({ sets, exerciseName }: DetailedSets
             <div>
               <div className="text-gray-400">Sets Completos</div>
               <div className="text-white font-semibold">
-                {sets.filter(set => set.completed).length}/{sets.length}
+                {sets.filter((set) => set.completed).length}/{sets.length}
               </div>
             </div>
           </div>

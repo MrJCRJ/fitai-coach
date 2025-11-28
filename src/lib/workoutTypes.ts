@@ -5,6 +5,7 @@ export interface DetailedSet {
   reps: number; // Número de repetições realizadas
   targetReps: number; // Número de repetições alvo (do nível)
   duration: number; // Duração total do set em segundos
+  weight?: number; // Peso utilizado (opcional)
   restTime?: number | undefined; // Tempo de descanso antes deste set
   startTime: string; // Timestamp ISO quando iniciou
   endTime: string; // Timestamp ISO quando terminou
@@ -17,7 +18,7 @@ export interface DetailedExercise {
   id: string; // ID único do exercício na sessão
   exerciseId: string; // ID do tipo (flexao, barra, agachamento)
   name: string; // Nome completo
-  muscleGroup: "pushup" | "pullup" | "squat";
+  muscleGroup: "pushup" | "pullup" | "squat" | "dip";
   level: number; // Nível atual
   sets: DetailedSet[]; // Array detalhado dos sets
   totalDuration: number; // Tempo total gasto neste exercício

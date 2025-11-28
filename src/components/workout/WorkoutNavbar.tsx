@@ -21,14 +21,14 @@ export default function WorkoutNavbar({
 }: WorkoutNavbarProps) {
   const tabs = [
     {
-      id: "peito",
-      name: "Peito",
+      id: "empurrar",
+      name: "Empurrar",
       icon: "💪",
       exerciseId: "flexao",
     },
     {
-      id: "costas",
-      name: "Costas",
+      id: "puxar",
+      name: "Puxar",
       icon: "🏋️",
       exerciseId: "barra",
     },

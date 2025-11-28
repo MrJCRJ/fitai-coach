@@ -1,0 +1,429 @@
+import { Exercise } from "/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types";
+import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
+import { PULL_ACHIEVEMENTS } from "./data/pullGameData";
+
+// ====================
+// EXERCÍCIOS DE PULL - NÍVEL ADVANCED
+// ====================
+
+export const advancedPull: Record<number, Exercise> = {
+  21: createPullExerciseWithGamification(
+    {
+      id: "archer_pull_up",
+      name: "Archer Pull-up (Arqueiro)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "3-5 por lado",
+      rest: "180s",
+      instructions:
+        "Puxe o corpo para um lado até o queixo passar a barra, enquanto mantém o braço oposto totalmente estendido. Mova lateralmente.",
+      tips: "Força unilateral máxima. Mantenha o corpo reto. Técnica precisa para evitar compensações.",
+      equipment: ["Barra"],
+      calories: 25,
+      xpReward: 50,
+      estimatedTime: 600,
+      rarity: "legendary",
+      category: "unilateral",
+      emoji: "🏹",
+    },
+    21,
+    50,
+    600,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 6400,
+        description: "Complete 6400 séries de exercícios intermediários",
+      },
+    ],
+    [PULL_ACHIEVEMENTS[3]!], // pull_legend
+    "advanced"
+  ),
+
+  22: createPullExerciseWithGamification(
+    {
+      id: "typewriter_pull_up",
+      name: "Typewriter Pull-up",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "2-4 por lado",
+      rest: "180s",
+      instructions:
+        "Do topo do pull-up, mova o corpo lateralmente para um lado e depois para o outro, como uma máquina de escrever.",
+      tips: "Controle absoluto do movimento. Pausa em cada 'letra'. Coordenação excepcional necessária.",
+      equipment: ["Barra"],
+      calories: 28,
+      xpReward: 55,
+      estimatedTime: 660,
+      rarity: "legendary",
+      category: "coordination",
+      emoji: "⌨️",
+    },
+    22,
+    55,
+    660,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 7000,
+        description: "Complete 7000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  23: createPullExerciseWithGamification(
+    {
+      id: "l_sit_pull_up_full",
+      name: "L-sit Pull-up (Completo)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "3-5",
+      rest: "180s",
+      instructions:
+        "Mantenha as pernas totalmente horizontais (paralelas ao chão) durante todo o movimento do pull-up.",
+      tips: "Core completamente contraído. Pernas não se dobram. Força isométrica máxima no core.",
+      equipment: ["Barra"],
+      calories: 30,
+      xpReward: 60,
+      estimatedTime: 720,
+      rarity: "legendary",
+      category: "core-integrated",
+      emoji: "🦵",
+    },
+    23,
+    60,
+    720,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 8000,
+        description: "Complete 8000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  24: createPullExerciseWithGamification(
+    {
+      id: "chest_to_bar_full",
+      name: "Chest-to-Bar (Peito na Barra)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "5-8",
+      rest: "150s",
+      instructions:
+        "Puxe o corpo explosivamente para cima até o peito tocar completamente a barra. Sem assistência.",
+      tips: "Extensão completa dos ombros. Momento de inércia no topo. Técnica CrossFit avançada.",
+      equipment: ["Barra"],
+      calories: 26,
+      xpReward: 52,
+      estimatedTime: 600,
+      rarity: "epic",
+      category: "explosive",
+      emoji: "👕",
+    },
+    24,
+    52,
+    600,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 9000,
+        description: "Complete 9000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  25: createPullExerciseWithGamification(
+    {
+      id: "high_pull_up",
+      name: "High Pull-up (Pull-up Alto)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "6-10",
+      rest: "120s",
+      instructions:
+        "Puxe o corpo para cima até as costelas tocarem a barra. Posição mais alta que o chest-to-bar.",
+      tips: "Foca na contração máxima das costas. Técnica precisa. Mais alto que chest-to-bar.",
+      equipment: ["Barra"],
+      calories: 24,
+      xpReward: 48,
+      estimatedTime: 540,
+      rarity: "epic",
+      category: "vertical",
+      emoji: "⬆️",
+    },
+    25,
+    48,
+    540,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 10000,
+        description: "Complete 10000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  26: createPullExerciseWithGamification(
+    {
+      id: "explosive_pull_up",
+      name: "Explosive Pull-up",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "8-12",
+      rest: "120s",
+      instructions:
+        "Execute pull-ups com máxima velocidade na fase concêntrica. Use o impulso para potência.",
+      tips: "Fase excêntrica controlada, concêntrica explosiva. Desenvolve potência máxima. Técnica CrossFit.",
+      equipment: ["Barra"],
+      calories: 27,
+      xpReward: 54,
+      estimatedTime: 540,
+      rarity: "epic",
+      category: "explosive",
+      emoji: "💥",
+    },
+    26,
+    54,
+    540,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 11000,
+        description: "Complete 11000 séries de exercícios avançados",
+      },
+    ],
+    [PULL_ACHIEVEMENTS[4]!], // pull_god
+    "advanced"
+  ),
+
+  27: createPullExerciseWithGamification(
+    {
+      id: "weighted_pull_up",
+      name: "Weighted Pull-up (Com Peso)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "5-8",
+      rest: "180s",
+      instructions:
+        "Adicione peso extra (cinto com peso, halteres) e execute pull-ups completos. Comece leve.",
+      tips: "Aumente peso gradualmente. Técnica perfeita essencial. Desenvolve força máxima absoluta.",
+      equipment: ["Barra", "Cinto de peso", "Halteres"],
+      calories: 32,
+      xpReward: 65,
+      estimatedTime: 720,
+      rarity: "legendary",
+      category: "weighted",
+      emoji: "🏋️‍♂️",
+    },
+    27,
+    65,
+    720,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 12000,
+        description: "Complete 12000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  28: createPullExerciseWithGamification(
+    {
+      id: "muscle_up_bar",
+      name: "Muscle-up (Barra)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "3-6",
+      rest: "180s",
+      instructions:
+        "Da posição pendurada, puxe explosivamente para cima passando completamente por cima da barra.",
+      tips: "Transição suave do pull-up para dip. Coordenação e potência. Movimento lendário da calistenia.",
+      equipment: ["Barra"],
+      calories: 35,
+      xpReward: 70,
+      estimatedTime: 780,
+      rarity: "legendary",
+      category: "compound",
+      emoji: "💪",
+    },
+    28,
+    70,
+    780,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 12800,
+        description: "Complete 12800 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  29: createPullExerciseWithGamification(
+    {
+      id: "one_arm_pull_up",
+      name: "One-Arm Pull-up (Um Braço)",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "2-4 por lado",
+      rest: "240s",
+      instructions:
+        "Execute pull-ups usando apenas um braço. Movimento de força unilateral máxima.",
+      tips: "Use assistência parcial inicialmente. Técnica perfeita. Força relativa excepcional necessária.",
+      equipment: ["Barra"],
+      calories: 38,
+      xpReward: 75,
+      estimatedTime: 900,
+      rarity: "legendary",
+      category: "unilateral",
+      emoji: "💪",
+    },
+    29,
+    75,
+    900,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 14000,
+        description: "Complete 14000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  30: createPullExerciseWithGamification(
+    {
+      id: "tuck_front_lever_hold",
+      name: "Tuck Front Lever Hold",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "10-20s",
+      rest: "120s",
+      instructions:
+        "Mantenha o corpo em front lever com as pernas dobradas (tuck). Corpo horizontal ao chão.",
+      tips: "Pernas dobradas facilitam. Gire os ombros para manter horizontal. Força isométrica excepcional.",
+      equipment: ["Barra"],
+      calories: 20,
+      xpReward: 40,
+      estimatedTime: 480,
+      rarity: "legendary",
+      category: "isometric",
+      emoji: "🤸‍♂️",
+    },
+    30,
+    40,
+    480,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 15000,
+        description: "Complete 15000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  31: createPullExerciseWithGamification(
+    {
+      id: "back_lever_hold",
+      name: "Back Lever Hold",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "8-15s",
+      rest: "120s",
+      instructions:
+        "Mantenha o corpo em back lever (invertido) com as pernas em tuck. Corpo horizontal ao chão.",
+      tips: "Posição invertida. Contraia todos os músculos. Força isométrica máxima. Técnica precisa.",
+      equipment: ["Barra"],
+      calories: 22,
+      xpReward: 45,
+      estimatedTime: 480,
+      rarity: "legendary",
+      category: "isometric",
+      emoji: "🤸‍♂️",
+    },
+    31,
+    45,
+    480,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 16000,
+        description: "Complete 16000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+
+  32: createPullExerciseWithGamification(
+    {
+      id: "ice_cream_maker",
+      name: "Ice Cream Maker",
+      muscleGroup: "back",
+      difficulty: "advanced",
+      sets: 4,
+      reps: "3-5 por lado",
+      rest: "180s",
+      instructions:
+        "Do topo do pull-up, mova o corpo lateralmente para um lado enquanto gira, simulando fazer sorvete.",
+      tips: "Coordenação extrema. Combina força, controle e mobilidade. Movimento muito técnico.",
+      equipment: ["Barra"],
+      calories: 30,
+      xpReward: 60,
+      estimatedTime: 720,
+      rarity: "legendary",
+      category: "coordination",
+      emoji: "🍦",
+    },
+    32,
+    60,
+    720,
+    [
+      {
+        type: "sets",
+        exerciseType: "pullup",
+        value: 17000,
+        description: "Complete 17000 séries de exercícios avançados",
+      },
+    ],
+    undefined,
+    "advanced"
+  ),
+};
