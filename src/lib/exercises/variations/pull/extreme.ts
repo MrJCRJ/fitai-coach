@@ -1,4 +1,4 @@
-import { Exercise } from "/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types";
+import { Exercise } from "../../types";
 import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
 
 // ====================
