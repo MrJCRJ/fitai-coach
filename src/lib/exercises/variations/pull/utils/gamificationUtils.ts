@@ -1,5 +1,9 @@
-import { Exercise, ExerciseRequirement, Achievement } from "../../../types";
-import { parseRepRange } from "../../../gamificationUtils";
+import type {
+  Exercise,
+  ExerciseRequirement,
+  Achievement,
+} from "@/lib/exercises";
+import { parseRepRange } from "@/lib/exercises/gamificationUtils";
 import {
   PULL_THRESHOLDS,
   PULL_PROGRESSION_TIPS,
@@ -20,7 +24,7 @@ export function createPullExerciseWithGamification(
   estimatedTime: number,
   unlockRequirements?: ExerciseRequirement[],
   achievements?: Achievement[],
-  difficulty: "beginner" | "intermediate" | "advanced" | "extreme" = "beginner"
+  difficulty: "beginner" | "intermediate" | "advanced" | "extreme" = "beginner",
 ): Exercise {
   const exercise: Exercise = {
     id: baseExercise.id || `pull-exercise-${level}`,
@@ -64,7 +68,7 @@ export function createPullAchievement(
   description: string,
   icon: string,
   xpReward: number,
-  condition: Achievement["condition"]
+  condition: Achievement["condition"],
 ): Achievement {
   return {
     id: `pull_${id}`,
@@ -102,7 +106,7 @@ export function getSetsToNextPullLevel(currentSets: number): number {
 export function canUnlockPullVariation(
   level: number,
   totalSets: number,
-  variations: Record<number, Exercise>
+  variations: Record<number, Exercise>,
 ): boolean {
   const variation = variations[level];
   if (!variation?.unlockRequirements) return true;
@@ -120,7 +124,7 @@ export function canUnlockPullVariation(
  */
 export function getUnlockedPullVariations(
   totalSets: number,
-  variations: Record<number, Exercise>
+  variations: Record<number, Exercise>,
 ): Exercise[] {
   const currentLevel = calculatePullLevel(totalSets);
   return Object.values(variations).slice(0, currentLevel);
@@ -150,7 +154,7 @@ export function calculateStreakMultiplier(currentStreak: number): number {
  */
 export function getContextualPullTips(
   currentLevel: number,
-  totalSets: number
+  totalSets: number,
 ): string[] {
   const tips: string[] = [];
 
@@ -190,7 +194,7 @@ export function validatePullForm(
   exerciseId: string,
   reps: number,
   duration: number,
-  formRating?: 1 | 2 | 3 | 4 | 5
+  formRating?: 1 | 2 | 3 | 4 | 5,
 ): {
   isValid: boolean;
   feedback: string[];

@@ -1,4 +1,8 @@
-import { Exercise, ExerciseRequirement, Achievement } from "./types";
+import type {
+  Exercise,
+  ExerciseRequirement,
+  Achievement,
+} from "@/lib/exercises";
 
 // ====================
 // FUNÇÕES UTILITÁRIAS GENÉRICAS

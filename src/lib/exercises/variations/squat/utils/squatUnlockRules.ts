@@ -60,7 +60,7 @@ export function canUnlockExtremeSquat(totalSets: number): boolean {
  */
 export function calculateSquatProgress(
   currentLevel: number,
-  totalSets: number
+  totalSets: number,
 ): {
   currentThreshold: number;
   nextThreshold: number;
@@ -93,7 +93,7 @@ export function calculateSquatProgress(
 export function suggestNextSquatExercises(
   currentLevel: number,
   totalSets: number,
-  preferredStyle: "strict" | "explosive" | "mobility" | "mixed" = "strict"
+  preferredStyle: "strict" | "explosive" | "mobility" | "mixed" = "strict",
 ): string[] {
   const suggestions: string[] = [];
 
@@ -136,7 +136,7 @@ export function suggestNextSquatExercises(
 export function validateSquatProgressHealth(
   totalSets: number,
   sessionsPerWeek: number,
-  averageSessionSets: number
+  averageSessionSets: number,
 ): {
   isHealthy: boolean;
   warnings: string[];
@@ -155,7 +155,7 @@ export function validateSquatProgressHealth(
   if (averageSessionSets > 60) {
     warnings.push("Volume muito alto por sessão pode causar fadiga");
     recommendations.push(
-      "Divida o treino em dias específicos por grupo muscular"
+      "Divida o treino em dias específicos por grupo muscular",
     );
   }
 

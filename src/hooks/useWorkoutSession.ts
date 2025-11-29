@@ -3,6 +3,11 @@ import { workoutSaver } from "@/lib/workoutSaver";
 import { Exercise } from "@/lib/exercises";
 import { gamificationSystem } from "@/lib/gamification";
 import { UserProgress } from "@/lib/exercises/types";
+import type {
+  DetailedWorkoutSession,
+  DetailedExercise,
+  DetailedSet,
+} from "@/lib/workoutTypes";
 
 interface WorkoutSessionState {
   [key: string]: {
@@ -35,7 +40,7 @@ export function useWorkoutSession() {
   const [currentSession, setCurrentSession] = useState<WorkoutSessionState>({});
 
   // Função para atualizar progresso do usuário
-  const updateUserProgress = useCallback((session: any) => {
+  const updateUserProgress = useCallback((session: DetailedWorkoutSession) => {
     try {
       // Carregar progresso atual
       const currentProgress: UserProgress = JSON.parse(
@@ -104,7 +109,7 @@ export function useWorkoutSession() {
 
       // Calcular XP ganho na sessão
       let sessionXp = 0;
-      session.exercises.forEach((exercise: any) => {
+      session.exercises.forEach((exercise: DetailedExercise) => {
         // XP baseado em reps e dificuldade
         const baseXp = exercise.totalReps * 10;
         const difficultyMultiplier = exercise.level || 1;
@@ -122,7 +127,7 @@ export function useWorkoutSession() {
           );
 
           // Atualizar recordes pessoais
-          exercise.sets.forEach((set: any) => {
+          exercise.sets.forEach((set: DetailedSet) => {
             currentProgress.exerciseStats[muscleGroup].personalRecords.maxReps =
               Math.max(
                 currentProgress.exerciseStats[muscleGroup].personalRecords
@@ -203,7 +208,7 @@ export function useWorkoutSession() {
       updateUserProgress(detailedSession);
     }
     return detailedSession;
-  }, []);
+  }, [updateUserProgress]);
 
   // Salvar progresso de um exercício
   const saveProgress = useCallback(
@@ -255,7 +260,7 @@ export function useWorkoutSession() {
           muscleGroup,
           level
         );
-      } catch (error) {
+      } catch {
         // Exercício já ativo, continuar normalmente
         console.debug("Exercício já ativo:", exerciseId);
       }

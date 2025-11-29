@@ -1,6 +1,6 @@
-import { Exercise } from "../../types";
-import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
-import { PULL_ACHIEVEMENTS } from "./data/pullGameData";
+import type { Exercise } from "@/lib/exercises";
+import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+import { PULL_ACHIEVEMENTS } from "@/lib/exercises/variations/pull/data/pullGameData";
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL INTERMEDIATE
@@ -39,7 +39,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     [PULL_ACHIEVEMENTS[2]!], // pull_master
-    "intermediate"
+    "intermediate",
   ),
 
   10: createPullExerciseWithGamification(
@@ -74,7 +74,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   11: createPullExerciseWithGamification(
@@ -109,7 +109,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   12: createPullExerciseWithGamification(
@@ -144,7 +144,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   13: createPullExerciseWithGamification(
@@ -179,7 +179,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   14: createPullExerciseWithGamification(
@@ -214,7 +214,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   15: createPullExerciseWithGamification(
@@ -249,7 +249,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   16: createPullExerciseWithGamification(
@@ -284,7 +284,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   17: createPullExerciseWithGamification(
@@ -319,7 +319,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   18: createPullExerciseWithGamification(
@@ -354,7 +354,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   19: createPullExerciseWithGamification(
@@ -389,7 +389,7 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   20: createPullExerciseWithGamification(
@@ -424,6 +424,6 @@ export const intermediatePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 };

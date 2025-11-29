@@ -23,7 +23,7 @@ import { PULL_THRESHOLDS } from "../data/pullGameData";
 export function canUnlockPullLevel(
   level: number,
   totalSets: number,
-  masteredReps: number = 0
+  masteredReps: number = 0,
 ): boolean {
   // Validações básicas
   if (level < 1 || level > 12) return false;
@@ -82,7 +82,7 @@ export function canUnlockPullLevel(
 export function canUnlockBeginnerPull(
   exerciseId: string,
   totalSets: number,
-  currentLevel: number
+  currentLevel: number,
 ): boolean {
   switch (exerciseId) {
     case "dead_hang":
@@ -112,7 +112,7 @@ export function canUnlockBeginnerPull(
 export function canUnlockIntermediatePull(
   exerciseId: string,
   totalSets: number,
-  masteredBeginner: boolean
+  masteredBeginner: boolean,
 ): boolean {
   if (!masteredBeginner) return false;
 
@@ -153,7 +153,7 @@ export function canUnlockAdvancedPull(
   exerciseId: string,
   totalSets: number,
   masteredIntermediate: boolean,
-  maxRepsPullUp: number
+  maxRepsPullUp: number,
 ): boolean {
   if (!masteredIntermediate || maxRepsPullUp < 8) return false;
 
@@ -195,7 +195,7 @@ export function canUnlockExtremePull(
   totalSets: number,
   masteredAdvanced: boolean,
   hasWeightedPullUps: boolean,
-  hasMuscleUps: boolean
+  hasMuscleUps: boolean,
 ): boolean {
   if (!masteredAdvanced) return false;
 
@@ -238,7 +238,7 @@ export function canUnlockExtremePull(
  */
 export function calculatePullProgress(
   currentLevel: number,
-  totalSets: number
+  totalSets: number,
 ): {
   currentThreshold: number;
   nextThreshold: number;
@@ -271,7 +271,7 @@ export function calculatePullProgress(
 export function suggestNextPullExercises(
   currentLevel: number,
   totalSets: number,
-  preferredStyle: "strict" | "kipping" | "mixed" = "strict"
+  preferredStyle: "strict" | "kipping" | "mixed" = "strict",
 ): string[] {
   const suggestions: string[] = [];
 
@@ -309,7 +309,7 @@ export function suggestNextPullExercises(
 export function validatePullProgressHealth(
   totalSets: number,
   sessionsPerWeek: number,
-  averageSessionSets: number
+  averageSessionSets: number,
 ): {
   isHealthy: boolean;
   warnings: string[];

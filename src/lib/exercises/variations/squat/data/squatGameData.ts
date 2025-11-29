@@ -2,7 +2,7 @@
 // DADOS DO JOGO - MÓDULO SQUAT
 // ====================
 
-import { Achievement } from "../../../types";
+import type { Achievement } from "@/lib/exercises";
 
 // Thresholds de progresso baseados em sets cumulativos
 export const SQUAT_THRESHOLDS = [

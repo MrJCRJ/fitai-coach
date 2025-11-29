@@ -5,20 +5,37 @@ import { UserProgress } from "@/lib/exercises/types";
 export function useDashboardData() {
   const [workoutSessions, setWorkoutSessions] = useState<
     DetailedWorkoutSession[]
-  >([]);
-  const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
+  >(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const saved = localStorage.getItem("detailedWorkoutSessions");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [userProgress, setUserProgress] = useState<UserProgress | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const savedProgress = localStorage.getItem("userProgress");
+      return savedProgress ? JSON.parse(savedProgress) : null;
+    } catch {
+      return null;
+    }
+  });
 
   useEffect(() => {
-    const saved = localStorage.getItem("detailedWorkoutSessions");
-    if (saved) {
-      setWorkoutSessions(JSON.parse(saved));
+    // Se já existem dados iniciais, não fazer nada adicional
+    if (userProgress !== null && workoutSessions.length > 0) return;
+
+    // Carregar progresso do usuário caso não tenha sido inicializado
+    const savedProgress = localStorage.getItem("userProgress");
+    if (savedProgress && userProgress === null) {
+      setUserProgress(JSON.parse(savedProgress));
+      return;
     }
 
-    // Carregar progresso do usuário
-    const savedProgress = localStorage.getItem("userProgress");
-    if (savedProgress) {
-      setUserProgress(JSON.parse(savedProgress));
-    } else {
+    if (!savedProgress && userProgress === null) {
       // Inicializar progresso padrão se não existir
       const defaultProgress: UserProgress = {
         totalXp: 0,
@@ -103,6 +120,7 @@ export function useDashboardData() {
       setUserProgress(defaultProgress);
       localStorage.setItem("userProgress", JSON.stringify(defaultProgress));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- we only want this to run on mount
   }, []);
 
   return {

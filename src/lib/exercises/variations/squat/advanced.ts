@@ -2,8 +2,8 @@
 // EXERCÍCIOS DE SQUAT - NÍVEL ADVANCED
 // ====================
 
-import { Exercise } from "../../types";
-import { createSquatExerciseWithGamification } from "./utils/gamificationUtils";
+import type { Exercise } from "@/lib/exercises";
+import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const advancedSquat: Record<number, Exercise> = {
   15: createSquatExerciseWithGamification(
@@ -33,7 +33,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   16: createSquatExerciseWithGamification(
@@ -63,7 +63,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   17: createSquatExerciseWithGamification(
@@ -93,7 +93,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   18: createSquatExerciseWithGamification(
@@ -123,7 +123,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   19: createSquatExerciseWithGamification(
@@ -153,7 +153,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   20: createSquatExerciseWithGamification(
@@ -183,7 +183,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   21: createSquatExerciseWithGamification(
@@ -213,7 +213,7 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   22: createSquatExerciseWithGamification(
@@ -243,6 +243,6 @@ export const advancedSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 };

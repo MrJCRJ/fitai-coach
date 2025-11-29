@@ -2,7 +2,11 @@
 // UTILITÁRIOS DE GAMIFICAÇÃO - MÓDULO SQUAT
 // ====================
 
-import { Exercise, ExerciseRequirement, Achievement } from "../../../types";
+import type {
+  Exercise,
+  ExerciseRequirement,
+  Achievement,
+} from "@/lib/exercises";
 import {
   SQUAT_THRESHOLDS,
   SQUAT_PROGRESSION_TIPS,
@@ -18,7 +22,7 @@ export function createAchievement(
   description: string,
   xpReward: number,
   icon: string = "",
-  condition: Achievement["condition"]
+  condition: Achievement["condition"],
 ): Achievement {
   return {
     id: `squat_${id}`,
@@ -35,7 +39,7 @@ export function createAchievement(
  */
 export function calculateSquatLevel(totalSets: number): number {
   const level = SQUAT_THRESHOLDS.findIndex(
-    (threshold) => totalSets < threshold
+    (threshold) => totalSets < threshold,
   );
   return level === -1 ? SQUAT_THRESHOLDS.length : level;
 }
@@ -58,7 +62,7 @@ export function getSetsToNextSquatLevel(currentSets: number): number {
 export function canUnlockSquatVariation(
   level: number,
   totalSets: number,
-  variations: Record<number, Exercise>
+  variations: Record<number, Exercise>,
 ): boolean {
   const variation = variations[level];
   if (!variation?.unlockRequirements) return true;
@@ -76,7 +80,7 @@ export function canUnlockSquatVariation(
  */
 export function getUnlockedSquatVariations(
   totalSets: number,
-  variations: Record<number, Exercise>
+  variations: Record<number, Exercise>,
 ): Exercise[] {
   const currentLevel = calculateSquatLevel(totalSets);
   return Object.values(variations).slice(0, currentLevel);
@@ -119,7 +123,7 @@ export function createSquatExerciseWithGamification(
   estimatedTime: number,
   unlockRequirements?: ExerciseRequirement[],
   achievements?: Achievement[],
-  difficulty: "beginner" | "intermediate" | "advanced" | "extreme" = "beginner"
+  difficulty: "beginner" | "intermediate" | "advanced" | "extreme" = "beginner",
 ): Exercise {
   const xpReward = baseXp + level * 5; // XP aumenta com o nível
 
@@ -150,7 +154,7 @@ export function createSquatExerciseWithGamification(
  */
 export function getContextualSquatTips(
   currentLevel: number,
-  totalSets: number
+  totalSets: number,
 ): string[] {
   const tips: string[] = [];
 
@@ -198,7 +202,7 @@ export function validateSquatForm(
   exerciseId: string,
   reps: number,
   duration: number,
-  formRating?: 1 | 2 | 3 | 4 | 5
+  formRating?: 1 | 2 | 3 | 4 | 5,
 ): {
   isValid: boolean;
   feedback: string[];

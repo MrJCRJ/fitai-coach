@@ -14,7 +14,7 @@ import {
 export default function DashboardPage() {
   const { workoutSessions, userProgress, setWorkoutSessions, setUserProgress } =
     useDashboardData();
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [, setRefreshKey] = useState(0);
   const stats = calculateDashboardStats(workoutSessions, userProgress);
 
   const handleDataImported = () => {

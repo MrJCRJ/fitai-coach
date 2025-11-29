@@ -17,7 +17,7 @@ interface WorkoutSessionCardProps {
 
 export function WorkoutSessionCard({
   session,
-  index,
+  // index intentionally omitted in this component
   isExpanded = false,
   onToggleExpansion,
 }: WorkoutSessionCardProps) {

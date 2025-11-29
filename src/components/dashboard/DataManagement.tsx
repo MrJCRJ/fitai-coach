@@ -19,6 +19,7 @@ export function DataManagement({ onDataImported }: DataManagementProps) {
 
   const exportData = () => {
     try {
+      setIsExporting(true);
       const data = {
         version: "1.0",
         exportDate: new Date().toISOString(),
@@ -43,14 +44,17 @@ export function DataManagement({ onDataImported }: DataManagementProps) {
       document.body.removeChild(a);
 
       URL.revokeObjectURL(url);
+      setIsExporting(false);
       setMessage({ type: "success", text: "Backup exportado com sucesso!" });
     } catch (error) {
       console.error("Erro ao exportar:", error);
       setMessage({ type: "error", text: "Erro ao exportar dados." });
+      setIsExporting(false);
     }
   };
 
   const importData = () => {
+    setIsImporting(true);
     const input = document.createElement("input");
     input.type = "file";
     input.accept = ".json";
@@ -91,12 +95,14 @@ export function DataManagement({ onDataImported }: DataManagementProps) {
             text: "Dados importados! Recarregue a página.",
           });
           onDataImported?.();
+          setIsImporting(false);
         } catch (error) {
           console.error("Erro ao importar:", error);
           setMessage({
             type: "error",
             text: "Erro ao importar dados. Verifique o arquivo.",
           });
+          setIsImporting(false);
         }
       };
 
@@ -162,6 +168,7 @@ export function DataManagement({ onDataImported }: DataManagementProps) {
               <Button
                 onClick={exportData}
                 className="w-full bg-green-600 hover:bg-green-700"
+                disabled={isExporting}
               >
                 📤 Exportar
               </Button>
@@ -177,6 +184,7 @@ export function DataManagement({ onDataImported }: DataManagementProps) {
               <Button
                 onClick={importData}
                 className="w-full bg-blue-600 hover:bg-blue-700"
+                disabled={isImporting}
               >
                 📥 Importar
               </Button>

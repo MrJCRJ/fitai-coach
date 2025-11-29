@@ -2,8 +2,8 @@
 // EXERCÍCIOS DE SQUAT - NÍVEL EXTREME
 // ====================
 
-import { Exercise } from "../../types";
-import { createSquatExerciseWithGamification } from "./utils/gamificationUtils";
+import type { Exercise } from "@/lib/exercises";
+import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const extremeSquat: Record<number, Exercise> = {
   23: createSquatExerciseWithGamification(
@@ -33,7 +33,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   24: createSquatExerciseWithGamification(
@@ -63,7 +63,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   25: createSquatExerciseWithGamification(
@@ -93,7 +93,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   26: createSquatExerciseWithGamification(
@@ -123,7 +123,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   27: createSquatExerciseWithGamification(
@@ -153,7 +153,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   28: createSquatExerciseWithGamification(
@@ -183,7 +183,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   29: createSquatExerciseWithGamification(
@@ -213,7 +213,7 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   30: createSquatExerciseWithGamification(
@@ -243,6 +243,6 @@ export const extremeSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 };

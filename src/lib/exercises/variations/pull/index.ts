@@ -3,7 +3,8 @@
 // ====================
 
 // Tipos
-export type { Exercise } from "/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types";
+import type { Exercise } from "@/lib/exercises";
+export type { Exercise } from "@/lib/exercises";
 
 // Dados do jogo
 export {
@@ -12,7 +13,7 @@ export {
   PULL_BADGES,
   PULL_PROGRESSION_TIPS,
   PULL_FORM_TIPS,
-} from "./data/pullGameData";
+} from "@/lib/exercises/variations/pull/data/pullGameData";
 
 // Utilitários
 export {
@@ -25,7 +26,7 @@ export {
   calculateStreakMultiplier,
   getContextualPullTips,
   validatePullForm,
-} from "./utils/gamificationUtils";
+} from "@/lib/exercises/variations/pull/utils/gamificationUtils";
 
 export {
   canUnlockPullLevel,
@@ -36,30 +37,27 @@ export {
   calculatePullProgress,
   suggestNextPullExercises,
   validatePullProgressHealth,
-} from "./utils/pullUnlockRules";
+} from "@/lib/exercises/variations/pull/utils/pullUnlockRules";
 
 // Exercícios por nível
-export { beginnerPull } from "./beginner";
-export { intermediatePull } from "./intermediate";
-export { advancedPull } from "./advanced";
-export { extremePull } from "./extreme";
+export { beginnerPull } from "@/lib/exercises/variations/pull/beginner";
+export { intermediatePull } from "@/lib/exercises/variations/pull/intermediate";
+export { advancedPull } from "@/lib/exercises/variations/pull/advanced";
+export { extremePull } from "@/lib/exercises/variations/pull/extreme";
 
 // ====================
 // EXERCÍCIOS CONSOLIDADOS
 // ====================
 
-import { beginnerPull } from "./beginner";
-import { intermediatePull } from "./intermediate";
-import { advancedPull } from "./advanced";
-import { extremePull } from "./extreme";
+import { beginnerPull } from "@/lib/exercises/variations/pull/beginner";
+import { intermediatePull } from "@/lib/exercises/variations/pull/intermediate";
+import { advancedPull } from "@/lib/exercises/variations/pull/advanced";
+import { extremePull } from "@/lib/exercises/variations/pull/extreme";
 
 /**
  * Todos os exercícios de pull organizados por nível
  */
-export const pullVariations: Record<
-  number,
-  import("/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types").Exercise
-> = {
+export const pullVariations: Record<number, Exercise> = {
   ...beginnerPull,
   ...intermediatePull,
   ...advancedPull,
@@ -93,15 +91,9 @@ export const pullStats = {
  * Função utilitária para obter exercícios por nível
  */
 export function getPullExercisesByLevel(
-  level: number
-): Record<
-  number,
-  import("/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types").Exercise
-> {
-  const exercises: Record<
-    number,
-    import("/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types").Exercise
-  > = {};
+  level: number,
+): Record<number, Exercise> {
+  const exercises: Record<number, Exercise> = {};
 
   // Lógica para determinar quais exercícios estão disponíveis no nível
   if (level >= 1) {
@@ -142,11 +134,7 @@ export function getPullExercisesByLevel(
 /**
  * Função utilitária para obter exercício específico por ID
  */
-export function getPullExerciseById(
-  id: string
-):
-  | import("/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types").Exercise
-  | undefined {
+export function getPullExerciseById(id: string): Exercise | undefined {
   return Object.values(pullVariations).find((exercise) => exercise.id === id);
 }
 
@@ -154,10 +142,7 @@ export function getPullExerciseById(
  * Função utilitária para obter exercícios por dificuldade
  */
 export function getPullExercisesByDifficulty(
-  difficulty: "beginner" | "intermediate" | "advanced" | "extreme"
-): Record<
-  number,
-  import("/home/josecicero/Documentos/fitai-coach/src/lib/exercises/types").Exercise
-> {
+  difficulty: "beginner" | "intermediate" | "advanced" | "extreme",
+): Record<number, Exercise> {
   return pullExercisesByDifficulty[difficulty];
 }

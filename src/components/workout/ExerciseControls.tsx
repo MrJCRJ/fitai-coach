@@ -31,7 +31,7 @@ interface ExerciseControlsProps {
     reps: number,
     weight?: number,
     exercise?: Exercise,
-    selectedDifficulty?: string
+    selectedDifficulty?: string,
   ) => void;
 }
 
@@ -52,7 +52,7 @@ export default function ExerciseControls({
   // Sincronizar checkbox com input de peso
   useEffect(() => {
     const weightInput = document.getElementById(
-      `weight-${exerciseId}`
+      `weight-${exerciseId}`,
     ) as HTMLInputElement;
     if (weightInput) {
       weightInput.disabled = !useWeight;
@@ -72,7 +72,7 @@ export default function ExerciseControls({
   const handleSaveProgress = () => {
     const reps = parseInt(
       (document.getElementById(`reps-${exerciseId}`) as HTMLInputElement)
-        ?.value || "0"
+        ?.value || "0",
     );
     const weightToSave = useWeight ? weight : undefined;
     onSaveProgress(exerciseId, reps, weightToSave, exercise, undefined);

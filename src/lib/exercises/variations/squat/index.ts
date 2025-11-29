@@ -3,7 +3,12 @@
 // ====================
 
 // Tipos
-export type { Exercise, ExerciseRequirement, Achievement } from "../../types";
+import type { Exercise } from "@/lib/exercises";
+export type {
+  Exercise,
+  ExerciseRequirement,
+  Achievement,
+} from "@/lib/exercises";
 
 // Dados do jogo
 export {
@@ -12,7 +17,7 @@ export {
   SQUAT_BADGES,
   SQUAT_PROGRESSION_TIPS,
   SQUAT_FORM_TIPS,
-} from "./data/squatGameData";
+} from "@/lib/exercises/variations/squat/data/squatGameData";
 
 // Utilitários
 export {
@@ -26,7 +31,7 @@ export {
   createSquatExerciseWithGamification,
   getContextualSquatTips,
   validateSquatForm,
-} from "./utils/gamificationUtils";
+} from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export {
   canUnlockSquatLevel,
@@ -37,27 +42,27 @@ export {
   calculateSquatProgress,
   suggestNextSquatExercises,
   validateSquatProgressHealth,
-} from "./utils/squatUnlockRules";
+} from "@/lib/exercises/variations/squat/utils/squatUnlockRules";
 
 // Exercícios por nível
-export { beginnerSquat } from "./beginner";
-export { intermediateSquat } from "./intermediate";
-export { advancedSquat } from "./advanced";
-export { extremeSquat } from "./extreme";
+export { beginnerSquat } from "@/lib/exercises/variations/squat/beginner";
+export { intermediateSquat } from "@/lib/exercises/variations/squat/intermediate";
+export { advancedSquat } from "@/lib/exercises/variations/squat/advanced";
+export { extremeSquat } from "@/lib/exercises/variations/squat/extreme";
 
 // ====================
 // EXERCÍCIOS CONSOLIDADOS
 // ====================
 
-import { beginnerSquat } from "./beginner";
-import { intermediateSquat } from "./intermediate";
-import { advancedSquat } from "./advanced";
-import { extremeSquat } from "./extreme";
+import { beginnerSquat } from "@/lib/exercises/variations/squat/beginner";
+import { intermediateSquat } from "@/lib/exercises/variations/squat/intermediate";
+import { advancedSquat } from "@/lib/exercises/variations/squat/advanced";
+import { extremeSquat } from "@/lib/exercises/variations/squat/extreme";
 
 /**
  * Todos os exercícios de squat organizados por nível
  */
-export const squatVariations: Record<number, import("../../types").Exercise> = {
+export const squatVariations: Record<number, Exercise> = {
   ...beginnerSquat,
   ...intermediateSquat,
   ...advancedSquat,
@@ -91,9 +96,9 @@ export const squatStats = {
  * Função utilitária para obter exercícios por nível
  */
 export function getSquatExercisesByLevel(
-  level: number
-): Record<number, import("../../types").Exercise> {
-  const exercises: Record<number, import("../../types").Exercise> = {};
+  level: number,
+): Record<number, Exercise> {
+  const exercises: Record<number, Exercise> = {};
 
   // Lógica para determinar quais exercícios estão disponíveis no nível
   if (level >= 1) {
@@ -134,9 +139,7 @@ export function getSquatExercisesByLevel(
 /**
  * Função utilitária para obter exercício específico por ID
  */
-export function getSquatExerciseById(
-  id: string
-): import("../../types").Exercise | undefined {
+export function getSquatExerciseById(id: string): Exercise | undefined {
   return Object.values(squatVariations).find((exercise) => exercise.id === id);
 }
 
@@ -144,7 +147,7 @@ export function getSquatExerciseById(
  * Função utilitária para obter exercícios por dificuldade
  */
 export function getSquatExercisesByDifficulty(
-  difficulty: "beginner" | "intermediate" | "advanced" | "extreme"
-): Record<number, import("../../types").Exercise> {
+  difficulty: "beginner" | "intermediate" | "advanced" | "extreme",
+): Record<number, Exercise> {
   return squatExercisesByDifficulty[difficulty];
 }

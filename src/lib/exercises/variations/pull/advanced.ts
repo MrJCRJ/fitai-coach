@@ -1,6 +1,6 @@
-import { Exercise } from "../../types";
-import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
-import { PULL_ACHIEVEMENTS } from "./data/pullGameData";
+import type { Exercise } from "@/lib/exercises";
+import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+import { PULL_ACHIEVEMENTS } from "@/lib/exercises/variations/pull/data/pullGameData";
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL ADVANCED
@@ -39,7 +39,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     [PULL_ACHIEVEMENTS[3]!], // pull_legend
-    "advanced"
+    "advanced",
   ),
 
   22: createPullExerciseWithGamification(
@@ -74,7 +74,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   23: createPullExerciseWithGamification(
@@ -109,7 +109,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   24: createPullExerciseWithGamification(
@@ -144,7 +144,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   25: createPullExerciseWithGamification(
@@ -179,7 +179,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   26: createPullExerciseWithGamification(
@@ -214,7 +214,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     [PULL_ACHIEVEMENTS[4]!], // pull_god
-    "advanced"
+    "advanced",
   ),
 
   27: createPullExerciseWithGamification(
@@ -249,7 +249,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   28: createPullExerciseWithGamification(
@@ -284,7 +284,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   29: createPullExerciseWithGamification(
@@ -319,7 +319,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   30: createPullExerciseWithGamification(
@@ -354,7 +354,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   31: createPullExerciseWithGamification(
@@ -389,7 +389,7 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 
   32: createPullExerciseWithGamification(
@@ -424,6 +424,6 @@ export const advancedPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "advanced"
+    "advanced",
   ),
 };

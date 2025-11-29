@@ -85,9 +85,11 @@ Para ativar anúncios rewarded reais:
    - **Tipo**: Vídeo
    - **Conjuntos**: Interativo
 4. **Configure no arquivo `.env.local`** (valores de exemplo já incluídos):
+
    ```env
 
    ```
+
 5. **A aplicação usará anúncios reais** em vez da simulação
 
 > **Nota**: Sem configurar o AdMob, a aplicação funcionará normalmente com anúncios simulados para desenvolvimento.
@@ -118,6 +120,39 @@ Para aumentar os limites de veiculação e remover restrições do AdMob:
 - `npm run test:deepseek` - Testar integração com API DeepSeek
 - `npm run estimate-cost` - Estimativa de custos
 - `npm run lint` - Verificação de código
+
+## 🔗 Convenção de Imports (Alias & Tipos)
+
+Para manter consistência e evitar import paths absolutos ou relativos frágeis, usamos o alias `@/*` configurado no `tsconfig.json`.
+
+- Use `@/lib/exercises` para importar tipos e utilitários relacionados a exercícios.
+- Sempre que importar apenas tipos, use `import type { ... } from "@/lib/exercises";` para evitar ciclos em tempo de execução.
+- Para módulos operacionais (runtime) dentro das variações, prefira `@/lib/exercises/variations/<group>/<file>`.
+
+Exemplos:
+
+```ts
+// Tipo-only - use import type
+import type { Exercise } from "@/lib/exercises";
+
+// Runtime - módulos de utilitários ou variações
+import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+import { beginnerPull } from "@/lib/exercises/variations/pull/beginner";
+```
+
+Regras de lint aplicadas: `no-restricted-imports` bloqueia imports relativos ascendentes como `../../types` ou caminhos absolutos com `/home/...`. Caso o linter reporte violações, substitua por alias com exemplos mostrados acima.
+
+Comandos úteis:
+
+```bash
+# rodar lint e ver erros
+npm run lint
+
+# build para checar tipos e produção
+npm run build
+```
+
+Leia o guia completo: `docs/import-alias-guidelines.md`
 
 ## 🏗️ Arquitetura
 

@@ -1,5 +1,5 @@
-import { Exercise } from "../../types";
-import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
+import type { Exercise } from "@/lib/exercises";
+import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL EXTREME
@@ -38,7 +38,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   34: createPullExerciseWithGamification(
@@ -73,7 +73,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   35: createPullExerciseWithGamification(
@@ -108,7 +108,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   36: createPullExerciseWithGamification(
@@ -143,7 +143,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   37: createPullExerciseWithGamification(
@@ -178,7 +178,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   38: createPullExerciseWithGamification(
@@ -213,7 +213,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   39: createPullExerciseWithGamification(
@@ -248,7 +248,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   40: createPullExerciseWithGamification(
@@ -283,7 +283,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   41: createPullExerciseWithGamification(
@@ -318,7 +318,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   42: createPullExerciseWithGamification(
@@ -353,7 +353,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   43: createPullExerciseWithGamification(
@@ -388,7 +388,7 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 
   44: createPullExerciseWithGamification(
@@ -423,6 +423,6 @@ export const extremePull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "extreme"
+    "extreme",
   ),
 };

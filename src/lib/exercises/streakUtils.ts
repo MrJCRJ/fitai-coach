@@ -1,4 +1,4 @@
-import { UserProgress } from "./types";
+import type { UserProgress } from "@/lib/exercises";
 
 /**
  * Utilitários para gerenciamento de streaks (sequências)

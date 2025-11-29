@@ -1,4 +1,9 @@
-import { Exercise, RepRange, ExerciseRequirement, Achievement } from "./types";
+import type {
+  Exercise,
+  RepRange,
+  ExerciseRequirement,
+  Achievement,
+} from "@/lib/exercises";
 
 // Utilitários para criar exercícios com gamificação
 export function createExerciseWithGamification(

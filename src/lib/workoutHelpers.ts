@@ -3,6 +3,7 @@ import {
   pullUpVariations,
   squatVariations,
 } from "@/lib/exercises";
+import type { Exercise } from "@/lib/exercises";
 import {
   beginnerPushups,
   intermediatePushups,
@@ -74,10 +75,7 @@ export function getExerciseName(
 /**
  * Obtém as variações de exercício baseado na aba ativa
  */
-export function getExerciseVariations(
-  activeTab: string,
-  pushExerciseType?: "pushup" | "dip"
-) {
+export function getExerciseVariations(activeTab: string) {
   switch (activeTab) {
     case "empurrar":
       // Dips agora fazem parte dos push-ups, então sempre retorna pushUpVariations
@@ -120,7 +118,10 @@ export function getSelectedLevel(
  * Organiza exercícios de push-up por nível (incluindo dips)
  */
 export function getPushExercisesByLevel() {
-  const exercisesByLevel: Record<number, { pushup?: any; dip?: any }> = {};
+  const exercisesByLevel: Record<
+    number,
+    { pushup?: Exercise; dip?: Exercise }
+  > = {};
 
   // Adicionar todos os exercícios de push-up
   Object.entries(beginnerPushups).forEach(([level, exercise]) => {
@@ -198,7 +199,7 @@ export function getPushExercisesByLevel() {
  * Organiza exercícios de puxar por nível
  */
 export function getPullExercisesByLevel() {
-  const exercisesByLevel: Record<number, { pullup?: any }> = {};
+  const exercisesByLevel: Record<number, { pullup?: Exercise }> = {};
 
   // Usar a função do módulo pull que já filtra por nível disponível
   const availableExercises = getPullExercisesFromModule(48); // Máximo nível possível
@@ -275,7 +276,7 @@ export function getLevelsByDifficulty(): Record<string, number[]> {
  * Organiza exercícios de pernas por nível
  */
 export function getSquatExercisesByLevel() {
-  const exercisesByLevel: Record<number, { squat?: any }> = {};
+  const exercisesByLevel: Record<number, { squat?: Exercise }> = {};
 
   // Usar a função do módulo squat que já filtra por nível disponível
   const availableExercises = getSquatExercisesFromModule(48); // Máximo nível possível

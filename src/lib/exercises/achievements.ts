@@ -1,4 +1,4 @@
-import { Achievement } from "./types";
+import type { Achievement } from "@/lib/exercises";
 
 // Conquistas relacionadas a flexões
 export const pushUpAchievements: Achievement[] = [

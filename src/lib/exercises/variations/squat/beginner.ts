@@ -2,8 +2,8 @@
 // EXERCÍCIOS DE SQUAT - NÍVEL BEGINNER
 // ====================
 
-import { Exercise } from "../../types";
-import { createSquatExerciseWithGamification } from "./utils/gamificationUtils";
+import type { Exercise } from "@/lib/exercises";
+import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const beginnerSquat: Record<number, Exercise> = {
   1: createSquatExerciseWithGamification(
@@ -26,7 +26,7 @@ export const beginnerSquat: Record<number, Exercise> = {
     180,
     undefined,
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   2: createSquatExerciseWithGamification(
@@ -56,7 +56,7 @@ export const beginnerSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   3: createSquatExerciseWithGamification(
@@ -86,7 +86,7 @@ export const beginnerSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   4: createSquatExerciseWithGamification(
@@ -116,7 +116,7 @@ export const beginnerSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   5: createSquatExerciseWithGamification(
@@ -146,7 +146,7 @@ export const beginnerSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   6: createSquatExerciseWithGamification(
@@ -176,6 +176,6 @@ export const beginnerSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 };

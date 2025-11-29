@@ -1,5 +1,18 @@
 // Tipos
-export type { Exercise, Difficulty, MuscleGroup } from "./types";
+export type {
+  Exercise,
+  Difficulty,
+  MuscleGroup,
+  ExerciseRequirement,
+  Achievement,
+  AchievementCondition,
+  RepRange,
+  UserProgress,
+  ExerciseStats,
+  WorkoutSession,
+  WorkoutExercise,
+  ExerciseSet,
+} from "./types";
 
 // Variações por nível
 export {

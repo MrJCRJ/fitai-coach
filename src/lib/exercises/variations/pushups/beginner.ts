@@ -1,10 +1,10 @@
-import { Exercise } from "../../types";
+import type { Exercise } from "@/lib/exercises";
 import {
   createExerciseWithGamification,
   parseRepRange,
-} from "../../gamificationUtils";
-import { EXERCISE_THRESHOLDS } from "../../exerciseData";
-import { PUSHUP_BADGES } from "../../../gamification/pushupBadges";
+} from "@/lib/exercises/gamificationUtils";
+import { EXERCISE_THRESHOLDS } from "@/lib/exercises/exerciseData";
+// Badge data available via gamification utilities when needed
 
 export const beginnerPushups: Record<number, Exercise> = {
   1: createExerciseWithGamification(

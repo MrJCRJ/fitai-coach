@@ -59,7 +59,7 @@ interface ExerciseCarouselProps {
     reps: number,
     weight?: number,
     exercise?: Exercise,
-    selectedDifficulty?: string
+    selectedDifficulty?: string,
   ) => void;
 }
 
@@ -117,13 +117,13 @@ export default function ExerciseCarousel({
   // Navegação do carrossel
   const nextExercise = () => {
     setCurrentExerciseIndex((prev) =>
-      prev === currentExercises.length - 1 ? 0 : prev + 1
+      prev === currentExercises.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevExercise = () => {
     setCurrentExerciseIndex((prev) =>
-      prev === 0 ? currentExercises.length - 1 : prev - 1
+      prev === 0 ? currentExercises.length - 1 : prev - 1,
     );
   };
 
@@ -268,7 +268,7 @@ export default function ExerciseCarousel({
                     reps,
                     weight,
                     exercise,
-                    selectedDifficulty
+                    selectedDifficulty,
                   )
                 }
               />

@@ -12,17 +12,20 @@ export function usePWAInstall() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [isInstalled, setIsInstalled] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    const isStandalone = window.matchMedia(
+      "(display-mode: standalone)",
+    ).matches;
+    const isInWebAppiOS =
+      (window.navigator as unknown as { standalone?: boolean }).standalone ===
+      true;
+    return isStandalone || isInWebAppiOS;
+  });
 
   useEffect(() => {
     // Check if already installed
-    if (typeof window !== "undefined") {
-      const isStandalone = window.matchMedia(
-        "(display-mode: standalone)",
-      ).matches;
-      const isInWebAppiOS = (window.navigator as any).standalone === true;
-      setIsInstalled(isStandalone || isInWebAppiOS);
-    }
+    // No longer set initial installation state here; keep for event listeners
 
     const handler = (e: Event) => {
       e.preventDefault();

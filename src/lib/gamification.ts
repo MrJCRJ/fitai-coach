@@ -1,9 +1,9 @@
-import {
+import type {
   Achievement,
   UserProgress,
   ExerciseStats,
   WorkoutSession,
-} from "./exercises/types";
+} from "@/lib/exercises";
 import { allAchievements } from "./exercises/achievements";
 import { calculateUserLevel, getXpToNextLevel } from "./exercises/levelUtils";
 import { updateStreaks } from "./exercises/streakUtils";
@@ -11,6 +11,7 @@ import {
   checkAllAchievements,
   getUnlockedAchievements,
   getLockedAchievements,
+  checkAchievementUnlock,
 } from "./exercises/achievementUtils";
 
 /**
@@ -62,12 +63,12 @@ export class GamificationSystem {
   checkAchievementUnlock(
     achievementId: string,
     userProgress: UserProgress,
-    exerciseStats?: ExerciseStats,
+    exerciseStats?: ExerciseStats
   ): boolean {
     const achievement = this.achievements.get(achievementId);
     if (!achievement) return false;
 
-    return checkAllAchievements([achievement], userProgress).length > 0;
+    return checkAchievementUnlock(achievement, userProgress, exerciseStats);
   }
 
   /**
@@ -95,7 +96,7 @@ export class GamificationSystem {
     // Bônus por streak
     if (
       session.achievements.some(
-        (a: Achievement) => a.condition.type === "streak_days",
+        (a: Achievement) => a.condition.type === "streak_days"
       )
     ) {
       totalXp += 50; // Bônus por manter streak

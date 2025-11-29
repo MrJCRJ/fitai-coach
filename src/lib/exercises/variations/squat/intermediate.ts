@@ -2,8 +2,8 @@
 // EXERCÍCIOS DE SQUAT - NÍVEL INTERMEDIATE
 // ====================
 
-import { Exercise } from "../../types";
-import { createSquatExerciseWithGamification } from "./utils/gamificationUtils";
+import type { Exercise } from "@/lib/exercises";
+import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const intermediateSquat: Record<number, Exercise> = {
   7: createSquatExerciseWithGamification(
@@ -33,7 +33,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   8: createSquatExerciseWithGamification(
@@ -63,7 +63,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   9: createSquatExerciseWithGamification(
@@ -93,7 +93,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   10: createSquatExerciseWithGamification(
@@ -123,7 +123,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   11: createSquatExerciseWithGamification(
@@ -153,7 +153,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   12: createSquatExerciseWithGamification(
@@ -183,7 +183,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   13: createSquatExerciseWithGamification(
@@ -213,7 +213,7 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 
   14: createSquatExerciseWithGamification(
@@ -243,6 +243,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "intermediate"
+    "intermediate",
   ),
 };

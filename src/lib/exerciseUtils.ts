@@ -8,7 +8,7 @@ import { Exercise } from "@/lib/exercises";
  * Formata a representação de repetições
  */
 export function formatReps(
-  reps: string | { min: number; max: number; unit?: string } | undefined
+  reps: string | { min: number; max: number; unit?: string } | undefined,
 ): string {
   if (!reps) return "10-15";
 
@@ -24,7 +24,7 @@ export function formatReps(
  * Obtém o número mínimo de repetições
  */
 export function getMinReps(
-  reps: string | { min: number; max: number; unit?: string } | undefined
+  reps: string | { min: number; max: number; unit?: string } | undefined,
 ): number {
   if (!reps) return 10;
   if (typeof reps === "string") {
@@ -48,7 +48,7 @@ export function formatTime(seconds: number): string {
  * Verifica se um exercício é válido (tem nome)
  */
 export function isValidExercise(
-  exercise: Exercise | undefined
+  exercise: Exercise | undefined,
 ): exercise is Exercise {
   return (
     exercise !== undefined &&
@@ -64,6 +64,6 @@ export function getValidExercises<
   T extends Record<string, Exercise | undefined>,
 >(exercises: T): Array<[keyof T, Exercise]> {
   return Object.entries(exercises).filter(([, exercise]) =>
-    isValidExercise(exercise)
+    isValidExercise(exercise),
   ) as Array<[keyof T, Exercise]>;
 }

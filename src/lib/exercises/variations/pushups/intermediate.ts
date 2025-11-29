@@ -1,9 +1,9 @@
-import { Exercise } from "../../types";
+import type { Exercise } from "@/lib/exercises";
 import {
   createExerciseWithGamification,
   parseRepRange,
-} from "../../gamificationUtils";
-import { EXERCISE_THRESHOLDS } from "../../exerciseData";
+} from "@/lib/exercises/gamificationUtils";
+import { EXERCISE_THRESHOLDS } from "@/lib/exercises/exerciseData";
 
 export const intermediatePushups: Record<number, Exercise> = {
   11: createExerciseWithGamification(
@@ -47,7 +47,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Use uma superfície baixa inicialmente",
       "Aumente a altura gradualmente",
       "Foco no peito superior",
-    ]
+    ],
   ),
   12: createExerciseWithGamification(
     {
@@ -86,7 +86,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Comece com superfície estável",
       "Adicione instabilidade gradualmente",
       "Foco no equilíbrio",
-    ]
+    ],
   ),
   13: createExerciseWithGamification(
     {
@@ -125,7 +125,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique descida controlada",
       "Use impulso mínimo",
       "Aumente tempo de descida",
-    ]
+    ],
   ),
   14: createExerciseWithGamification(
     {
@@ -168,7 +168,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique com anéis fixos",
       "Aumente instabilidade gradualmente",
       "Foco na forma",
-    ]
+    ],
   ),
   15: createExerciseWithGamification(
     {
@@ -202,7 +202,7 @@ export const intermediatePushups: Record<number, Exercise> = {
     ],
     undefined,
     ["Pausa de 2s no fundo", "Corpo reto", "Controle perfeito"],
-    ["Comece com pausa curta", "Aumente tempo gradualmente", "Mantenha tensão"]
+    ["Comece com pausa curta", "Aumente tempo gradualmente", "Mantenha tensão"],
   ),
   16: createExerciseWithGamification(
     {
@@ -237,7 +237,7 @@ export const intermediatePushups: Record<number, Exercise> = {
     ],
     undefined,
     ["Movimento fluido", "Corpo em arco", "Controle total"],
-    ["Pratique movimento separadamente", "Comece devagar", "Foco na fluidez"]
+    ["Pratique movimento separadamente", "Comece devagar", "Foco na fluidez"],
   ),
   17: createExerciseWithGamification(
     {
@@ -272,7 +272,7 @@ export const intermediatePushups: Record<number, Exercise> = {
     ],
     undefined,
     ["Corpo reto", "Cotovelos próximos", "Amplitude completa"],
-    ["Comece com poucas reps", "Foco na forma", "Aumente carga gradualmente"]
+    ["Comece com poucas reps", "Foco na forma", "Aumente carga gradualmente"],
   ),
   18: createExerciseWithGamification(
     {
@@ -311,7 +311,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique movimento lento",
       "Aumente velocidade gradualmente",
       "Foco na coordenação",
-    ]
+    ],
   ),
   19: createExerciseWithGamification(
     {
@@ -350,7 +350,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique posição estática",
       "Adicione movimento gradual",
       "Construa força lentamente",
-    ]
+    ],
   ),
   20: createExerciseWithGamification(
     {
@@ -385,6 +385,6 @@ export const intermediatePushups: Record<number, Exercise> = {
     ],
     undefined,
     ["Descida lenta", "Pausa no fundo", "Subida explosiva"],
-    ["Comece com pausa curta", "Aumente tempo de descida", "Foco na explosão"]
+    ["Comece com pausa curta", "Aumente tempo de descida", "Foco na explosão"],
   ),
 };

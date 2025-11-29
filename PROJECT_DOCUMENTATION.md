@@ -231,3 +231,28 @@ Implementations for AI provider should go under `src/lib/ai`.
 Currently `src/lib/ai/deepseek.ts` is a lightweight stub that returns a mocked workout plan. Replace the stub with a real DeepSeek API integration using prompts de sistema, cache de contexto para dados estáticos do usuário e resumos para histórico dinâmico. Inclua sanitização de inputs de texto livre do usuário para prevenir ataques via prompts. Mantenha chaves em `.env`.
 
 Adicione outras etapas conforme necessário (linters, testes, deploy).
+
+---
+
+## Import Paths and Type Import Conventions
+
+Para manter o código consistente, resistente a renomeações e evitar import paths relativos frágeis entre módulos, adotamos as seguintes convenções:
+
+- Use `@/lib/exercises` como fonte única para tipos e utilitários relacionados ao banco de exercícios (reexportados em `src/lib/exercises/index.ts`).
+- Para importações apenas de tipos, use `import type` para evitar dependências e ciclos em tempo de execução. Exemplo:
+  ```ts
+  import type { Exercise } from "@/lib/exercises";
+  ```
+- Para imports de runtime (módulos e utilitários), prefira caminhos no alias, por exemplo
+  ```ts
+  import { beginnerPushups } from "@/lib/exercises/variations/pushups/beginner";
+  import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+  ```
+- Não utilize imports relativos ascendentes direcionando para `types` (por exemplo `../../types`, `../../../types`) — há uma regra ESLint que impede essas importações e recomenda o uso de alias.
+
+Regras de lint aplicadas (exemplo): `no-restricted-imports` bloqueará `../**/types`, `../../**/types`, `../../../**/types` e caminhos absolutos com `/home/...`. Caso o linter reporte violações, substitua por alias com exemplos mostrados acima.
+
+Ferramentas de verificação:
+
+- `npm run lint` — rodar para verificar violações de imports/estilo
+- `npm run build` — checar os tipos e garantir que as alterações não afetam build/treeshaking

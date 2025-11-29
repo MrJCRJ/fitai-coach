@@ -1,6 +1,9 @@
-import { Exercise } from "../../types";
-import { createPullExerciseWithGamification } from "./utils/gamificationUtils";
-import { PULL_ACHIEVEMENTS, PULL_BADGES } from "./data/pullGameData";
+import type { Exercise } from "@/lib/exercises";
+import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+import {
+  PULL_ACHIEVEMENTS,
+  PULL_BADGES,
+} from "@/lib/exercises/variations/pull/data/pullGameData";
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL BEGINNER
@@ -33,7 +36,7 @@ export const beginnerPull: Record<number, Exercise> = {
     180,
     undefined,
     [PULL_ACHIEVEMENTS[0]!], // first_pull
-    "beginner"
+    "beginner",
   ),
 
   2: createPullExerciseWithGamification(
@@ -69,7 +72,7 @@ export const beginnerPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   3: createPullExerciseWithGamification(
@@ -104,7 +107,7 @@ export const beginnerPull: Record<number, Exercise> = {
       },
     ],
     [PULL_ACHIEVEMENTS[1]!], // pull_warrior
-    "beginner"
+    "beginner",
   ),
 
   4: createPullExerciseWithGamification(
@@ -140,7 +143,7 @@ export const beginnerPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   5: createPullExerciseWithGamification(
@@ -175,7 +178,7 @@ export const beginnerPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   6: createPullExerciseWithGamification(
@@ -210,7 +213,7 @@ export const beginnerPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   7: createPullExerciseWithGamification(
@@ -238,7 +241,7 @@ export const beginnerPull: Record<number, Exercise> = {
     300,
     undefined, // Sempre disponível como alternativa
     undefined,
-    "beginner"
+    "beginner",
   ),
 
   8: createPullExerciseWithGamification(
@@ -273,6 +276,6 @@ export const beginnerPull: Record<number, Exercise> = {
       },
     ],
     undefined,
-    "beginner"
+    "beginner",
   ),
 };

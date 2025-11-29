@@ -1,4 +1,4 @@
-import { Achievement, UserProgress, ExerciseStats } from "./types";
+import type { Achievement, UserProgress, ExerciseStats } from "@/lib/exercises";
 
 /**
  * Utilitários para verificação e gerenciamento de conquistas
@@ -10,7 +10,7 @@ import { Achievement, UserProgress, ExerciseStats } from "./types";
 export function checkAchievementUnlock(
   achievement: Achievement,
   userProgress: UserProgress,
-  exerciseStats?: ExerciseStats,
+  exerciseStats?: ExerciseStats
 ): boolean {
   if (userProgress.achievements.includes(achievement.id)) {
     return false; // Já desbloqueada
@@ -25,7 +25,7 @@ export function checkAchievementUnlock(
       }
       // Conquista geral (qualquer exercício)
       return Object.values(userProgress.exerciseStats).some(
-        (stats: ExerciseStats) => stats.totalSets >= condition.value,
+        (stats: ExerciseStats) => stats.totalSets >= condition.value
       );
 
     case "level_reached":
@@ -45,25 +45,26 @@ export function checkAchievementUnlock(
       // Verificar se o usuário já usou peso em alguma série
       return Object.values(userProgress.exerciseStats).some(
         (stats: ExerciseStats) =>
-          (stats.weightStats?.totalWeightedSets || 0) > 0,
+          (stats.weightStats?.totalWeightedSets || 0) > 0
       );
 
-    case "weight_sets":
+    case "weight_sets": {
       // Verificar total de séries com peso
       const totalWeightedSets = Object.values(
-        userProgress.exerciseStats,
+        userProgress.exerciseStats
       ).reduce(
         (total: number, stats: ExerciseStats) =>
           total + (stats.weightStats?.totalWeightedSets || 0),
-        0,
+        0
       );
       return totalWeightedSets >= condition.value;
+    }
 
     case "max_weight":
       // Verificar se o usuário já usou peso acima do limite
       return Object.values(userProgress.exerciseStats).some(
         (stats: ExerciseStats) =>
-          (stats.weightStats?.maxWeight || 0) >= condition.value,
+          (stats.weightStats?.maxWeight || 0) >= condition.value
       );
 
     default:
@@ -76,7 +77,7 @@ export function checkAchievementUnlock(
  */
 export function checkAllAchievements(
   achievements: Achievement[],
-  userProgress: UserProgress,
+  userProgress: UserProgress
 ): Achievement[] {
   const newAchievements: Achievement[] = [];
 
@@ -103,10 +104,10 @@ export function checkAllAchievements(
  */
 export function getAchievementsByExerciseType(
   achievements: Achievement[],
-  exerciseType: "pushup" | "pullup" | "squat",
+  exerciseType: "pushup" | "pullup" | "squat"
 ): Achievement[] {
   return achievements.filter(
-    (achievement) => achievement.condition.exerciseType === exerciseType,
+    (achievement) => achievement.condition.exerciseType === exerciseType
   );
 }
 
@@ -115,12 +116,12 @@ export function getAchievementsByExerciseType(
  */
 export function getUnlockedAchievements(
   achievements: Achievement[],
-  userProgress: UserProgress,
+  userProgress: UserProgress
 ): Achievement[] {
   return userProgress.achievements
     .map((id: string) => achievements.find((a) => a.id === id))
     .filter(
-      (achievement): achievement is Achievement => achievement !== undefined,
+      (achievement): achievement is Achievement => achievement !== undefined
     );
 }
 
@@ -129,10 +130,10 @@ export function getUnlockedAchievements(
  */
 export function getLockedAchievements(
   achievements: Achievement[],
-  userProgress: UserProgress,
+  userProgress: UserProgress
 ): Achievement[] {
   return achievements.filter(
-    (achievement) => !userProgress.achievements.includes(achievement.id),
+    (achievement) => !userProgress.achievements.includes(achievement.id)
   );
 }
 
@@ -141,7 +142,7 @@ export function getLockedAchievements(
  */
 export function getAchievementProgress(
   achievement: Achievement,
-  userProgress: UserProgress,
+  userProgress: UserProgress
 ): { current: number; target: number; percentage: number } {
   const condition = achievement.condition;
 
@@ -155,7 +156,7 @@ export function getAchievementProgress(
       } else {
         current = Object.values(userProgress.exerciseStats).reduce(
           (total, stats) => total + stats.totalSets,
-          0,
+          0
         );
       }
       break;
@@ -174,15 +175,15 @@ export function getAchievementProgress(
     case "weight_sets":
       current = Object.values(userProgress.exerciseStats).reduce(
         (total, stats) => total + (stats.weightStats?.totalWeightedSets || 0),
-        0,
+        0
       );
       break;
 
     case "max_weight":
       current = Math.max(
         ...Object.values(userProgress.exerciseStats).map(
-          (stats) => stats.weightStats?.maxWeight || 0,
-        ),
+          (stats) => stats.weightStats?.maxWeight || 0
+        )
       );
       break;
   }

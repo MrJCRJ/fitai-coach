@@ -33,7 +33,7 @@ interface ExerciseCardProps {
     reps: number,
     weight?: number,
     exercise?: Exercise,
-    selectedDifficulty?: string
+    selectedDifficulty?: string,
   ) => void;
 }
 
