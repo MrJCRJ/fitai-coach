@@ -63,7 +63,7 @@ describe("squat level utilities", () => {
     expect(getUnlockedSquatVariations(0, variations).length).toBe(0);
     // totalSets 50 -> falls into a higher level; expect at least 2 variations unlocked
     expect(
-      getUnlockedSquatVariations(50, variations).length
+      getUnlockedSquatVariations(50, variations).length,
     ).toBeGreaterThanOrEqual(2);
   });
 });

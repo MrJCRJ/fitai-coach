@@ -32,7 +32,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       "Não arqueie as costas",
       "Desça até o peito tocar a parede",
     ],
-    ["Pratique diariamente", "Aumente reps gradualmente", "Foco na forma"]
+    ["Pratique diariamente", "Aumente reps gradualmente", "Foco na forma"],
   ),
   2: createExercise(
     {
@@ -75,7 +75,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo em linha reta", "Cotovelos a 45°", "Amplitude completa"],
-    ["Use superfície elevada", "Abaixe gradualmente", "Foco na forma"]
+    ["Use superfície elevada", "Abaixe gradualmente", "Foco na forma"],
   ),
   3: createExercise(
     {
@@ -122,7 +122,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       "Pratique forma perfeita",
       "Aumente reps lentamente",
       "Prepare para flexões completas",
-    ]
+    ],
   ),
   4: createExercise(
     {
@@ -161,7 +161,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo reto", "Core contraído", "Cotovelos próximos"],
-    ["Pratique diariamente", "Aumente reps", "Mantenha forma"]
+    ["Pratique diariamente", "Aumente reps", "Mantenha forma"],
   ),
   5: createExercise(
     {
@@ -204,7 +204,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Mãos afastadas", "Cotovelos abertos", "Corpo reto"],
-    ["Aumente afastamento gradualmente", "Foco no peito", "Mantenha forma"]
+    ["Aumente afastamento gradualmente", "Foco no peito", "Mantenha forma"],
   ),
   6: createExercise(
     {
@@ -243,7 +243,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Mãos juntas", "Cotovelos colados", "Amplitude completa"],
-    ["Pratique forma", "Aumente reps", "Prepare para diamante"]
+    ["Pratique forma", "Aumente reps", "Prepare para diamante"],
   ),
   7: createExercise(
     {
@@ -286,7 +286,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Cotovelos para dentro", "Controle o movimento", "Corpo estável"],
-    ["Pratique devagar", "Foco na técnica", "Aumente controle"]
+    ["Pratique devagar", "Foco na técnica", "Aumente controle"],
   ),
   8: createExercise(
     {
@@ -329,7 +329,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo reto", "Toque controlado", "Equilíbrio perfeito"],
-    ["Pratique estabilidade", "Comece devagar", "Aumente velocidade"]
+    ["Pratique estabilidade", "Comece devagar", "Aumente velocidade"],
   ),
   9: createExercise(
     {
@@ -367,7 +367,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo reto", "Peso distribuído", "Controle total"],
-    ["Comece com elevação baixa", "Aumente gradualmente", "Melhore equilíbrio"]
+    ["Comece com elevação baixa", "Aumente gradualmente", "Melhore equilíbrio"],
   ),
   10: createExercise(
     {
@@ -406,6 +406,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       },
     ],
     ["Cotovelos próximos", "Amplitude controlada", "Corpo reto"],
-    ["Pratique forma", "Aumente reps", "Prepare para dips avançados"]
+    ["Pratique forma", "Aumente reps", "Prepare para dips avançados"],
   ),
 };

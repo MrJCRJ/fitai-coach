@@ -33,7 +33,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Subida explosiva", "Mãos deixam o chão", "Aterrisse suavemente"],
-    ["Pratique potência", "Comece sem explosão", "Aumente gradualmente"]
+    ["Pratique potência", "Comece sem explosão", "Aumente gradualmente"],
   ),
   22: createExercise(
     {
@@ -65,7 +65,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo em V", "Cabeça ao chão", "Ombros fortes"],
-    ["Melhore flexibilidade", "Pratique posição", "Aumente amplitude"]
+    ["Melhore flexibilidade", "Pratique posição", "Aumente amplitude"],
   ),
   23: createExercise(
     {
@@ -96,7 +96,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Pés elevados", "Corpo em V", "Controle total"],
-    ["Domine pike primeiro", "Adicione elevação gradual", "Foco na forma"]
+    ["Domine pike primeiro", "Adicione elevação gradual", "Foco na forma"],
   ),
   24: createExercise(
     {
@@ -127,7 +127,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Descida controlada", "Anéis instáveis", "Corpo reto"],
-    ["Pratique com anéis fixos", "Aumente instabilidade", "Foco no controle"]
+    ["Pratique com anéis fixos", "Aumente instabilidade", "Foco no controle"],
   ),
   25: createExercise(
     {
@@ -163,7 +163,7 @@ export const advancedPushups: Record<number, Exercise> = {
       "Comece com banda leve",
       "Aumente resistência gradualmente",
       "Mantenha forma",
-    ]
+    ],
   ),
   26: createExercise(
     {
@@ -198,7 +198,7 @@ export const advancedPushups: Record<number, Exercise> = {
       "Comece com mãos próximas",
       "Forme diamante gradualmente",
       "Foco nos tríceps",
-    ]
+    ],
   ),
   27: createExercise(
     {
@@ -229,7 +229,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Descida profunda", "Subida explosiva", "Controle perfeito"],
-    ["Pratique separadamente", "Combine gradualmente", "Foco na técnica"]
+    ["Pratique separadamente", "Combine gradualmente", "Foco na técnica"],
   ),
   28: createExercise(
     {
@@ -260,7 +260,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Pés elevados", "Subida explosiva", "Aterrisse controlado"],
-    ["Domine explosiva primeiro", "Adicione inclinação", "Aumente altura"]
+    ["Domine explosiva primeiro", "Adicione inclinação", "Aumente altura"],
   ),
   29: createExercise(
     {
@@ -291,7 +291,7 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Anéis instáveis", "Corpo reto", "Controle total"],
-    ["Domine dips negativos", "Adicione subida", "Foco na estabilidade"]
+    ["Domine dips negativos", "Adicione subida", "Foco na estabilidade"],
   ),
   30: createExercise(
     {
@@ -322,6 +322,6 @@ export const advancedPushups: Record<number, Exercise> = {
       },
     ],
     ["Peso extra", "Forma perfeita", "Controle total"],
-    ["Comece com pouco peso", "Aumente gradualmente", "Mantenha técnica"]
+    ["Comece com pouco peso", "Aumente gradualmente", "Mantenha técnica"],
   ),
 };

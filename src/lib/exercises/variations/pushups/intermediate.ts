@@ -41,7 +41,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Use uma superfície baixa inicialmente",
       "Aumente a altura gradualmente",
       "Foco no peito superior",
-    ]
+    ],
   ),
   12: createExercise(
     {
@@ -77,7 +77,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Comece com superfície estável",
       "Adicione instabilidade gradualmente",
       "Foco no equilíbrio",
-    ]
+    ],
   ),
   13: createExercise(
     {
@@ -113,7 +113,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique descida controlada",
       "Use impulso mínimo",
       "Aumente tempo de descida",
-    ]
+    ],
   ),
   14: createExercise(
     {
@@ -153,7 +153,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique com anéis fixos",
       "Aumente instabilidade gradualmente",
       "Foco na forma",
-    ]
+    ],
   ),
   15: createExercise(
     {
@@ -184,7 +184,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       },
     ],
     ["Pausa de 2s no fundo", "Corpo reto", "Controle perfeito"],
-    ["Comece com pausa curta", "Aumente tempo gradualmente", "Mantenha tensão"]
+    ["Comece com pausa curta", "Aumente tempo gradualmente", "Mantenha tensão"],
   ),
   16: createExercise(
     {
@@ -216,7 +216,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       },
     ],
     ["Movimento fluido", "Corpo em arco", "Controle total"],
-    ["Pratique movimento separadamente", "Comece devagar", "Foco na fluidez"]
+    ["Pratique movimento separadamente", "Comece devagar", "Foco na fluidez"],
   ),
   17: createExercise(
     {
@@ -248,7 +248,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo reto", "Cotovelos próximos", "Amplitude completa"],
-    ["Comece com poucas reps", "Foco na forma", "Aumente carga gradualmente"]
+    ["Comece com poucas reps", "Foco na forma", "Aumente carga gradualmente"],
   ),
   18: createExercise(
     {
@@ -284,7 +284,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique movimento lento",
       "Aumente velocidade gradualmente",
       "Foco na coordenação",
-    ]
+    ],
   ),
   19: createExercise(
     {
@@ -320,7 +320,7 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique posição estática",
       "Adicione movimento gradual",
       "Construa força lentamente",
-    ]
+    ],
   ),
   20: createExercise(
     {
@@ -352,6 +352,6 @@ export const intermediatePushups: Record<number, Exercise> = {
       },
     ],
     ["Descida lenta", "Pausa no fundo", "Subida explosiva"],
-    ["Comece com pausa curta", "Aumente tempo de descida", "Foco na explosão"]
+    ["Comece com pausa curta", "Aumente tempo de descida", "Foco na explosão"],
   ),
 };

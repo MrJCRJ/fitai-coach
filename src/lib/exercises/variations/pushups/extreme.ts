@@ -34,7 +34,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Subida explosiva", "Batida de palmas", "Aterrisse controlado"],
-    ["Pratique sem batida", "Adicione batida gradual", "Foco na coordenação"]
+    ["Pratique sem batida", "Adicione batida gradual", "Foco na coordenação"],
   ),
   32: createExercise(
     {
@@ -66,7 +66,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Batida no peito", "Timing perfeito", "Controle de voo"],
-    ["Domine 1 batida", "Ajuste altura da batida", "Pratique coordenação"]
+    ["Domine 1 batida", "Ajuste altura da batida", "Pratique coordenação"],
   ),
   33: createExercise(
     {
@@ -98,7 +98,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Batida nas coxas", "Corpo compacto", "Aterrisse preciso"],
-    ["Pratique flexibilidade", "Ajuste posição", "Foco na precisão"]
+    ["Pratique flexibilidade", "Ajuste posição", "Foco na precisão"],
   ),
   34: createExercise(
     {
@@ -130,7 +130,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Batida atrás", "Rotação controlada", "Aterrisse estável"],
-    ["Domine batidas anteriores", "Pratique rotação", "Foco na segurança"]
+    ["Domine batidas anteriores", "Pratique rotação", "Foco na segurança"],
   ),
   35: createExercise(
     {
@@ -162,7 +162,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Ande no topo", "Corpo coordenado", "Ritmo constante"],
-    ["Pratique andar separado", "Adicione flexão gradual", "Mantenha ritmo"]
+    ["Pratique andar separado", "Adicione flexão gradual", "Mantenha ritmo"],
   ),
   36: createExercise(
     {
@@ -194,7 +194,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Duas batidas", "Ritmo perfeito", "Controle de voo"],
-    ["Domine 1 batida", "Adicione segunda batida", "Pratique timing"]
+    ["Domine 1 batida", "Adicione segunda batida", "Pratique timing"],
   ),
   37: createExercise(
     {
@@ -226,7 +226,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Braço estendido", "Corpo reto", "Controle lateral"],
-    ["Pratique unilateral", "Aumente extensão", "Foco no equilíbrio"]
+    ["Pratique unilateral", "Aumente extensão", "Foco no equilíbrio"],
   ),
   38: createExercise(
     {
@@ -258,7 +258,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Três batidas", "Ritmo impecável", "Controle absoluto"],
-    ["Domine 2 batidas", "Adicione terceira", "Foco na perfeição"]
+    ["Domine 2 batidas", "Adicione terceira", "Foco na perfeição"],
   ),
   39: createExercise(
     {
@@ -290,7 +290,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Rotação 180°", "Controle de voo", "Aterrisse preciso"],
-    ["Pratique rotação", "Adicione explosão", "Foco na segurança"]
+    ["Pratique rotação", "Adicione explosão", "Foco na segurança"],
   ),
   40: createExercise(
     {
@@ -322,7 +322,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Ponta dos dedos", "Pulsos retos", "Distribua peso"],
-    ["Fortaleça dedos", "Comece com apoio parcial", "Aumente gradualmente"]
+    ["Fortaleça dedos", "Comece com apoio parcial", "Aumente gradualmente"],
   ),
   41: createExercise(
     {
@@ -354,7 +354,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Toalhas deslizam", "Controle constante", "Adapte posição"],
-    ["Pratique deslizar", "Adicione flexão", "Foco na estabilidade"]
+    ["Pratique deslizar", "Adicione flexão", "Foco na estabilidade"],
   ),
   42: createExercise(
     {
@@ -386,7 +386,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Joelhos no peito", "Corpo paralelo", "Core máximo"],
-    ["Domine tuck planche", "Adicione movimento", "Construa força"]
+    ["Domine tuck planche", "Adicione movimento", "Construa força"],
   ),
   43: createExercise(
     {
@@ -418,7 +418,7 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo paralelo", "Braços retos", "Core contraído"],
-    ["Pratique holds curtos", "Aumente tempo gradualmente", "Foco na forma"]
+    ["Pratique holds curtos", "Aumente tempo gradualmente", "Foco na forma"],
   ),
   44: createExercise(
     {
@@ -450,6 +450,10 @@ export const extremePushups: Record<number, Exercise> = {
       },
     ],
     ["Corpo paralelo", "Movimento controlado", "Força máxima"],
-    ["Domine tudo anterior", "Construa força gradualmente", "Foco na perfeição"]
+    [
+      "Domine tudo anterior",
+      "Construa força gradualmente",
+      "Foco na perfeição",
+    ],
   ),
 };

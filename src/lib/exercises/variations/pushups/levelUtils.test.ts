@@ -13,11 +13,11 @@ describe("pushup level utilities", () => {
   it("getUnlockedVariations should return expected number of unlocked exercises", () => {
     // at 0 sets the first level should be unlocked by default
     expect(
-      getUnlockedVariations(0, EXERCISE_THRESHOLDS, pushUpVariations).length
+      getUnlockedVariations(0, EXERCISE_THRESHOLDS, pushUpVariations).length,
     ).toBe(1);
     // at 50 sets more variations should be unlocked
     expect(
-      getUnlockedVariations(50, EXERCISE_THRESHOLDS, pushUpVariations).length
+      getUnlockedVariations(50, EXERCISE_THRESHOLDS, pushUpVariations).length,
     ).toBeGreaterThanOrEqual(2);
   });
 });

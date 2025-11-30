@@ -22,7 +22,7 @@ export {
 
 export function canUnlockPushUpVariation(
   level: number,
-  totalSets: number
+  totalSets: number,
 ): boolean {
   return canUnlockVariation(level, totalSets, "pushup", pushUpVariations);
 }
