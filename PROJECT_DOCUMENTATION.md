@@ -172,6 +172,8 @@ interface FraudDetection {
 
 5.2 Retenção & Engajamento: Gamification, personalization, comunidade, desafios.
 
+Nota: O sistema de gamificação (XP, badges, achievements, streaks) foi removido do código-base em uma refatoração recente. Pontos de engajamento podem ser reimplementados com um sistema desacoplado do core — recomendamos introduzir uma camada separada de serviço/feature para isso. Consulte `src/lib/workoutSaver.ts` para integração de progresso e `src/lib/exercises` para dados de exercícios.
+
 5.3 Métricas de Crescimento: metas por Mês 3/6/12 para usuários ativos, retenção, conversão e NPS.
 
 ---

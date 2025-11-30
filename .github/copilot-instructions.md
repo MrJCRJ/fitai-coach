@@ -5,6 +5,8 @@ Resumo rápido:
 - Repositório Next.js 14 (ESM) com PWA + Capacitor para mobile.
 - Estrutura feature-driven: interface em `src/app/` + componentes em `src/components/` + lógica/DB em `src/lib/` + hooks em `src/hooks/`.
 
+- Nota: O sistema de gamificação (XP, badges, achievements, streaks) foi removido em refactor recente. Arquivos e utilitários antigos foram neutralizados/retirados. Se desejar reintroduzir, siga a seção "Reintrodução da Gamificação" abaixo ou abra um PR com a nova arquitetura.
+
 Pontos essenciais para começar:
 
 - Rotas/App Router: `src/app/[feature]/page.tsx` (cada feature tem rota dedicada).
