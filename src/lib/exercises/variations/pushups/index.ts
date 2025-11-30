@@ -1,9 +1,9 @@
 import type { Exercise } from "@/lib/exercises";
-import { beginnerPushups } from "@/lib/exercises/variations/pushups/beginner";
-import { intermediatePushups } from "@/lib/exercises/variations/pushups/intermediate";
-import { advancedPushups } from "@/lib/exercises/variations/pushups/advanced";
-import { extremePushups } from "@/lib/exercises/variations/pushups/extreme";
-import { canUnlockVariation } from "@/lib/exercises/exerciseUtils";
+import { beginnerPushups } from "./beginner";
+import { intermediatePushups } from "./intermediate";
+import { advancedPushups } from "./advanced";
+import { extremePushups } from "./extreme";
+import { canUnlockVariation } from "../../exerciseUtils";
 
 export const pushUpVariations: Record<number, Exercise> = {
   ...beginnerPushups,
@@ -22,7 +22,7 @@ export {
 
 export function canUnlockPushUpVariation(
   level: number,
-  totalSets: number,
+  totalSets: number
 ): boolean {
   return canUnlockVariation(level, totalSets, "pushup", pushUpVariations);
 }

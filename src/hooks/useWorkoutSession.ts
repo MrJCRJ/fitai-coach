@@ -1,13 +1,7 @@
 import { useState, useCallback } from "react";
 import { workoutSaver } from "@/lib/workoutSaver";
 import { Exercise } from "@/lib/exercises";
-import { gamificationSystem } from "@/lib/gamification";
-import { UserProgress } from "@/lib/exercises/types";
-import type {
-  DetailedWorkoutSession,
-  DetailedExercise,
-  DetailedSet,
-} from "@/lib/workoutTypes";
+// DetailedWorkoutSession type no longer used (gamification removed)
 
 interface WorkoutSessionState {
   [key: string]: {
@@ -25,7 +19,7 @@ interface WorkoutSessionState {
 
 // Função utilitária para extrair o valor mínimo de reps
 function getMinReps(
-  reps: string | { min: number; max: number; unit?: string } | undefined
+  reps: string | { min: number; max: number; unit?: string } | undefined,
 ): number {
   if (!reps) return 10;
   if (typeof reps === "string") {
@@ -39,159 +33,7 @@ function getMinReps(
 export function useWorkoutSession() {
   const [currentSession, setCurrentSession] = useState<WorkoutSessionState>({});
 
-  // Função para atualizar progresso do usuário
-  const updateUserProgress = useCallback((session: DetailedWorkoutSession) => {
-    try {
-      // Carregar progresso atual
-      const currentProgress: UserProgress = JSON.parse(
-        localStorage.getItem("userProgress") ||
-          JSON.stringify({
-            totalXp: 0,
-            level: 1,
-            achievements: [],
-            streaks: { current: 0, longest: 0, lastWorkoutDate: "" },
-            exerciseStats: {
-              pushup: {
-                totalSets: 0,
-                currentLevel: 1,
-                bestStreak: 0,
-                personalRecords: { maxReps: 0, fastestTime: 0, mostSets: 0 },
-                unlockedVariations: [],
-                weightStats: {
-                  totalWeightedSets: 0,
-                  maxWeight: 0,
-                  averageWeight: 0,
-                  totalWeightLifted: 0,
-                },
-              },
-              pullup: {
-                totalSets: 0,
-                currentLevel: 1,
-                bestStreak: 0,
-                personalRecords: { maxReps: 0, fastestTime: 0, mostSets: 0 },
-                unlockedVariations: [],
-                weightStats: {
-                  totalWeightedSets: 0,
-                  maxWeight: 0,
-                  averageWeight: 0,
-                  totalWeightLifted: 0,
-                },
-              },
-              squat: {
-                totalSets: 0,
-                currentLevel: 1,
-                bestStreak: 0,
-                personalRecords: { maxReps: 0, fastestTime: 0, mostSets: 0 },
-                unlockedVariations: [],
-                weightStats: {
-                  totalWeightedSets: 0,
-                  maxWeight: 0,
-                  averageWeight: 0,
-                  totalWeightLifted: 0,
-                },
-              },
-              dip: {
-                totalSets: 0,
-                currentLevel: 1,
-                bestStreak: 0,
-                personalRecords: { maxReps: 0, fastestTime: 0, mostSets: 0 },
-                unlockedVariations: [],
-                weightStats: {
-                  totalWeightedSets: 0,
-                  maxWeight: 0,
-                  averageWeight: 0,
-                  totalWeightLifted: 0,
-                },
-              },
-            },
-          })
-      );
-
-      // Calcular XP ganho na sessão
-      let sessionXp = 0;
-      session.exercises.forEach((exercise: DetailedExercise) => {
-        // XP baseado em reps e dificuldade
-        const baseXp = exercise.totalReps * 10;
-        const difficultyMultiplier = exercise.level || 1;
-        sessionXp += baseXp * difficultyMultiplier;
-
-        // Atualizar estatísticas do exercício
-        const muscleGroup =
-          exercise.muscleGroup as keyof UserProgress["exerciseStats"];
-        if (currentProgress.exerciseStats[muscleGroup]) {
-          currentProgress.exerciseStats[muscleGroup].totalSets +=
-            exercise.sets.length;
-          currentProgress.exerciseStats[muscleGroup].currentLevel = Math.max(
-            currentProgress.exerciseStats[muscleGroup].currentLevel,
-            exercise.level || 1
-          );
-
-          // Atualizar recordes pessoais
-          exercise.sets.forEach((set: DetailedSet) => {
-            currentProgress.exerciseStats[muscleGroup].personalRecords.maxReps =
-              Math.max(
-                currentProgress.exerciseStats[muscleGroup].personalRecords
-                  .maxReps,
-                set.reps
-              );
-
-            if (set.duration) {
-              currentProgress.exerciseStats[
-                muscleGroup
-              ].personalRecords.fastestTime =
-                currentProgress.exerciseStats[muscleGroup].personalRecords
-                  .fastestTime === 0
-                  ? set.duration
-                  : Math.min(
-                      currentProgress.exerciseStats[muscleGroup].personalRecords
-                        .fastestTime,
-                      set.duration
-                    );
-            }
-          });
-
-          currentProgress.exerciseStats[muscleGroup].personalRecords.mostSets =
-            Math.max(
-              currentProgress.exerciseStats[muscleGroup].personalRecords
-                .mostSets,
-              exercise.sets.length
-            );
-        }
-      });
-
-      // Bônus por completar treino
-      sessionXp += Math.floor(sessionXp * 0.1);
-
-      // Atualizar XP total e nível
-      currentProgress.totalXp += sessionXp;
-      currentProgress.level = gamificationSystem.calculateUserLevel(
-        currentProgress.totalXp
-      );
-
-      // Atualizar streaks
-      gamificationSystem.updateStreaks(currentProgress, session.date);
-
-      // Verificar conquistas desbloqueadas
-      const newAchievements =
-        gamificationSystem.checkAllAchievements(currentProgress);
-      newAchievements.forEach((achievement) => {
-        if (!currentProgress.achievements.includes(achievement.id)) {
-          currentProgress.achievements.push(achievement.id);
-        }
-      });
-
-      // Salvar progresso atualizado
-      localStorage.setItem("userProgress", JSON.stringify(currentProgress));
-
-      console.log("Progresso atualizado:", {
-        sessionXp,
-        newLevel: currentProgress.level,
-        newAchievements: newAchievements.length,
-      });
-    } catch (error) {
-      console.error("Erro ao atualizar progresso:", error);
-    }
-  }, []);
+  // Gamification removed: user progress tracking/XP/achievements/streaks removed
 
   // Iniciar sessão de treino
   const startSession = useCallback(() => {
@@ -204,11 +46,10 @@ export function useWorkoutSession() {
     if (detailedSession) {
       workoutSaver.saveToStorage(detailedSession);
 
-      // Atualizar progresso do usuário
-      updateUserProgress(detailedSession);
+      // No gamification update - keep session saved only
     }
     return detailedSession;
-  }, [updateUserProgress]);
+  }, []);
 
   // Salvar progresso de um exercício
   const saveProgress = useCallback(
@@ -223,7 +64,7 @@ export function useWorkoutSession() {
       weight?: number,
       pushExerciseType?: "pushup" | "dip",
       exercise?: Exercise,
-      selectedDifficulty?: string
+      selectedDifficulty?: string,
     ) => {
       const time = timers[exerciseId] || 0;
 
@@ -258,7 +99,7 @@ export function useWorkoutSession() {
           exerciseId,
           exerciseName,
           muscleGroup,
-          level
+          level,
         );
       } catch {
         // Exercício já ativo, continuar normalmente
@@ -273,7 +114,7 @@ export function useWorkoutSession() {
         undefined, // restTime será definido no finishRest
         undefined, // perceivedDifficulty
         undefined, // notes
-        weight // peso opcional
+        weight, // peso opcional
       );
 
       // Atualizar estado local (compatibilidade)
@@ -289,7 +130,7 @@ export function useWorkoutSession() {
         } as WorkoutSessionState;
       });
     },
-    []
+    [],
   ); // Resetar sessão
   const resetSession = useCallback(() => {
     setCurrentSession({});

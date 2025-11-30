@@ -1,13 +1,10 @@
 import type { Exercise } from "@/lib/exercises";
-import {
-  createExerciseWithGamification,
-  parseRepRange,
-} from "@/lib/exercises/gamificationUtils";
-import { EXERCISE_THRESHOLDS } from "@/lib/exercises/exerciseData";
+import { parseRepRange, createExercise } from "../../gamificationUtils";
+import { EXERCISE_THRESHOLDS } from "../../exerciseData";
 // Badge data available via gamification utilities when needed
 
 export const beginnerPushups: Record<number, Exercise> = {
-  1: createExerciseWithGamification(
+  1: createExercise(
     {
       id: "wall-push-up",
       name: "Flexão na Parede",
@@ -21,18 +18,14 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Mantenha o corpo reto e os cotovelos próximos ao corpo.",
       equipment: [],
       calories: 4,
-      xpReward: 5,
       estimatedTime: 180,
-      badgeId: "first-pushup",
       rarity: "common",
       category: "strength",
       emoji: "🧱",
     },
     1,
     EXERCISE_THRESHOLDS,
-    5,
     180,
-    undefined,
     undefined,
     [
       "Mantenha os cotovelos a 45° do corpo",
@@ -41,7 +34,7 @@ export const beginnerPushups: Record<number, Exercise> = {
     ],
     ["Pratique diariamente", "Aumente reps gradualmente", "Foco na forma"]
   ),
-  2: createExerciseWithGamification(
+  2: createExercise(
     {
       id: "incline-push-up",
       name: "Flexão Inclinada",
@@ -55,7 +48,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Reduz a carga no peito superior. Use uma superfície baixa inicialmente.",
       equipment: ["banco"],
       calories: 5,
-      xpReward: 8,
       estimatedTime: 240,
       formTips: [
         "Mantenha o corpo reto",
@@ -73,7 +65,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     2,
     EXERCISE_THRESHOLDS,
-    8,
     240,
     [
       {
@@ -83,11 +74,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 20 séries de flexão na parede",
       },
     ],
-    undefined,
     ["Corpo em linha reta", "Cotovelos a 45°", "Amplitude completa"],
     ["Use superfície elevada", "Abaixe gradualmente", "Foco na forma"]
   ),
-  3: createExerciseWithGamification(
+  3: createExercise(
     {
       id: "knee-push-up",
       name: "Flexão com Joelhos",
@@ -101,7 +91,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Mantenha o core contraído e os cotovelos próximos ao corpo.",
       equipment: [],
       calories: 6,
-      xpReward: 10,
       estimatedTime: 300,
       formTips: [
         "Corpo reto dos joelhos à cabeça",
@@ -119,7 +108,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     3,
     EXERCISE_THRESHOLDS,
-    12,
     300,
     [
       {
@@ -129,7 +117,6 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 18 séries de flexão inclinada",
       },
     ],
-    undefined,
     ["Corpo em linha reta", "Core contraído", "Cotovelos próximos"],
     [
       "Pratique forma perfeita",
@@ -137,7 +124,7 @@ export const beginnerPushups: Record<number, Exercise> = {
       "Prepare para flexões completas",
     ]
   ),
-  4: createExerciseWithGamification(
+  4: createExercise(
     {
       id: "push-up",
       name: "Flexão Padrão",
@@ -151,7 +138,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Mantenha os cotovelos próximos ao corpo e contraia o core.",
       equipment: [],
       calories: 8,
-      xpReward: 12,
       estimatedTime: 360,
       formTips: ["Corpo em linha reta", "Cotovelos a 45°", "Olhe para frente"],
       progressionTips: [
@@ -165,7 +151,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     4,
     EXERCISE_THRESHOLDS,
-    15,
     360,
     [
       {
@@ -175,11 +160,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 15 séries de flexão com joelhos",
       },
     ],
-    undefined,
     ["Corpo reto", "Core contraído", "Cotovelos próximos"],
     ["Pratique diariamente", "Aumente reps", "Mantenha forma"]
   ),
-  5: createExerciseWithGamification(
+  5: createExercise(
     {
       id: "wide-push-up",
       name: "Flexão Larga",
@@ -193,7 +177,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Foca mais no peito. Mantenha os cotovelos abertos.",
       equipment: [],
       calories: 9,
-      xpReward: 15,
       estimatedTime: 420,
       formTips: [
         "Mãos mais afastadas",
@@ -211,7 +194,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     5,
     EXERCISE_THRESHOLDS,
-    18,
     420,
     [
       {
@@ -221,11 +203,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 12 séries de flexão padrão",
       },
     ],
-    undefined,
     ["Mãos afastadas", "Cotovelos abertos", "Corpo reto"],
     ["Aumente afastamento gradualmente", "Foco no peito", "Mantenha forma"]
   ),
-  6: createExerciseWithGamification(
+  6: createExercise(
     {
       id: "close-push-up",
       name: "Flexão Estreita",
@@ -239,7 +220,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Foca nos tríceps. Mantenha os cotovelos próximos ao corpo.",
       equipment: [],
       calories: 10,
-      xpReward: 18,
       estimatedTime: 480,
       formTips: ["Mãos juntas", "Cotovelos próximos", "Corpo reto"],
       progressionTips: [
@@ -253,7 +233,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     6,
     EXERCISE_THRESHOLDS,
-    20,
     480,
     [
       {
@@ -263,11 +242,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 12 séries de flexão larga",
       },
     ],
-    undefined,
     ["Mãos juntas", "Cotovelos colados", "Amplitude completa"],
     ["Pratique forma", "Aumente reps", "Prepare para diamante"]
   ),
-  7: createExerciseWithGamification(
+  7: createExercise(
     {
       id: "elbows-in-push-up",
       name: "Flexão Cotovelos para Dentro",
@@ -281,7 +259,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Melhora controle e força lateral. Técnica avançada para iniciante.",
       equipment: [],
       calories: 11,
-      xpReward: 20,
       estimatedTime: 540,
       formTips: [
         "Cotovelos para dentro na descida",
@@ -299,7 +276,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     7,
     EXERCISE_THRESHOLDS,
-    22,
     540,
     [
       {
@@ -309,11 +285,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 10 séries de flexão estreita",
       },
     ],
-    undefined,
     ["Cotovelos para dentro", "Controle o movimento", "Corpo estável"],
     ["Pratique devagar", "Foco na técnica", "Aumente controle"]
   ),
-  8: createExerciseWithGamification(
+  8: createExercise(
     {
       id: "shoulder-tap-push-up",
       name: "Flexão com Toque no Ombro",
@@ -327,7 +302,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Desafia equilíbrio e core. Mantenha o corpo estável.",
       equipment: [],
       calories: 12,
-      xpReward: 25,
       estimatedTime: 600,
       formTips: [
         "Corpo completamente reto",
@@ -345,7 +319,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     8,
     EXERCISE_THRESHOLDS,
-    25,
     600,
     [
       {
@@ -355,11 +328,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 10 séries de flexão cotovelos para dentro",
       },
     ],
-    undefined,
     ["Corpo reto", "Toque controlado", "Equilíbrio perfeito"],
     ["Pratique estabilidade", "Comece devagar", "Aumente velocidade"]
   ),
-  9: createExerciseWithGamification(
+  9: createExercise(
     {
       id: "uneven-push-up",
       name: "Flexão Desigual",
@@ -372,7 +344,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Desafia força unilateral e equilíbrio. Use elevação baixa.",
       equipment: [],
       calories: 13,
-      xpReward: 28,
       estimatedTime: 660,
       formTips: ["Mão elevada baixa", "Corpo reto", "Distribua peso"],
       progressionTips: [
@@ -386,7 +357,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     9,
     EXERCISE_THRESHOLDS,
-    28,
     660,
     [
       {
@@ -396,11 +366,10 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 8 séries de flexão com toque no ombro",
       },
     ],
-    undefined,
     ["Corpo reto", "Peso distribuído", "Controle total"],
     ["Comece com elevação baixa", "Aumente gradualmente", "Melhore equilíbrio"]
   ),
-  10: createExerciseWithGamification(
+  10: createExercise(
     {
       id: "bench-dips",
       name: "Dips no Banco",
@@ -414,7 +383,6 @@ export const beginnerPushups: Record<number, Exercise> = {
       tips: "Foca tríceps e peito inferior. Mantenha cotovelos próximos.",
       equipment: ["banco"],
       calories: 8,
-      xpReward: 15,
       estimatedTime: 240,
       formTips: ["Cotovelos próximos", "Desça até 90°", "Corpo controlado"],
       progressionTips: [
@@ -428,7 +396,6 @@ export const beginnerPushups: Record<number, Exercise> = {
     },
     10,
     EXERCISE_THRESHOLDS,
-    15,
     240,
     [
       {
@@ -438,7 +405,6 @@ export const beginnerPushups: Record<number, Exercise> = {
         description: "Complete 8 séries de flexão desigual",
       },
     ],
-    undefined,
     ["Cotovelos próximos", "Amplitude controlada", "Corpo reto"],
     ["Pratique forma", "Aumente reps", "Prepare para dips avançados"]
   ),

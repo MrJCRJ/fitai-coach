@@ -1,12 +1,9 @@
 import type { Exercise } from "@/lib/exercises";
-import {
-  createExerciseWithGamification,
-  parseRepRange,
-} from "@/lib/exercises/gamificationUtils";
-import { EXERCISE_THRESHOLDS } from "@/lib/exercises/exerciseData";
+import { createExercise, parseRepRange } from "../../gamificationUtils";
+import { EXERCISE_THRESHOLDS } from "../../exerciseData";
 
 export const intermediatePushups: Record<number, Exercise> = {
-  11: createExerciseWithGamification(
+  11: createExercise(
     {
       id: "decline-push-up",
       name: "Flexão Declinada",
@@ -20,14 +17,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Aumenta a carga no peito superior. Mantenha o core contraído.",
       equipment: [],
       calories: 12,
-      xpReward: 30,
       estimatedTime: 720,
       category: "strength",
       emoji: "📈",
     },
     11,
     EXERCISE_THRESHOLDS,
-    30,
     720,
     [
       {
@@ -37,7 +32,6 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 8 séries de dips no banco",
       },
     ],
-    undefined,
     [
       "Corpo em linha reta",
       "Não deixe a cabeça cair",
@@ -47,9 +41,9 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Use uma superfície baixa inicialmente",
       "Aumente a altura gradualmente",
       "Foco no peito superior",
-    ],
+    ]
   ),
-  12: createExerciseWithGamification(
+  12: createExercise(
     {
       id: "bosu-push-up",
       name: "Flexão em Superfície Instável",
@@ -63,14 +57,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Desafia estabilidade e força. Mantenha o corpo reto.",
       equipment: ["bosu"],
       calories: 13,
-      xpReward: 32,
       estimatedTime: 780,
       category: "stability",
       emoji: "🟢",
     },
     12,
     EXERCISE_THRESHOLDS,
-    32,
     780,
     [
       {
@@ -80,15 +72,14 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 12 séries de flexão declinada",
       },
     ],
-    undefined,
     ["Mantenha estabilidade", "Corpo reto", "Controle o movimento"],
     [
       "Comece com superfície estável",
       "Adicione instabilidade gradualmente",
       "Foco no equilíbrio",
-    ],
+    ]
   ),
-  13: createExerciseWithGamification(
+  13: createExercise(
     {
       id: "parallel-bar-dips-negative",
       name: "Dips Negativos em Barras",
@@ -102,14 +93,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Enfatize a fase negativa. Controle total da descida.",
       equipment: ["barras paralelas"],
       calories: 14,
-      xpReward: 35,
       estimatedTime: 360,
       category: "strength",
       emoji: "📉",
     },
     13,
     EXERCISE_THRESHOLDS,
-    35,
     360,
     [
       {
@@ -119,15 +108,14 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 10 séries de flexão em superfície instável",
       },
     ],
-    undefined,
     ["Desça lentamente", "Corpo reto", "Controle total"],
     [
       "Pratique descida controlada",
       "Use impulso mínimo",
       "Aumente tempo de descida",
-    ],
+    ]
   ),
-  14: createExerciseWithGamification(
+  14: createExercise(
     {
       id: "ring-push-up",
       name: "Flexão em Anéis",
@@ -141,14 +129,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Movimento desafiador devido à instabilidade. Requer controle excepcional.",
       equipment: ["anéis"],
       calories: 15,
-      xpReward: 38,
       estimatedTime: 960,
       category: "stability",
       emoji: "⭕",
     },
     14,
     EXERCISE_THRESHOLDS,
-    38,
     960,
     [
       {
@@ -158,7 +144,6 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 6 séries de dips negativos",
       },
     ],
-    undefined,
     [
       "Controle a instabilidade",
       "Mantenha ombros estáveis",
@@ -168,9 +153,9 @@ export const intermediatePushups: Record<number, Exercise> = {
       "Pratique com anéis fixos",
       "Aumente instabilidade gradualmente",
       "Foco na forma",
-    ],
+    ]
   ),
-  15: createExerciseWithGamification(
+  15: createExercise(
     {
       id: "paused-push-up",
       name: "Flexão Pausada",
@@ -183,14 +168,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Aumenta força isométrica e controle. Técnica avançada.",
       equipment: [],
       calories: 14,
-      xpReward: 35,
       estimatedTime: 960,
       category: "control",
       emoji: "⏸️",
     },
     15,
     EXERCISE_THRESHOLDS,
-    35,
     960,
     [
       {
@@ -200,11 +183,10 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 8 séries de flexão em anéis",
       },
     ],
-    undefined,
     ["Pausa de 2s no fundo", "Corpo reto", "Controle perfeito"],
-    ["Comece com pausa curta", "Aumente tempo gradualmente", "Mantenha tensão"],
+    ["Comece com pausa curta", "Aumente tempo gradualmente", "Mantenha tensão"]
   ),
-  16: createExerciseWithGamification(
+  16: createExercise(
     {
       id: "hindi-push-up",
       name: "Flexão Hindu",
@@ -218,14 +200,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Movimento fluido que trabalha mobilidade e força. Técnica complexa.",
       equipment: [],
       calories: 16,
-      xpReward: 40,
       estimatedTime: 1200,
       category: "mobility",
       emoji: "🕉️",
     },
     16,
     EXERCISE_THRESHOLDS,
-    40,
     1200,
     [
       {
@@ -235,11 +215,10 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 8 séries de flexão pausada",
       },
     ],
-    undefined,
     ["Movimento fluido", "Corpo em arco", "Controle total"],
-    ["Pratique movimento separadamente", "Comece devagar", "Foco na fluidez"],
+    ["Pratique movimento separadamente", "Comece devagar", "Foco na fluidez"]
   ),
-  17: createExerciseWithGamification(
+  17: createExercise(
     {
       id: "parallel-bar-dips",
       name: "Dips em Barras Paralelas",
@@ -253,14 +232,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Mantenha o corpo reto e cotovelos próximos. Movimento completo.",
       equipment: ["barras paralelas"],
       calories: 16,
-      xpReward: 40,
       estimatedTime: 480,
       category: "strength",
       emoji: "🏗️",
     },
     17,
     EXERCISE_THRESHOLDS,
-    40,
     480,
     [
       {
@@ -270,11 +247,10 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 10 séries de flexão hindu",
       },
     ],
-    undefined,
     ["Corpo reto", "Cotovelos próximos", "Amplitude completa"],
-    ["Comece com poucas reps", "Foco na forma", "Aumente carga gradualmente"],
+    ["Comece com poucas reps", "Foco na forma", "Aumente carga gradualmente"]
   ),
-  18: createExerciseWithGamification(
+  18: createExercise(
     {
       id: "dive-bomber-push-up",
       name: "Flexão Mergulhador",
@@ -288,14 +264,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Movimento dinâmico que requer coordenação excepcional.",
       equipment: [],
       calories: 18,
-      xpReward: 45,
       estimatedTime: 1200,
       category: "explosive",
       emoji: "🚀",
     },
     18,
     EXERCISE_THRESHOLDS,
-    45,
     1200,
     [
       {
@@ -305,15 +279,14 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 10 séries de dips em barras",
       },
     ],
-    undefined,
     ["Movimento contínuo", "Corpo em arco", "Controle perfeito"],
     [
       "Pratique movimento lento",
       "Aumente velocidade gradualmente",
       "Foco na coordenação",
-    ],
+    ]
   ),
-  19: createExerciseWithGamification(
+  19: createExercise(
     {
       id: "pseudo-planche-push-up",
       name: "Flexão Pseudo Planche",
@@ -327,14 +300,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Posição avançada que desafia ombros e core. Requer força excepcional.",
       equipment: [],
       calories: 19,
-      xpReward: 48,
       estimatedTime: 1440,
       category: "shoulder",
       emoji: "🤸",
     },
     19,
     EXERCISE_THRESHOLDS,
-    48,
     1440,
     [
       {
@@ -344,15 +315,14 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão mergulhador",
       },
     ],
-    undefined,
     ["Ombros à frente das mãos", "Corpo reto", "Core contraído"],
     [
       "Pratique posição estática",
       "Adicione movimento gradual",
       "Construa força lentamente",
-    ],
+    ]
   ),
-  20: createExerciseWithGamification(
+  20: createExercise(
     {
       id: "depth-push-up",
       name: "Flexão com Profundidade",
@@ -366,14 +336,12 @@ export const intermediatePushups: Record<number, Exercise> = {
       tips: "Enfatiza força excêntrica e potência concêntrica.",
       equipment: [],
       calories: 17,
-      xpReward: 42,
       estimatedTime: 1440,
       category: "explosive",
       emoji: "📏",
     },
     20,
     EXERCISE_THRESHOLDS,
-    42,
     1440,
     [
       {
@@ -383,8 +351,7 @@ export const intermediatePushups: Record<number, Exercise> = {
         description: "Complete 8 séries de flexão pseudo planche",
       },
     ],
-    undefined,
     ["Descida lenta", "Pausa no fundo", "Subida explosiva"],
-    ["Comece com pausa curta", "Aumente tempo de descida", "Foco na explosão"],
+    ["Comece com pausa curta", "Aumente tempo de descida", "Foco na explosão"]
   ),
 };
