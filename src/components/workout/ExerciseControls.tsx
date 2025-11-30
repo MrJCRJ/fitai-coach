@@ -17,7 +17,6 @@ interface ExerciseControlsProps {
       sets: {
         reps: number;
         time: number;
-        level: number;
         exerciseName: string;
         restTime?: number;
       }[];
@@ -75,7 +74,7 @@ export default function ExerciseControls({
         ?.value || "0",
     );
     const weightToSave = useWeight ? weight : undefined;
-    onSaveProgress(exerciseId, reps, weightToSave, exercise, undefined);
+    onSaveProgress(exerciseId, reps, weightToSave, exercise);
   };
 
   return (

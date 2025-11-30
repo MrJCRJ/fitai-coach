@@ -8,7 +8,6 @@ interface WorkoutSessionState {
     sets: {
       reps: number;
       time: number;
-      level: number;
       exerciseName: string;
       restTime?: number;
       weight?: number;
@@ -64,23 +63,14 @@ export function useWorkoutSession() {
       weight?: number,
       pushExerciseType?: "pushup" | "dip",
       exercise?: Exercise,
-      selectedDifficulty?: string,
     ) => {
       const time = timers[exerciseId] || 0;
 
       // Usar o exercício passado diretamente se disponível (novo sistema)
       const exerciseName = exercise?.name || `${exerciseId} - Exercício`;
       // Mapear dificuldade para nível numérico
-      const level =
-        selectedDifficulty === "beginner"
-          ? 1
-          : selectedDifficulty === "intermediate"
-            ? 2
-            : selectedDifficulty === "advanced"
-              ? 3
-              : selectedDifficulty === "extreme"
-                ? 4
-                : 1;
+      // Níveis/progressão removidos — usamos um valor neutro quando necessário
+      const level = 1;
       const targetReps = exercise ? getMinReps(exercise.reps) : 10;
 
       // Sempre iniciar exercício automaticamente com dados corretos
@@ -106,7 +96,7 @@ export function useWorkoutSession() {
         console.debug("Exercício já ativo:", exerciseId);
       }
 
-      // Salvar o set
+      // Salvar o set (não armazenamos "level" por set — removido)
       workoutSaver.saveDetailedSet(
         reps,
         targetReps,
@@ -120,7 +110,7 @@ export function useWorkoutSession() {
       // Atualizar estado local (compatibilidade)
       setCurrentSession((prev) => {
         const current = prev[exerciseId] || { sets: [], totalTime: 0 };
-        const newSet = { reps, time, level, exerciseName, weight };
+        const newSet = { reps, time, exerciseName, weight };
         return {
           ...prev,
           [exerciseId]: {

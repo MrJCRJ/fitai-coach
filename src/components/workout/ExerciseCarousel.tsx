@@ -45,7 +45,6 @@ interface ExerciseCarouselProps {
       sets: {
         reps: number;
         time: number;
-        level: number;
         exerciseName: string;
         restTime?: number;
       }[];

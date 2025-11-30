@@ -51,7 +51,6 @@ export default function WorkoutPage() {
     reps: number,
     weight?: number,
     exercise?: Exercise,
-    selectedDifficulty?: string,
   ) => {
     workoutTimers.stopTimer(exerciseId);
 
@@ -66,7 +65,6 @@ export default function WorkoutPage() {
       weight,
       "pushup", // Default para compatibilidade
       exercise,
-      selectedDifficulty,
     );
 
     workoutTimers.startRest();

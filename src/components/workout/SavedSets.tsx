@@ -12,7 +12,6 @@ interface SavedSetsProps {
       sets: {
         reps: number;
         time: number;
-        level: number;
         exerciseName: string;
         restTime?: number;
         weight?: number;
@@ -27,7 +26,6 @@ interface SavedSetsProps {
 interface WorkoutSet {
   reps: number;
   time: number;
-  level: number;
   exerciseName: string;
   restTime?: number;
   weight?: number;
@@ -59,9 +57,6 @@ export default function SavedSets({
             >
               <div className="flex items-center gap-2">
                 <span className="text-gray-300">Set {index + 1}</span>
-                <Badge variant="default" className="text-xs px-1 py-0">
-                  Nível {set.level}
-                </Badge>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-white font-medium">{set.reps} reps</span>
