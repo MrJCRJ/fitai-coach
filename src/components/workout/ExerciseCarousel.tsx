@@ -246,15 +246,6 @@ export default function ExerciseCarousel({
                 exerciseId={`${exerciseId}-${currentExercise.id}`}
                 icon={icon}
                 title={title}
-                selectedLevel={
-                  selectedDifficulty === "beginner"
-                    ? 1
-                    : selectedDifficulty === "intermediate"
-                      ? 2
-                      : selectedDifficulty === "advanced"
-                        ? 3
-                        : 4
-                }
                 selectedDifficulty={selectedDifficulty}
                 activeTimer={activeTimer}
                 timers={timers}
