@@ -12,10 +12,9 @@ import {
 } from "@/components/dashboard";
 
 export default function DashboardPage() {
-  const { workoutSessions, userProgress, setWorkoutSessions, setUserProgress } =
-    useDashboardData();
+  const { workoutSessions, setWorkoutSessions } = useDashboardData();
   const [, setRefreshKey] = useState(0);
-  const stats = calculateDashboardStats(workoutSessions, userProgress);
+  const stats = calculateDashboardStats(workoutSessions);
 
   const handleDataImported = () => {
     // Forçar recarregamento dos dados
@@ -25,10 +24,7 @@ export default function DashboardPage() {
     if (saved) {
       setWorkoutSessions(JSON.parse(saved));
     }
-    const savedProgress = localStorage.getItem("userProgress");
-    if (savedProgress) {
-      setUserProgress(JSON.parse(savedProgress));
-    }
+    // removed userProgress handling (no gamification)
   };
 
   return (

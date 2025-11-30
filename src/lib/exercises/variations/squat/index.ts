@@ -4,31 +4,23 @@
 
 // Tipos
 import type { Exercise } from "@/lib/exercises";
-export type {
-  Exercise,
-  ExerciseRequirement,
-  Achievement,
-} from "@/lib/exercises";
+export type { Exercise, ExerciseRequirement } from "@/lib/exercises";
 
 // Dados do jogo
 export {
   SQUAT_THRESHOLDS,
-  SQUAT_ACHIEVEMENTS,
-  SQUAT_BADGES,
   SQUAT_PROGRESSION_TIPS,
   SQUAT_FORM_TIPS,
 } from "@/lib/exercises/variations/squat/data/squatGameData";
 
 // Utilitários
 export {
-  createAchievement,
   calculateSquatLevel,
   getSetsToNextSquatLevel,
   canUnlockSquatVariation,
   getUnlockedSquatVariations,
   calculateFormBonus,
-  calculateStreakMultiplier,
-  createSquatExerciseWithGamification,
+  createSquatExercise,
   getContextualSquatTips,
   validateSquatForm,
 } from "@/lib/exercises/variations/squat/utils/gamificationUtils";

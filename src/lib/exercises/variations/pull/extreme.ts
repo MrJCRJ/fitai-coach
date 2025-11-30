@@ -1,12 +1,12 @@
 import type { Exercise } from "@/lib/exercises";
-import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+import { createPullExercise } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL EXTREME
 // ====================
 
 export const extremePull: Record<number, Exercise> = {
-  33: createPullExerciseWithGamification(
+  33: createPullExercise(
     {
       id: "one_arm_pull_up_full",
       name: "One-Arm Pull-up (Completo)",
@@ -20,14 +20,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Força unilateral máxima da humanidade. Técnica perfeita obrigatória. Dominar este movimento é alcançar o topo da calistenia.",
       equipment: ["Barra"],
       calories: 45,
-      xpReward: 100,
       estimatedTime: 1200,
       rarity: "legendary",
       category: "unilateral",
       emoji: "💪",
     },
     33,
-    100,
     1200,
     [
       {
@@ -37,11 +35,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 25600 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  34: createPullExerciseWithGamification(
+  34: createPullExercise(
     {
       id: "weighted_pull_up_heavy",
       name: "Weighted Pull-up (Pesado)",
@@ -55,14 +52,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Aumente peso gradualmente. Força máxima absoluta. Técnica CrossFit/powerlifting combinada.",
       equipment: ["Barra", "Cinto de peso pesado"],
       calories: 40,
-      xpReward: 85,
       estimatedTime: 960,
       rarity: "legendary",
       category: "weighted",
       emoji: "🏋️‍♂️",
     },
     34,
-    85,
     960,
     [
       {
@@ -72,11 +67,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 28000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  35: createPullExerciseWithGamification(
+  35: createPullExercise(
     {
       id: "ring_muscle_up",
       name: "Ring Muscle-up",
@@ -90,14 +84,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Instabilidade extrema. Coordenação perfeita. Combina força, controle e propriocepção máxima.",
       equipment: ["Argolas"],
       calories: 42,
-      xpReward: 90,
       estimatedTime: 1020,
       rarity: "legendary",
       category: "compound",
       emoji: "🔗",
     },
     35,
-    90,
     1020,
     [
       {
@@ -107,11 +99,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 30000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  36: createPullExerciseWithGamification(
+  36: createPullExercise(
     {
       id: "front_lever_full",
       name: "Front Lever (Completo)",
@@ -125,14 +116,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Corpo reto como prancha. Ombros girados. Força isométrica máxima da calistenia. Movimento lendário.",
       equipment: ["Barra"],
       calories: 25,
-      xpReward: 55,
       estimatedTime: 600,
       rarity: "legendary",
       category: "isometric",
       emoji: "🤸‍♂️",
     },
     36,
-    55,
     600,
     [
       {
@@ -142,11 +131,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 32000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  37: createPullExerciseWithGamification(
+  37: createPullExercise(
     {
       id: "pull_up_front_lever",
       name: "Pull-up to Front Lever",
@@ -160,14 +148,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Transição suave. Controle absoluto. Combina força dinâmica com isométrica. Movimento de mestre.",
       equipment: ["Barra"],
       calories: 35,
-      xpReward: 75,
       estimatedTime: 900,
       rarity: "legendary",
       category: "transition",
       emoji: "🔄",
     },
     37,
-    75,
     900,
     [
       {
@@ -177,11 +163,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 34000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  38: createPullExerciseWithGamification(
+  38: createPullExercise(
     {
       id: "front_lever_raises",
       name: "Front Lever Raises",
@@ -195,14 +180,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Controle preciso. Força excepcional. Combina isometria com movimento. Técnica muito avançada.",
       equipment: ["Barra"],
       calories: 32,
-      xpReward: 70,
       estimatedTime: 840,
       rarity: "legendary",
       category: "dynamic",
       emoji: "⬆️",
     },
     38,
-    70,
     840,
     [
       {
@@ -212,11 +195,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 36000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  39: createPullExerciseWithGamification(
+  39: createPullExercise(
     {
       id: "rotational_pull_up_180",
       name: "Rotational Pull-up 180°",
@@ -230,14 +212,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Coordenação extrema. Força e controle. Movimento muito técnico. Risco de lesão alto.",
       equipment: ["Barra"],
       calories: 38,
-      xpReward: 80,
       estimatedTime: 960,
       rarity: "legendary",
       category: "rotational",
       emoji: "🔄",
     },
     39,
-    80,
     960,
     [
       {
@@ -247,11 +227,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 38000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  40: createPullExerciseWithGamification(
+  40: createPullExercise(
     {
       id: "clap_pull_up",
       name: "Clap Pull-up (Com Batida)",
@@ -265,14 +244,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Potência máxima. Tempo de voo significativo. Coordenação excepcional. Técnica CrossFit extrema.",
       equipment: ["Barra"],
       calories: 40,
-      xpReward: 85,
       estimatedTime: 1020,
       rarity: "legendary",
       category: "explosive",
       emoji: "👏",
     },
     40,
-    85,
     1020,
     [
       {
@@ -282,11 +259,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 40000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  41: createPullExerciseWithGamification(
+  41: createPullExercise(
     {
       id: "double_clap_pull_up",
       name: "Double Clap Pull-up",
@@ -300,14 +276,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Potência sobre-humana. Tempo de voo extremo. Coordenação máxima. Movimento de elite absoluta.",
       equipment: ["Barra"],
       calories: 45,
-      xpReward: 95,
       estimatedTime: 1200,
       rarity: "legendary",
       category: "explosive",
       emoji: "👏👏",
     },
     41,
-    95,
     1200,
     [
       {
@@ -317,11 +291,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 42000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  42: createPullExerciseWithGamification(
+  42: createPullExercise(
     {
       id: "360_pull_up",
       name: "360° Pull-up",
@@ -335,14 +308,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Coordenação máxima. Força explosiva extrema. Movimento muito perigoso. Técnica perfeita obrigatória.",
       equipment: ["Barra"],
       calories: 50,
-      xpReward: 110,
       estimatedTime: 1440,
       rarity: "legendary",
       category: "rotational",
       emoji: "🔄",
     },
     42,
-    110,
     1440,
     [
       {
@@ -352,11 +323,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 44000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  43: createPullExerciseWithGamification(
+  43: createPullExercise(
     {
       id: "victorian_pull",
       name: "Victorian Pull (Cruz Vitoriana)",
@@ -370,14 +340,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Força total do corpo. Coordenação perfeita. Movimento histórico da calistenia. Risco muito alto.",
       equipment: ["Barra"],
       calories: 55,
-      xpReward: 120,
       estimatedTime: 1680,
       rarity: "legendary",
       category: "legendary",
       emoji: "👑",
     },
     43,
-    120,
     1680,
     [
       {
@@ -387,11 +355,10 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 46000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  44: createPullExerciseWithGamification(
+  44: createPullExercise(
     {
       id: "planche_to_invert",
       name: "Planche to Inverted",
@@ -405,14 +372,12 @@ export const extremePull: Record<number, Exercise> = {
       tips: "Força máxima absoluta. Controle total. Movimento que desafia todos os limites humanos. Extremo perigo.",
       equipment: ["Barra"],
       calories: 60,
-      xpReward: 130,
       estimatedTime: 1920,
       rarity: "legendary",
       category: "transitional",
       emoji: "🔄",
     },
     44,
-    130,
     1920,
     [
       {
@@ -422,7 +387,6 @@ export const extremePull: Record<number, Exercise> = {
         description: "Complete 48000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 };

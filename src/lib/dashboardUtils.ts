@@ -1,7 +1,6 @@
 import { DetailedWorkoutSession } from "@/lib/workoutTypes";
 import { DashboardStats } from "@/lib/dashboardTypes";
-import { UserProgress } from "@/lib/exercises/types";
-import { gamificationSystem } from "@/lib/gamification";
+// userProgress (and gamification) removed
 
 export function formatTime(seconds: number): string {
   const mins = Math.floor(seconds / 60);
@@ -11,7 +10,6 @@ export function formatTime(seconds: number): string {
 
 export function calculateDashboardStats(
   workoutSessions: DetailedWorkoutSession[],
-  userProgress?: UserProgress | null,
 ): DashboardStats {
   const totalSessions = workoutSessions.length;
   const totalTime = workoutSessions.reduce(
@@ -109,21 +107,7 @@ export function calculateDashboardStats(
     }
   });
 
-  // Estatísticas de gamificação
-  let gamificationStats = {};
-  if (userProgress) {
-    gamificationStats = {
-      userLevel: userProgress.level,
-      totalXp: userProgress.totalXp,
-      xpToNextLevel: gamificationSystem.getXpToNextLevel(userProgress.totalXp),
-      unlockedAchievements:
-        gamificationSystem.getUnlockedAchievements(userProgress),
-      lockedAchievements:
-        gamificationSystem.getLockedAchievements(userProgress),
-      currentStreak: userProgress.streaks.current,
-      longestStreak: userProgress.streaks.longest,
-    };
-  }
+  // Gamification removed — no gamification statistics
 
   return {
     totalSessions,
@@ -142,6 +126,5 @@ export function calculateDashboardStats(
         ? weightStats.totalWeightUsed / weightStats.sessionsWithWeight
         : 0,
     sessionsWithWeight: weightStats.sessionsWithWeight,
-    ...gamificationStats,
   };
 }

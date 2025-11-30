@@ -3,10 +3,10 @@
 // ====================
 
 import type { Exercise } from "@/lib/exercises";
-import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
+import { createSquatExercise } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const beginnerSquat: Record<number, Exercise> = {
-  1: createSquatExerciseWithGamification(
+  1: createSquatExercise(
     {
       id: "wall_sit",
       name: "Wall Sit (Isometria na Parede)",
@@ -22,14 +22,12 @@ export const beginnerSquat: Record<number, Exercise> = {
       calories: 6,
     },
     1,
-    15,
     180,
-    undefined,
     undefined,
     "beginner",
   ),
 
-  2: createSquatExerciseWithGamification(
+  2: createSquatExercise(
     {
       id: "chair_box_squat_high",
       name: "Chair/Box Squat (Cadeira Alta)",
@@ -45,7 +43,6 @@ export const beginnerSquat: Record<number, Exercise> = {
       calories: 8,
     },
     2,
-    20,
     240,
     [
       {
@@ -55,11 +52,10 @@ export const beginnerSquat: Record<number, Exercise> = {
         description: "Complete 10 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  3: createSquatExerciseWithGamification(
+  3: createSquatExercise(
     {
       id: "assisted_squat_hold",
       name: "Assisted Squat Hold (Apoio na Parede)",
@@ -75,7 +71,6 @@ export const beginnerSquat: Record<number, Exercise> = {
       calories: 7,
     },
     3,
-    18,
     180,
     [
       {
@@ -85,11 +80,10 @@ export const beginnerSquat: Record<number, Exercise> = {
         description: "Complete 25 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  4: createSquatExerciseWithGamification(
+  4: createSquatExercise(
     {
       id: "partial_squat",
       name: "Partial Squat (½ Profundidade)",
@@ -105,7 +99,6 @@ export const beginnerSquat: Record<number, Exercise> = {
       calories: 8,
     },
     4,
-    22,
     180,
     [
       {
@@ -115,11 +108,10 @@ export const beginnerSquat: Record<number, Exercise> = {
         description: "Complete 50 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  5: createSquatExerciseWithGamification(
+  5: createSquatExercise(
     {
       id: "air_squat",
       name: "Air Squat (Agachamento Livre)",
@@ -135,7 +127,6 @@ export const beginnerSquat: Record<number, Exercise> = {
       calories: 9,
     },
     5,
-    25,
     240,
     [
       {
@@ -145,11 +136,10 @@ export const beginnerSquat: Record<number, Exercise> = {
         description: "Complete 75 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  6: createSquatExerciseWithGamification(
+  6: createSquatExercise(
     {
       id: "tempo_air_squat",
       name: "Tempo Air Squat (Cadência Lenta)",
@@ -165,7 +155,6 @@ export const beginnerSquat: Record<number, Exercise> = {
       calories: 10,
     },
     6,
-    28,
     300,
     [
       {
@@ -175,7 +164,6 @@ export const beginnerSquat: Record<number, Exercise> = {
         description: "Complete 100 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 };

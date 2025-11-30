@@ -29,7 +29,7 @@ import {
  * Mapeia o nome da aba ativa para o tipo de exercício
  */
 export function getExerciseTypeFromTab(
-  activeTab: string
+  activeTab: string,
 ): "pushup" | "pullup" | "squat" {
   switch (activeTab) {
     case "empurrar":
@@ -47,7 +47,7 @@ export function getExerciseTypeFromTab(
  * Mapeia o nome da aba ativa para o grupo muscular
  */
 export function getMuscleGroupFromTab(
-  activeTab: string
+  activeTab: string,
 ): "pushup" | "pullup" | "squat" {
   return getExerciseTypeFromTab(activeTab);
 }
@@ -58,7 +58,7 @@ export function getMuscleGroupFromTab(
 export function getExerciseName(
   exerciseId: string,
   activeTab: string,
-  selectedLevel: number
+  selectedLevel: number,
 ): string {
   const variations =
     activeTab === "empurrar"
@@ -98,7 +98,7 @@ export function getSelectedLevel(
   selectedPullUpLevel: number,
   selectedSquatLevel: number,
   selectedDipLevel?: number,
-  pushExerciseType?: "pushup" | "dip"
+  pushExerciseType?: "pushup" | "dip",
 ): number {
   switch (activeTab) {
     case "empurrar":
@@ -163,7 +163,6 @@ export function getPushExercisesByLevel() {
       tips: "Foca tríceps e peito inferior. Mantenha cotovelos próximos.",
       equipment: ["banco"],
       calories: 8,
-      xpReward: 15,
       estimatedTime: 240,
       category: "strength",
       emoji: "🪑",
@@ -185,7 +184,6 @@ export function getPushExercisesByLevel() {
       tips: "Mantenha o corpo reto e cotovelos próximos. Movimento completo.",
       equipment: ["barras paralelas"],
       calories: 16,
-      xpReward: 40,
       estimatedTime: 480,
       category: "strength",
       emoji: "🏗️",

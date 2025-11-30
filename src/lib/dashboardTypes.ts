@@ -21,36 +21,6 @@ export interface DashboardStats {
   totalWeightUsed?: number; // Peso total utilizado em todas as sessões
   avgWeightPerSession?: number; // Peso médio por sessão
   sessionsWithWeight?: number; // Número de sessões que usaram peso
-  // Estatísticas de gamificação
-  userLevel?: number;
-  totalXp?: number;
-  xpToNextLevel?: number;
-  unlockedAchievements?: Achievement[];
-  lockedAchievements?: Achievement[];
-  currentStreak?: number;
-  longestStreak?: number;
+  // Gamification removed — these stats no longer tracked
 }
-
-export interface Achievement {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  xpReward: number;
-  condition: AchievementCondition;
-}
-
-export interface AchievementCondition {
-  type:
-    | "sets_completed"
-    | "level_reached"
-    | "streak_days"
-    | "time_record"
-    | "perfect_form"
-    | "weight_used"
-    | "weight_sets"
-    | "max_weight";
-  exerciseType?: "pushup" | "pullup" | "squat";
-  value: number;
-  timeframe?: "daily" | "weekly" | "monthly" | "all_time";
-}
+// AchievementCondition removed - gamification no longer used for dashboard stats

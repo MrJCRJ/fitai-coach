@@ -1,16 +1,13 @@
 import type { Exercise } from "@/lib/exercises";
-import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
-import {
-  PULL_ACHIEVEMENTS,
-  PULL_BADGES,
-} from "@/lib/exercises/variations/pull/data/pullGameData";
+import { createPullExercise } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+// PULL_THRESHOLDS is available in pull utils; not required in this file
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL BEGINNER
 // ====================
 
 export const beginnerPull: Record<number, Exercise> = {
-  1: createPullExerciseWithGamification(
+  1: createPullExercise(
     {
       id: "dead_hang",
       name: "Dead Hang (Suspensão Morta)",
@@ -24,22 +21,18 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "Comece com 10 segundos e aumente gradualmente. Foque na força de preensão.",
       equipment: ["Barra"],
       calories: 6,
-      xpReward: 8,
       estimatedTime: 180,
-      badgeId: PULL_BADGES.firstHang.id,
       rarity: "common",
       category: "isometric",
       emoji: "⏱️",
     },
     1,
-    8,
     180,
     undefined,
-    [PULL_ACHIEVEMENTS[0]!], // first_pull
     "beginner",
   ),
 
-  2: createPullExerciseWithGamification(
+  2: createPullExercise(
     {
       id: "active_hang",
       name: "Active Hang (Suspensão Ativa)",
@@ -53,15 +46,12 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "Imagine 'dar de ombros' para cima. Este movimento prepara para scapular pull-ups.",
       equipment: ["Barra"],
       calories: 8,
-      xpReward: 10,
       estimatedTime: 240,
-      badgeId: PULL_BADGES.scapularMaster.id,
       rarity: "common",
       category: "isometric",
       emoji: "🏋️‍♂️",
     },
     2,
-    10,
     240,
     [
       {
@@ -71,11 +61,10 @@ export const beginnerPull: Record<number, Exercise> = {
         description: "Complete 8 séries de dead hang",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  3: createPullExerciseWithGamification(
+  3: createPullExercise(
     {
       id: "scapular_pull_up",
       name: "Scapular Pull-up",
@@ -89,14 +78,12 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "Foque apenas no movimento das escápulas. Braços permanecem retos. Este é o fundamento de todas as barras.",
       equipment: ["Barra"],
       calories: 7,
-      xpReward: 12,
       estimatedTime: 240,
       rarity: "rare",
       category: "scapular",
       emoji: "🦴",
     },
     3,
-    12,
     240,
     [
       {
@@ -106,11 +93,10 @@ export const beginnerPull: Record<number, Exercise> = {
         description: "Complete 25 séries de exercícios básicos de pull",
       },
     ],
-    [PULL_ACHIEVEMENTS[1]!], // pull_warrior
     "beginner",
   ),
 
-  4: createPullExerciseWithGamification(
+  4: createPullExercise(
     {
       id: "negative_pull_up",
       name: "Negative Pull-up (Negativa)",
@@ -124,15 +110,12 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "A fase negativa constrói mais força que a positiva. Controle total do movimento. Use impulso mínimo para chegar ao topo.",
       equipment: ["Barra"],
       calories: 10,
-      xpReward: 15,
       estimatedTime: 300,
-      badgeId: PULL_BADGES.negativeKing.id,
       rarity: "rare",
       category: "eccentric",
       emoji: "⬇️",
     },
     4,
-    15,
     300,
     [
       {
@@ -142,11 +125,10 @@ export const beginnerPull: Record<number, Exercise> = {
         description: "Complete 50 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  5: createPullExerciseWithGamification(
+  5: createPullExercise(
     {
       id: "assisted_pull_up",
       name: "Assisted Pull-up (Barra Assistida)",
@@ -160,14 +142,12 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "Reduza gradualmente a assistência conforme ganha força. Mantenha o corpo reto e evite balançar.",
       equipment: ["Barra", "Elástico (opcional)", "Máquina (opcional)"],
       calories: 12,
-      xpReward: 18,
       estimatedTime: 360,
       rarity: "common",
       category: "assisted",
       emoji: "🔧",
     },
     5,
-    18,
     360,
     [
       {
@@ -177,11 +157,10 @@ export const beginnerPull: Record<number, Exercise> = {
         description: "Complete 100 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  6: createPullExerciseWithGamification(
+  6: createPullExercise(
     {
       id: "chin_up_assisted",
       name: "Chin-up Assistido (Barra de Queixo)",
@@ -195,14 +174,12 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "A pegada supinada recruta mais bíceps. Mantenha os cotovelos apontando para baixo durante a subida.",
       equipment: ["Barra", "Elástico (opcional)"],
       calories: 13,
-      xpReward: 20,
       estimatedTime: 360,
       rarity: "common",
       category: "assisted",
       emoji: "🤏",
     },
     6,
-    20,
     360,
     [
       {
@@ -212,11 +189,10 @@ export const beginnerPull: Record<number, Exercise> = {
         description: "Complete 200 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 
-  7: createPullExerciseWithGamification(
+  7: createPullExercise(
     {
       id: "australian_row",
       name: "Australian Row (Remada Australiana)",
@@ -230,21 +206,18 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "Mantenha o corpo reto como uma prancha. Foque na contração das costas, não apenas nos braços. Excelente para iniciantes.",
       equipment: ["Barra baixa", "Barra de dominadas baixa"],
       calories: 9,
-      xpReward: 14,
       estimatedTime: 300,
       rarity: "common",
       category: "horizontal",
       emoji: "🇦🇺",
     },
     7,
-    14,
     300,
     undefined, // Sempre disponível como alternativa
-    undefined,
     "beginner",
   ),
 
-  8: createPullExerciseWithGamification(
+  8: createPullExercise(
     {
       id: "neutral_grip_assisted",
       name: "Neutral Grip Pull-up Assistido",
@@ -258,14 +231,12 @@ export const beginnerPull: Record<number, Exercise> = {
       tips: "Pegada neutra reduz tensão nos ombros. Use argolas ou barras especiais. Perfeita para quem tem desconforto na pronada/supinada.",
       equipment: ["Barra neutra", "Argolas", "Elástico"],
       calories: 12,
-      xpReward: 18,
       estimatedTime: 360,
       rarity: "rare",
       category: "assisted",
       emoji: "🤝",
     },
     8,
-    18,
     360,
     [
       {
@@ -275,7 +246,6 @@ export const beginnerPull: Record<number, Exercise> = {
         description: "Complete 400 séries de exercícios básicos",
       },
     ],
-    undefined,
     "beginner",
   ),
 };

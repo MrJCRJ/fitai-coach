@@ -2,11 +2,7 @@
 // UTILITÁRIOS DE GAMIFICAÇÃO - MÓDULO SQUAT
 // ====================
 
-import type {
-  Exercise,
-  ExerciseRequirement,
-  Achievement,
-} from "@/lib/exercises";
+import type { Exercise, ExerciseRequirement } from "@/lib/exercises";
 import {
   SQUAT_THRESHOLDS,
   SQUAT_PROGRESSION_TIPS,
@@ -16,23 +12,7 @@ import {
 /**
  * Cria uma conquista para squats
  */
-export function createAchievement(
-  id: string,
-  name: string,
-  description: string,
-  xpReward: number,
-  icon: string = "",
-  condition: Achievement["condition"],
-): Achievement {
-  return {
-    id: `squat_${id}`,
-    name,
-    description,
-    xpReward,
-    icon,
-    condition,
-  };
-}
+// Gamification-related helpers removed: achievements and XP are not part of exercises now.
 
 /**
  * Calcula o nível baseado nos thresholds de squat
@@ -89,26 +69,25 @@ export function getUnlockedSquatVariations(
 /**
  * Calcula XP bônus baseado em forma perfeita
  */
-export function calculateFormBonus(formRating: 1 | 2 | 3 | 4 | 5): number {
-  const bonuses = { 1: 0, 2: 5, 3: 10, 4: 20, 5: 50 };
-  return bonuses[formRating] || 0;
+export function calculateFormBonus(): number {
+  // Gamification removed — no XP bonus
+  return 0;
 }
 
 /**
  * Calcula multiplicador de streak
  */
-export function calculateStreakMultiplier(currentStreak: number): number {
-  if (currentStreak >= 30) return 2.0;
-  if (currentStreak >= 14) return 1.5;
-  if (currentStreak >= 7) return 1.25;
-  if (currentStreak >= 3) return 1.1;
-  return 1.0;
-}
+// Streak multiplier & XP-related helpers removed.
 
 /**
  * Cria exercício com gamificação integrada
  */
-export function createSquatExerciseWithGamification(
+// removed: createSquatExerciseWithGamification wrapper; all call sites should use createSquatExercise
+
+/**
+ * Neutral create function for squat exercises (no gamification fields)
+ */
+export function createSquatExercise(
   baseExercise: Omit<
     Exercise,
     | "xpReward"
@@ -119,23 +98,18 @@ export function createSquatExerciseWithGamification(
     | "progressionTips"
   >,
   level: number,
-  baseXp: number,
   estimatedTime: number,
   unlockRequirements?: ExerciseRequirement[],
-  achievements?: Achievement[],
   difficulty: "beginner" | "intermediate" | "advanced" | "extreme" = "beginner",
 ): Exercise {
-  const xpReward = baseXp + level * 5; // XP aumenta com o nível
-
   const exercise: Exercise = {
     ...baseExercise,
+    difficulty,
     instructions: baseExercise.instructions || "",
     equipment: baseExercise.equipment || ["Nenhum"],
     calories: baseExercise.calories || 8,
-    xpReward,
     estimatedTime,
     ...(unlockRequirements && { unlockRequirements }),
-    ...(achievements && { achievements }),
     ...(SQUAT_FORM_TIPS[baseExercise.id as keyof typeof SQUAT_FORM_TIPS] && {
       formTips: [
         ...SQUAT_FORM_TIPS[baseExercise.id as keyof typeof SQUAT_FORM_TIPS],
@@ -206,10 +180,8 @@ export function validateSquatForm(
 ): {
   isValid: boolean;
   feedback: string[];
-  bonusXp: number;
 } {
   const feedback: string[] = [];
-  let bonusXp = 0;
 
   // Validações específicas por exercício
   switch (exerciseId) {
@@ -218,28 +190,27 @@ export function validateSquatForm(
         feedback.push("Tente segurar por pelo menos 15 segundos");
       } else if (duration >= 45) {
         feedback.push("Excelente força isométrica!");
-        bonusXp += 15;
+        // removed XP reward
       }
       break;
 
     case "air_squat":
       if (reps >= 15) {
         feedback.push("Excelente profundidade e controle!");
-        bonusXp += 10;
+        // removed XP reward
       }
       break;
 
     case "pistol_squat":
       if (reps >= 3) {
         feedback.push("Movimento unilateral impressionante!");
-        bonusXp += 25;
+        // removed XP reward
       }
       break;
 
     case "shrimp_squat":
       if (reps >= 5) {
         feedback.push("Controle excepcional na variação avançada!");
-        bonusXp += 20;
       }
       break;
 
@@ -247,14 +218,13 @@ export function validateSquatForm(
       feedback.push("Controle o pouso suavemente");
       if (reps >= 8) {
         feedback.push("Explosividade controlada excelente!");
-        bonusXp += 15;
+        // removed bonus XP
       }
       break;
   }
 
   // Validação de forma geral
   if (formRating) {
-    bonusXp += calculateFormBonus(formRating);
     if (formRating >= 4) {
       feedback.push("Forma excelente! Continue assim!");
     } else if (formRating <= 2) {
@@ -263,8 +233,7 @@ export function validateSquatForm(
   }
 
   return {
-    isValid: feedback.length === 0 || bonusXp > 0,
+    isValid: feedback.length === 0,
     feedback,
-    bonusXp,
   };
 }

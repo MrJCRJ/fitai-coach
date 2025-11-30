@@ -1,8 +1,4 @@
-import type {
-  Exercise,
-  ExerciseRequirement,
-  Achievement,
-} from "@/lib/exercises";
+import type { Exercise, ExerciseRequirement, RepRange } from "@/lib/exercises";
 
 // ====================
 // FUNÇÕES UTILITÁRIAS GENÉRICAS
@@ -78,6 +74,28 @@ export function getUnlockedVariations(
 }
 
 /**
+ * Converte string reps para RepRange
+ */
+export function parseRepRange(reps: string | RepRange): RepRange {
+  if (typeof reps === "string") {
+    const parts = reps.split("-").map((s) => s.trim());
+    if (parts.length === 2) {
+      const minStr = parts[0];
+      const maxStr = parts[1];
+      if (minStr && maxStr) {
+        const min = parseInt(minStr);
+        const max = parseInt(maxStr);
+        if (!isNaN(min) && !isNaN(max)) {
+          return { min, max };
+        }
+      }
+    }
+    return { min: 8, max: 12 };
+  }
+  return reps;
+}
+
+/**
  * Valida se uma variação pode ser desbloqueada
  */
 export function canUnlockVariation(
@@ -103,7 +121,6 @@ export function canUnlockVariation(
 export interface ExerciseTypeConfig {
   thresholds: readonly number[];
   variations: Record<number, Exercise>;
-  achievements: Achievement[];
   exerciseType: "pushup" | "pullup" | "squat";
 }
 
@@ -152,10 +169,6 @@ export class ExerciseTypeManager {
 
   getAllVariations(): Record<number, Exercise> {
     return this.config.variations;
-  }
-
-  getAchievements(): Achievement[] {
-    return this.config.achievements;
   }
 
   getThresholds(): readonly number[] {

@@ -3,10 +3,10 @@
 // ====================
 
 import type { Exercise } from "@/lib/exercises";
-import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
+import { createSquatExercise } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const advancedSquat: Record<number, Exercise> = {
-  15: createSquatExerciseWithGamification(
+  15: createSquatExercise(
     {
       id: "pistol_squat_assisted",
       name: "Pistol Squat Assisted → Full (Baixas Reps)",
@@ -22,7 +22,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 18,
     },
     15,
-    60,
     600,
     [
       {
@@ -32,11 +31,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 1600 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  16: createSquatExerciseWithGamification(
+  16: createSquatExercise(
     {
       id: "shrimp_squat_assisted",
       name: "Shrimp Squat Assisted → Full",
@@ -52,7 +50,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 16,
     },
     16,
-    55,
     600,
     [
       {
@@ -62,11 +59,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 2000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  17: createSquatExerciseWithGamification(
+  17: createSquatExercise(
     {
       id: "bulgarian_split_squat_full",
       name: "Bulgarian Split Squat (Completo)",
@@ -82,7 +78,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 14,
     },
     17,
-    50,
     480,
     [
       {
@@ -92,11 +87,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 2400 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  18: createSquatExerciseWithGamification(
+  18: createSquatExercise(
     {
       id: "weighted_squat",
       name: "Weighted Squat (Mochila)",
@@ -112,7 +106,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 20,
     },
     18,
-    65,
     480,
     [
       {
@@ -122,11 +115,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 2800 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  19: createSquatExerciseWithGamification(
+  19: createSquatExercise(
     {
       id: "deep_cossack_squat",
       name: "Cossack Squat Profundo",
@@ -142,7 +134,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 13,
     },
     19,
-    45,
     360,
     [
       {
@@ -152,11 +143,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 3200 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  20: createSquatExerciseWithGamification(
+  20: createSquatExercise(
     {
       id: "archer_squat_assisted",
       name: "Archer Squat Assisted (Transferência Lateral)",
@@ -172,7 +162,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 15,
     },
     20,
-    52,
     600,
     [
       {
@@ -182,11 +171,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 3600 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  21: createSquatExerciseWithGamification(
+  21: createSquatExercise(
     {
       id: "elevated_heel_deep_squat",
       name: "Elevated-heel Deep Squat (Mobilidade Extrema)",
@@ -202,7 +190,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 12,
     },
     21,
-    42,
     360,
     [
       {
@@ -212,11 +199,10 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 4000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  22: createSquatExerciseWithGamification(
+  22: createSquatExercise(
     {
       id: "explosive_squat_broad_hop",
       name: "Explosive Squat to Broad Hop (Quique Frontal)",
@@ -232,7 +218,6 @@ export const advancedSquat: Record<number, Exercise> = {
       calories: 22,
     },
     22,
-    70,
     480,
     [
       {
@@ -242,7 +227,6 @@ export const advancedSquat: Record<number, Exercise> = {
         description: "Complete 4400 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 };

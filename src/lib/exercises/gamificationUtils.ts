@@ -1,19 +1,12 @@
-import type {
-  Exercise,
-  RepRange,
-  ExerciseRequirement,
-  Achievement,
-} from "@/lib/exercises";
+import type { Exercise, RepRange, ExerciseRequirement } from "@/lib/exercises";
 
 // Utilitários para criar exercícios com gamificação
-export function createExerciseWithGamification(
+export function createExercise(
   baseExercise: Partial<Exercise>,
   level: number,
   thresholds: readonly number[],
-  xpReward: number,
   estimatedTime: number,
   unlockRequirements?: ExerciseRequirement[],
-  achievements?: Achievement[],
   formTips?: string[],
   progressionTips?: string[],
 ): Exercise {
@@ -28,11 +21,10 @@ export function createExerciseWithGamification(
     instructions: baseExercise.instructions || "",
     equipment: baseExercise.equipment || [],
     calories: baseExercise.calories || 0,
-    xpReward,
+    // gamification removed: xpReward/achievements not included
     estimatedTime,
     ...(baseExercise.tips && { tips: baseExercise.tips }),
     ...(unlockRequirements && { unlockRequirements }),
-    ...(achievements && { achievements }),
     ...(formTips && { formTips }),
     ...(progressionTips && { progressionTips }),
   };
@@ -41,23 +33,7 @@ export function createExerciseWithGamification(
 }
 
 // Utilitários para criar conquistas
-export function createAchievement(
-  id: string,
-  name: string,
-  description: string,
-  icon: string,
-  xpReward: number,
-  condition: Achievement["condition"],
-): Achievement {
-  return {
-    id,
-    name,
-    description,
-    icon,
-    xpReward,
-    condition,
-  };
-}
+// Achievements removed: no longer creating achievement objects
 
 // Utilitários para calcular níveis baseado em thresholds
 export function calculateLevel(

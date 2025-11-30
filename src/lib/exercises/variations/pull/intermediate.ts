@@ -1,13 +1,12 @@
 import type { Exercise } from "@/lib/exercises";
-import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
-import { PULL_ACHIEVEMENTS } from "@/lib/exercises/variations/pull/data/pullGameData";
+import { createPullExercise } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL INTERMEDIATE
 // ====================
 
 export const intermediatePull: Record<number, Exercise> = {
-  9: createPullExerciseWithGamification(
+  9: createPullExercise(
     {
       id: "pull_up",
       name: "Pull-up (Barra Fixa Pronada)",
@@ -21,14 +20,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Mantenha o corpo reto, cotovelos apontando para baixo. Não balanceie o corpo. Esta é a barra clássica.",
       equipment: ["Barra"],
       calories: 15,
-      xpReward: 25,
+
       estimatedTime: 420,
       rarity: "common",
       category: "vertical",
       emoji: "💪",
     },
     9,
-    25,
     420,
     [
       {
@@ -38,11 +36,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 800 séries de exercícios básicos",
       },
     ],
-    [PULL_ACHIEVEMENTS[2]!], // pull_master
     "intermediate",
   ),
 
-  10: createPullExerciseWithGamification(
+  10: createPullExercise(
     {
       id: "chin_up",
       name: "Chin-up (Barra de Queixo)",
@@ -56,14 +53,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Cotovelos apontam para frente. Ótimo para desenvolvimento de bíceps junto com dorsais.",
       equipment: ["Barra"],
       calories: 16,
-      xpReward: 28,
+
       estimatedTime: 420,
       rarity: "common",
       category: "vertical",
       emoji: "🤏",
     },
     10,
-    28,
     420,
     [
       {
@@ -73,11 +69,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 1000 séries de pull-ups básicos",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  11: createPullExerciseWithGamification(
+  11: createPullExercise(
     {
       id: "neutral_grip_pull_up",
       name: "Neutral Grip Pull-up",
@@ -91,14 +86,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Use barras especiais ou argolas. Ideal para quem sente desconforto nas outras pegadas.",
       equipment: ["Barra neutra", "Argolas"],
       calories: 15,
-      xpReward: 25,
+
       estimatedTime: 420,
       rarity: "rare",
       category: "vertical",
       emoji: "🤝",
     },
     11,
-    25,
     420,
     [
       {
@@ -108,11 +102,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 1200 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  12: createPullExerciseWithGamification(
+  12: createPullExercise(
     {
       id: "wide_pull_up",
       name: "Wide Pull-up (Barra Larga)",
@@ -126,14 +119,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Foca mais nas costas que nos bíceps. Mantenha os ombros afastados. Desafiante para mobilidade.",
       equipment: ["Barra"],
       calories: 17,
-      xpReward: 30,
+
       estimatedTime: 450,
       rarity: "rare",
       category: "vertical",
       emoji: "📏",
     },
     12,
-    30,
     450,
     [
       {
@@ -143,11 +135,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 1400 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  13: createPullExerciseWithGamification(
+  13: createPullExercise(
     {
       id: "close_grip_pull_up",
       name: "Close Grip Pull-up",
@@ -161,14 +152,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Mãos quase se tocando. Aumenta recrutamento de bíceps. Técnica precisa para evitar lesões.",
       equipment: ["Barra"],
       calories: 16,
-      xpReward: 28,
+
       estimatedTime: 420,
       rarity: "rare",
       category: "vertical",
       emoji: "🤏",
     },
     13,
-    28,
     420,
     [
       {
@@ -178,11 +168,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 1600 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  14: createPullExerciseWithGamification(
+  14: createPullExercise(
     {
       id: "pull_up_pause",
       name: "Pull-up com Pausa",
@@ -196,14 +185,12 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Pause no topo (chest-to-bar) e/ou no fundo. Excelente para força explosiva e controle.",
       equipment: ["Barra"],
       calories: 18,
-      xpReward: 32,
       estimatedTime: 480,
       rarity: "epic",
       category: "isometric",
       emoji: "⏸️",
     },
     14,
-    32,
     480,
     [
       {
@@ -213,11 +200,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 1800 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  15: createPullExerciseWithGamification(
+  15: createPullExercise(
     {
       id: "ring_row",
       name: "Ring Row (Remada em Argolas)",
@@ -231,14 +217,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Ajuste a altura das argolas para dificuldade. Excelente para força horizontal e estabilização.",
       equipment: ["Argolas"],
       calories: 12,
-      xpReward: 22,
+
       estimatedTime: 360,
       rarity: "common",
       category: "horizontal",
       emoji: "🔗",
     },
     15,
-    22,
     360,
     [
       {
@@ -248,11 +233,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 1200 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  16: createPullExerciseWithGamification(
+  16: createPullExercise(
     {
       id: "ring_pull_up",
       name: "Ring Pull-up (Barra em Argolas)",
@@ -266,15 +250,14 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Comece com argolas mais altas se necessário. Foca na estabilização junto com força de tração.",
       equipment: ["Argolas"],
       calories: 17,
-      xpReward: 30,
+
       estimatedTime: 450,
       rarity: "epic",
       category: "vertical",
       emoji: "🔗",
     },
     16,
-    30,
-    450,
+    480,
     [
       {
         type: "sets",
@@ -283,11 +266,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 2000 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  17: createPullExerciseWithGamification(
+  17: createPullExercise(
     {
       id: "chest_to_bar",
       name: "Chest-to-Bar (Peito na Barra)",
@@ -301,14 +283,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Mantenha os cotovelos apontando para baixo. Foca na extensão completa dos ombros.",
       equipment: ["Barra"],
       calories: 19,
-      xpReward: 35,
+
       estimatedTime: 480,
       rarity: "epic",
       category: "vertical",
       emoji: "👕",
     },
     17,
-    35,
     480,
     [
       {
@@ -318,11 +299,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 2200 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  18: createPullExerciseWithGamification(
+  18: createPullExercise(
     {
       id: "commando_pull_up",
       name: "Commando Pull-up",
@@ -336,14 +316,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Controle o movimento lateral. Excelente para força unilateral e coordenação. Técnica avançada.",
       equipment: ["Barra"],
       calories: 18,
-      xpReward: 32,
+
       estimatedTime: 480,
       rarity: "legendary",
       category: "unilateral",
       emoji: "🎖️",
     },
     18,
-    32,
     480,
     [
       {
@@ -353,11 +332,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 2400 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  19: createPullExerciseWithGamification(
+  19: createPullExercise(
     {
       id: "assisted_archer_pull_up",
       name: "Archer Pull-up Assistido",
@@ -371,14 +349,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Comece com assistência significativa. Foca na força unilateral. Prepare-se para archer completo.",
       equipment: ["Barra", "Elástico"],
       calories: 16,
-      xpReward: 28,
+
       estimatedTime: 480,
       rarity: "legendary",
       category: "unilateral",
       emoji: "🏹",
     },
     19,
-    28,
     480,
     [
       {
@@ -388,11 +365,10 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 2600 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  20: createPullExerciseWithGamification(
+  20: createPullExercise(
     {
       id: "l_sit_pull_up",
       name: "L-sit Pull-up (Pernas Baixas)",
@@ -406,14 +382,13 @@ export const intermediatePull: Record<number, Exercise> = {
       tips: "Comece com as pernas mais baixas. Aumente gradualmente a altura. Desafia core e força de tração simultaneamente.",
       equipment: ["Barra"],
       calories: 22,
-      xpReward: 40,
+
       estimatedTime: 540,
       rarity: "legendary",
       category: "core-integrated",
       emoji: "🦵",
     },
     20,
-    40,
     540,
     [
       {
@@ -423,7 +398,6 @@ export const intermediatePull: Record<number, Exercise> = {
         description: "Complete 2800 séries de pull-ups",
       },
     ],
-    undefined,
     "intermediate",
   ),
 };

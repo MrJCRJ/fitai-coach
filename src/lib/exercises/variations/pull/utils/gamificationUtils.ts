@@ -1,9 +1,5 @@
-import type {
-  Exercise,
-  ExerciseRequirement,
-  Achievement,
-} from "@/lib/exercises";
-import { parseRepRange } from "@/lib/exercises/gamificationUtils";
+import type { Exercise, ExerciseRequirement } from "@/lib/exercises";
+import { parseRepRange } from "../../../gamificationUtils";
 import {
   PULL_THRESHOLDS,
   PULL_PROGRESSION_TIPS,
@@ -17,13 +13,11 @@ import {
 /**
  * Cria um exercício de pull com gamificação completa
  */
-export function createPullExerciseWithGamification(
+export function createPullExercise(
   baseExercise: Partial<Exercise>,
   level: number,
-  xpReward: number,
   estimatedTime: number,
   unlockRequirements?: ExerciseRequirement[],
-  achievements?: Achievement[],
   difficulty: "beginner" | "intermediate" | "advanced" | "extreme" = "beginner",
 ): Exercise {
   const exercise: Exercise = {
@@ -37,15 +31,13 @@ export function createPullExerciseWithGamification(
     instructions: baseExercise.instructions || "",
     equipment: baseExercise.equipment || ["Barra"],
     calories: baseExercise.calories || 12,
-    xpReward,
     estimatedTime,
-    ...(baseExercise.badgeId && { badgeId: baseExercise.badgeId }),
+    // badgeId removed (gamification)
     rarity: baseExercise.rarity || "common",
     category: "strength",
     emoji: baseExercise.emoji || "🏋️‍♂️",
     ...(baseExercise.tips && { tips: baseExercise.tips }),
     ...(unlockRequirements && { unlockRequirements }),
-    ...(achievements && { achievements }),
     ...(PULL_FORM_TIPS[baseExercise.id as keyof typeof PULL_FORM_TIPS] && {
       formTips: [
         ...PULL_FORM_TIPS[baseExercise.id as keyof typeof PULL_FORM_TIPS],
@@ -59,26 +51,7 @@ export function createPullExerciseWithGamification(
   return exercise;
 }
 
-/**
- * Cria conquistas específicas para exercícios de pull
- */
-export function createPullAchievement(
-  id: string,
-  name: string,
-  description: string,
-  icon: string,
-  xpReward: number,
-  condition: Achievement["condition"],
-): Achievement {
-  return {
-    id: `pull_${id}`,
-    name,
-    description,
-    icon,
-    xpReward,
-    condition,
-  };
-}
+// Achievements removed for pull
 
 /**
  * Calcula o nível baseado nos thresholds de pull
@@ -133,19 +106,16 @@ export function getUnlockedPullVariations(
 /**
  * Calcula XP bônus baseado em forma perfeita
  */
-export function calculateFormBonus(formRating: 1 | 2 | 3 | 4 | 5): number {
-  const bonuses = { 1: 0, 2: 5, 3: 10, 4: 20, 5: 50 };
-  return bonuses[formRating] || 0;
+export function calculateFormBonus(): number {
+  // Gamification removed — no form-based XP bonus
+  return 0;
 }
 
 /**
  * Calcula multiplicador de streak
  */
-export function calculateStreakMultiplier(currentStreak: number): number {
-  if (currentStreak >= 30) return 2.0;
-  if (currentStreak >= 14) return 1.5;
-  if (currentStreak >= 7) return 1.25;
-  if (currentStreak >= 3) return 1.1;
+export function calculateStreakMultiplier(): number {
+  // Gamification removed — neutral multiplier
   return 1.0;
 }
 
@@ -198,10 +168,8 @@ export function validatePullForm(
 ): {
   isValid: boolean;
   feedback: string[];
-  bonusXp: number;
 } {
   const feedback: string[] = [];
-  let bonusXp = 0;
 
   // Validações específicas por exercício
   switch (exerciseId) {
@@ -210,7 +178,6 @@ export function validatePullForm(
         feedback.push("Tente segurar por pelo menos 10 segundos");
       } else if (duration >= 30) {
         feedback.push("Excelente força de preensão!");
-        bonusXp += 10;
       }
       break;
 
@@ -219,28 +186,25 @@ export function validatePullForm(
         feedback.push("Complete pelo menos 8 repetições controladas");
       } else {
         feedback.push("Bom controle escapular!");
-        bonusXp += 5;
       }
       break;
 
     case "pull_up":
       if (reps >= 10) {
         feedback.push("Excelente força de tração!");
-        bonusXp += 15;
       }
       break;
 
     case "muscle_up":
       if (reps >= 3) {
         feedback.push("Movimento explosivo impressionante!");
-        bonusXp += 25;
       }
       break;
   }
 
   // Validação de forma geral
   if (formRating) {
-    bonusXp += calculateFormBonus(formRating);
+    // no XP calculation when gamification removed
     if (formRating >= 4) {
       feedback.push("Forma excelente! Continue assim!");
     } else if (formRating <= 2) {
@@ -249,8 +213,7 @@ export function validatePullForm(
   }
 
   return {
-    isValid: feedback.length === 0 || bonusXp > 0,
+    isValid: feedback.length === 0,
     feedback,
-    bonusXp,
   };
 }

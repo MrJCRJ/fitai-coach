@@ -8,5 +8,5 @@ export { WorkoutHistory } from "./WorkoutHistory";
 export { WorkoutSessionCard } from "./WorkoutSessionCard";
 export { ExerciseCard } from "./ExerciseCard";
 export { SetBadge } from "./SetBadge";
-export { AchievementDisplay } from "./AchievementDisplay";
+// AchievementDisplay removed (gamification disabled)
 export { DataManagement } from "./DataManagement";

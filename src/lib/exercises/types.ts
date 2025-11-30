@@ -10,15 +10,12 @@ export interface Exercise {
   tips?: string;
   equipment: string[];
   calories?: number;
-  // Novos campos para gamificação
-  xpReward?: number; // Pontos de experiência por conclusão
+  // Campos opcionais de configuração
   unlockRequirements?: ExerciseRequirement[]; // Requisitos para desbloquear
-  achievements?: Achievement[]; // Conquistas relacionadas
   progressionTips?: string[]; // Dicas de progressão
   estimatedTime?: number; // Tempo estimado em segundos
   formTips?: string[]; // Dicas de forma
   // Campos extras para expansão futura
-  badgeId?: string;
   unlocksAt?: number; // Nível ou valor para desbloquear
   milestone?: boolean;
   rarity?: "common" | "rare" | "epic" | "legendary";
@@ -34,35 +31,13 @@ export interface RepRange {
 }
 
 export interface ExerciseRequirement {
-  type: "level" | "sets" | "time" | "achievement";
+  type: "level" | "sets" | "time";
   exerciseType?: "pushup" | "pullup" | "squat" | "dip";
   value: number;
   description: string;
 }
 
-export interface Achievement {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  xpReward: number;
-  condition: AchievementCondition;
-}
-
-export interface AchievementCondition {
-  type:
-    | "sets_completed"
-    | "level_reached"
-    | "streak_days"
-    | "time_record"
-    | "perfect_form"
-    | "weight_used"
-    | "weight_sets"
-    | "max_weight";
-  exerciseType?: "pushup" | "pullup" | "squat" | "dip";
-  value: number;
-  timeframe?: "daily" | "weekly" | "monthly" | "all_time";
-}
+// Achievement types removed — gamification-free definitions
 
 export type Difficulty = "beginner" | "intermediate" | "advanced" | "extreme";
 export type MuscleGroup =
@@ -76,27 +51,9 @@ export type MuscleGroup =
   | "fullbody";
 
 // Tipos para gamificação
-export interface UserProgress {
-  totalXp: number;
-  level: number;
-  achievements: string[];
-  streaks: {
-    current: number;
-    longest: number;
-    lastWorkoutDate: string;
-  };
-  exerciseStats: {
-    pushup: ExerciseStats;
-    pullup: ExerciseStats;
-    squat: ExerciseStats;
-    dip: ExerciseStats;
-  };
-}
-
 export interface ExerciseStats {
   totalSets: number;
   currentLevel: number;
-  bestStreak: number;
   personalRecords: {
     maxReps: number;
     fastestTime: number;
@@ -115,9 +72,8 @@ export interface WorkoutSession {
   id: string;
   date: string;
   exercises: WorkoutExercise[];
-  totalXpEarned: number;
   duration: number; // em segundos
-  achievements: Achievement[];
+  // achievements/xp removed
 }
 
 export interface WorkoutExercise {
@@ -125,7 +81,6 @@ export interface WorkoutExercise {
   name: string;
   sets: ExerciseSet[];
   level: number;
-  xpEarned: number;
 }
 
 export interface ExerciseSet {

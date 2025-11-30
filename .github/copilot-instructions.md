@@ -1,3 +1,73 @@
+Project: fitai-coach — Guia rápido para agentes de código (AI)
+
+Resumo rápido:
+
+- Repositório Next.js 14 (ESM) com PWA + Capacitor para mobile.
+- Estrutura feature-driven: interface em `src/app/` + componentes em `src/components/` + lógica/DB em `src/lib/` + hooks em `src/hooks/`.
+
+- Nota: O sistema de gamificação (XP, badges, achievements, streaks) foi removido em refactor recente. Arquivos e utilitários antigos foram neutralizados/retirados. Se desejar reintroduzir, siga a seção "Reintrodução da Gamificação" abaixo ou abra um PR com a nova arquitetura.
+
+Pontos essenciais para começar:
+
+- Rotas/App Router: `src/app/[feature]/page.tsx` (cada feature tem rota dedicada).
+- UI vs Lógica: componentes UI em `src/components/`, lógica e utilitários em `src/lib/`, hooks em `src/hooks/`.
+- Dados de exercícios: `src/lib/exercises/variations/<group>/<level>.ts`; sempre exportar em `src/lib/exercises/index.ts`.
+- Persistência: sessions/sets gravados via `WorkoutSaver` (`src/lib/workoutSaver.ts`) e hooks (`useLocalStorage.ts`, `useWorkoutSession.ts`).
+
+Convenições importantes do projeto:
+
+- ESM configs: arquivos `.mjs` (next.config.mjs, postcss.config.mjs, tailwind.config.mjs).
+- TypeScript + Tailwind + Framer Motion. Componentes que usam `framer-motion` devem ter `'use client'` no topo do arquivo.
+- Nomeclatura: componentes → PascalCase; utilitários → camelCase; tipos em `src/lib/*.ts`.
+- localStorage: sempre proteger com `typeof window !== 'undefined'`.
+- Sanitização: use `sanitizeInput()` (se disponível) para qualquer conteúdo do usuário.
+
+Principais arquivos e exemplos (use como referência):
+
+- Implementar um novo exercício: criar `src/lib/exercises/variations/<group>/<level>.ts` e exportar via `src/lib/exercises/index.ts`.
+- Progresso/níveis: ver `src/lib/workoutLevelUtils.ts` e `src/lib/workoutSaver.ts` para regras de avanço e contagem de sets.
+- Gamificação: badges/achievements em `src/lib/gamification/` e `src/lib/exercises/achievements.ts`.
+- Hooks de estado: `src/hooks/useWorkoutLevels.ts`, `src/hooks/useWorkoutTimers.ts`, `src/hooks/useWorkoutSession.ts`.
+
+Fluxos de desenvolvedor (comandos rápidos):
+
+- Desenvolvimento: `npm run dev` — servidor Next com hot reload.
+- Build/produção: `npm run build` (gera service worker) && `npm run start` para servir produção e testar PWA.
+- Testes: `npm run test` (Vitest focado em utilitários e transformações de dados).
+- Lint: `npm run lint` — Husky + lint-staged ativados.
+
+Padrões raros/projetospecíficos:
+
+- Arquitetura feature-first: cada feature tem pasta no `app` e componentes com o mesmo nome em `components`.
+- Progressão por sets: níveis são calculados por acumulado de sets; ver a sequência definida em `workoutLevelUtils.ts`.
+- Estatísticas e dashboard: cálculos no `src/lib/dashboardUtils.ts`, UI em `src/components/dashboard/`.
+
+Integrações e pontos de atenção:
+
+- PWA/Service Worker: `next-pwa` config; SW gerado em `public/` no build.
+- Mobile: `capacitor.config.ts` e assets na pasta `public/`.
+- Auth, pagamentos e AI externos estão planejados (stubs em `src/lib/ai/`, `src/lib/payment/`, `src/lib/auth/`).
+
+Como abordar mudanças/PRs:
+
+- Mantenha features isoladas (novo exercício → só edite `src/lib/exercises/*` + export + testes pequenos).
+- Adicione tests unitários para utilitários/transformações (Vitest), coloque `.test.ts` ao lado do arquivo implementado.
+- Execute `npm run lint` e `npm run test` antes de abrir PR.
+
+Exemplo prático rápido:
+
+- Para adicionar um novo push-up intermédio: crie `src/lib/exercises/variations/pushups/intermediate.ts`, exporte em `src/lib/exercises/index.ts`, e adicione cobertura de testes em `src/lib/exercises/variations/pushups/intermediate.test.ts`.
+
+Se algo estiver ambíguo ou precisar de contexto extra, verifique `PROJECT_DOCUMENTATION.md`, `src/lib/workoutSaver.ts` e `src/lib/exercises/`.
+
+---
+
+Se quiser, eu posso:
+
+- Expandir esta seção com checklists de PR e templates para testes;
+- Adicionar exemplos de testes Vitest para `workoutLevelUtils` e `workoutSaver`.
+
+Por favor, diga se deseja que eu mantenha trechos do arquivo original mais longos (ex.: detalhes de gamificação) — estou pronto para ajustar.
 Project: fitai-coach — AI agent guide
 
 Summary:
