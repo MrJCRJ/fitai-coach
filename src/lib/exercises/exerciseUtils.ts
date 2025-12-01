@@ -1,8 +1,4 @@
-import type {
-  Exercise,
-  ExerciseRequirement,
-  Achievement,
-} from "@/lib/exercises";
+import type { Exercise, ExerciseRequirement, RepRange } from "@/lib/exercises";
 
 // ====================
 // FUNÇÕES UTILITÁRIAS GENÉRICAS
@@ -15,8 +11,10 @@ export function calculateCurrentLevel(
   totalSets: number,
   thresholds: readonly number[],
 ): number {
-  const level = thresholds.findIndex((threshold) => totalSets < threshold);
-  return level === -1 ? thresholds.length : level;
+  // Gamificação removida — retornar nível neutro (1) para compatibilidade
+  void totalSets;
+  void thresholds;
+  return 1;
 }
 
 /**
@@ -27,15 +25,9 @@ export function getCurrentVariation(
   thresholds: readonly number[],
   variations: Record<number, Exercise>,
 ): Exercise {
-  const level = calculateCurrentLevel(totalSets, thresholds);
-  const variation = variations[level];
-
-  if (!variation) {
-    console.warn(`Nenhuma variação encontrada para o nível ${level}`);
-    return variations[1]!;
-  }
-
-  return variation;
+  // Gamification removed — return a neutral variation
+  const entries = Object.values(variations);
+  return entries[0] || ({} as Exercise);
 }
 
 /**
@@ -45,9 +37,9 @@ export function getNextLevel(
   currentSets: number,
   thresholds: readonly number[],
 ): number {
-  const currentLevel = calculateCurrentLevel(currentSets, thresholds);
-  const nextLevel = currentLevel + 1;
-  return nextLevel <= thresholds.length ? nextLevel : thresholds.length;
+  void currentSets;
+  void thresholds;
+  return 1; // No progression, keep neutral level
 }
 
 /**
@@ -57,12 +49,9 @@ export function getSetsToNextLevel(
   currentSets: number,
   thresholds: readonly number[],
 ): number {
-  const currentLevel = calculateCurrentLevel(currentSets, thresholds);
-  if (currentLevel >= thresholds.length) {
-    return 0; // Já está no nível máximo
-  }
-  const nextThreshold = thresholds[currentLevel];
-  return nextThreshold ? Math.max(0, nextThreshold - currentSets) : 0;
+  void currentSets;
+  void thresholds;
+  return 0; // No progression, nothing to reach
 }
 
 /**
@@ -73,8 +62,32 @@ export function getUnlockedVariations(
   thresholds: readonly number[],
   variations: Record<number, Exercise>,
 ): Exercise[] {
-  const currentLevel = calculateCurrentLevel(totalSets, thresholds);
-  return Object.values(variations).slice(0, currentLevel);
+  // Gamificação removida — todas as variações ficam disponíveis
+  void totalSets;
+  void thresholds;
+  return Object.values(variations);
+}
+
+/**
+ * Converte string reps para RepRange
+ */
+export function parseRepRange(reps: string | RepRange): RepRange {
+  if (typeof reps === "string") {
+    const parts = reps.split("-").map((s) => s.trim());
+    if (parts.length === 2) {
+      const minStr = parts[0];
+      const maxStr = parts[1];
+      if (minStr && maxStr) {
+        const min = parseInt(minStr);
+        const max = parseInt(maxStr);
+        if (!isNaN(min) && !isNaN(max)) {
+          return { min, max };
+        }
+      }
+    }
+    return { min: 8, max: 12 };
+  }
+  return reps;
 }
 
 /**
@@ -103,7 +116,6 @@ export function canUnlockVariation(
 export interface ExerciseTypeConfig {
   thresholds: readonly number[];
   variations: Record<number, Exercise>;
-  achievements: Achievement[];
   exerciseType: "pushup" | "pullup" | "squat";
 }
 
@@ -152,10 +164,6 @@ export class ExerciseTypeManager {
 
   getAllVariations(): Record<number, Exercise> {
     return this.config.variations;
-  }
-
-  getAchievements(): Achievement[] {
-    return this.config.achievements;
   }
 
   getThresholds(): readonly number[] {

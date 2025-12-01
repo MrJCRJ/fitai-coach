@@ -45,7 +45,6 @@ interface ExerciseCarouselProps {
       sets: {
         reps: number;
         time: number;
-        level: number;
         exerciseName: string;
         restTime?: number;
       }[];
@@ -61,6 +60,8 @@ interface ExerciseCarouselProps {
     exercise?: Exercise,
     selectedDifficulty?: string,
   ) => void;
+  selectedDifficulty?: Difficulty;
+  onSelectedDifficultyChange?: (difficulty: Difficulty) => void;
 }
 
 export default function ExerciseCarousel({
@@ -71,9 +72,16 @@ export default function ExerciseCarousel({
   onStartTimer,
   onStopTimer,
   onSaveProgress,
+  selectedDifficulty: selectedDifficultyProp,
+  onSelectedDifficultyChange,
 }: ExerciseCarouselProps) {
-  const [selectedDifficulty, setSelectedDifficulty] =
+  type Difficulty = (typeof DIFFICULTY_LEVELS)[number];
+  const [internalSelectedDifficulty, setInternalSelectedDifficulty] =
     useState<Difficulty>("beginner");
+  const selectedDifficulty =
+    (selectedDifficultyProp as Difficulty) || internalSelectedDifficulty;
+  const setSelectedDifficulty =
+    onSelectedDifficultyChange || setInternalSelectedDifficulty;
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
 
   const { icon, title, exerciseId } = EXERCISE_DATA[exerciseType];
@@ -247,15 +255,6 @@ export default function ExerciseCarousel({
                 exerciseId={`${exerciseId}-${currentExercise.id}`}
                 icon={icon}
                 title={title}
-                selectedLevel={
-                  selectedDifficulty === "beginner"
-                    ? 1
-                    : selectedDifficulty === "intermediate"
-                      ? 2
-                      : selectedDifficulty === "advanced"
-                        ? 3
-                        : 4
-                }
                 selectedDifficulty={selectedDifficulty}
                 activeTimer={activeTimer}
                 timers={timers}

@@ -1,12 +1,9 @@
 import type { Exercise } from "@/lib/exercises";
-import {
-  createExerciseWithGamification,
-  parseRepRange,
-} from "@/lib/exercises/gamificationUtils";
-import { EXERCISE_THRESHOLDS } from "@/lib/exercises/exerciseData";
+import { createExercise, parseRepRange } from "../../gamificationUtils";
+import { EXERCISE_THRESHOLDS } from "../../exerciseData";
 
 export const advancedPushups: Record<number, Exercise> = {
-  21: createExerciseWithGamification(
+  21: createExercise(
     {
       id: "explosive-push-up",
       name: "Flexão Explosiva",
@@ -20,14 +17,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Requer potência excepcional. Mantenha forma perfeita.",
       equipment: [],
       calories: 20,
-      xpReward: 50,
       estimatedTime: 1440,
       category: "explosive",
       emoji: "💥",
     },
     21,
     EXERCISE_THRESHOLDS,
-    50,
     1440,
     [
       {
@@ -37,11 +32,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão com profundidade",
       },
     ],
-    undefined,
     ["Subida explosiva", "Mãos deixam o chão", "Aterrisse suavemente"],
     ["Pratique potência", "Comece sem explosão", "Aumente gradualmente"],
   ),
-  22: createExerciseWithGamification(
+  22: createExercise(
     {
       id: "pike-push-up",
       name: "Flexão Pike",
@@ -55,14 +49,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Foca nos ombros. Requer flexibilidade e força.",
       equipment: [],
       calories: 18,
-      xpReward: 45,
       estimatedTime: 1500,
       category: "shoulder",
       emoji: "🔺",
     },
     22,
     EXERCISE_THRESHOLDS,
-    45,
     1500,
     [
       {
@@ -72,11 +64,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão explosiva",
       },
     ],
-    undefined,
     ["Corpo em V", "Cabeça ao chão", "Ombros fortes"],
     ["Melhore flexibilidade", "Pratique posição", "Aumente amplitude"],
   ),
-  23: createExerciseWithGamification(
+  23: createExercise(
     {
       id: "decline-pike-push-up",
       name: "Flexão Pike Declinada",
@@ -89,14 +80,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Movimento muito avançado. Requer força excepcional.",
       equipment: [],
       calories: 22,
-      xpReward: 55,
       estimatedTime: 1800,
       category: "shoulder",
       emoji: "📐",
     },
     23,
     EXERCISE_THRESHOLDS,
-    55,
     1800,
     [
       {
@@ -106,11 +95,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 10 séries de flexão pike",
       },
     ],
-    undefined,
     ["Pés elevados", "Corpo em V", "Controle total"],
     ["Domine pike primeiro", "Adicione elevação gradual", "Foco na forma"],
   ),
-  24: createExerciseWithGamification(
+  24: createExercise(
     {
       id: "ring-dips-negative",
       name: "Dips Negativos em Anéis",
@@ -123,14 +111,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Instabilidade extrema. Controle excepcional necessário.",
       equipment: ["anéis"],
       calories: 20,
-      xpReward: 50,
       estimatedTime: 540,
       category: "stability",
       emoji: "🔄",
     },
     24,
     EXERCISE_THRESHOLDS,
-    50,
     540,
     [
       {
@@ -140,11 +126,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão pike declinada",
       },
     ],
-    undefined,
     ["Descida controlada", "Anéis instáveis", "Corpo reto"],
     ["Pratique com anéis fixos", "Aumente instabilidade", "Foco no controle"],
   ),
-  25: createExerciseWithGamification(
+  25: createExercise(
     {
       id: "band-resisted-push-up",
       name: "Flexão com Banda de Resistência",
@@ -158,14 +143,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Adiciona resistência variável. Técnica precisa.",
       equipment: ["banda elástica"],
       calories: 21,
-      xpReward: 52,
       estimatedTime: 1440,
       category: "strength",
       emoji: "🪢",
     },
     25,
     EXERCISE_THRESHOLDS,
-    52,
     1440,
     [
       {
@@ -175,7 +158,6 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 5 séries de dips negativos em anéis",
       },
     ],
-    undefined,
     ["Banda tensa", "Movimento controlado", "Resistência constante"],
     [
       "Comece com banda leve",
@@ -183,7 +165,7 @@ export const advancedPushups: Record<number, Exercise> = {
       "Mantenha forma",
     ],
   ),
-  26: createExerciseWithGamification(
+  26: createExercise(
     {
       id: "diamond-push-up",
       name: "Flexão Diamante",
@@ -196,14 +178,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Posição desafiadora. Mantenha cotovelos próximos.",
       equipment: [],
       calories: 19,
-      xpReward: 48,
       estimatedTime: 1440,
       category: "strength",
       emoji: "💎",
     },
     26,
     EXERCISE_THRESHOLDS,
-    48,
     1440,
     [
       {
@@ -213,7 +193,6 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 8 séries de flexão com banda",
       },
     ],
-    undefined,
     ["Mãos em diamante", "Cotovelos próximos", "Corpo reto"],
     [
       "Comece com mãos próximas",
@@ -221,7 +200,7 @@ export const advancedPushups: Record<number, Exercise> = {
       "Foco nos tríceps",
     ],
   ),
-  27: createExerciseWithGamification(
+  27: createExercise(
     {
       id: "depth-explosive-push-up",
       name: "Flexão Profunda Explosiva",
@@ -234,14 +213,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Movimento complexo que requer força e potência máxima.",
       equipment: [],
       calories: 23,
-      xpReward: 58,
       estimatedTime: 1800,
       category: "explosive",
       emoji: "🌋",
     },
     27,
     EXERCISE_THRESHOLDS,
-    58,
     1800,
     [
       {
@@ -251,11 +228,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão diamante",
       },
     ],
-    undefined,
     ["Descida profunda", "Subida explosiva", "Controle perfeito"],
     ["Pratique separadamente", "Combine gradualmente", "Foco na técnica"],
   ),
-  28: createExerciseWithGamification(
+  28: createExercise(
     {
       id: "incline-explosive-push-up",
       name: "Flexão Explosiva Inclinada",
@@ -268,14 +244,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Combina inclinação com explosão. Desafio máximo.",
       equipment: [],
       calories: 24,
-      xpReward: 60,
       estimatedTime: 1800,
       category: "explosive",
       emoji: "⬆️",
     },
     28,
     EXERCISE_THRESHOLDS,
-    60,
     1800,
     [
       {
@@ -285,11 +259,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 5 séries de flexão profunda explosiva",
       },
     ],
-    undefined,
     ["Pés elevados", "Subida explosiva", "Aterrisse controlado"],
     ["Domine explosiva primeiro", "Adicione inclinação", "Aumente altura"],
   ),
-  29: createExerciseWithGamification(
+  29: createExercise(
     {
       id: "ring-dips",
       name: "Dips em Anéis",
@@ -302,14 +275,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Movimento de elite. Requer controle excepcional.",
       equipment: ["anéis"],
       calories: 22,
-      xpReward: 55,
       estimatedTime: 720,
       category: "stability",
       emoji: "🎪",
     },
     29,
     EXERCISE_THRESHOLDS,
-    55,
     720,
     [
       {
@@ -319,11 +290,10 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 5 séries de flexão explosiva inclinada",
       },
     ],
-    undefined,
     ["Anéis instáveis", "Corpo reto", "Controle total"],
     ["Domine dips negativos", "Adicione subida", "Foco na estabilidade"],
   ),
-  30: createExerciseWithGamification(
+  30: createExercise(
     {
       id: "weighted-dips",
       name: "Dips com Peso",
@@ -336,14 +306,12 @@ export const advancedPushups: Record<number, Exercise> = {
       tips: "Para força máxima. Mantenha forma perfeita.",
       equipment: ["peso extra"],
       calories: 25,
-      xpReward: 62,
       estimatedTime: 720,
       category: "strength",
       emoji: "🏋️",
     },
     30,
     EXERCISE_THRESHOLDS,
-    62,
     720,
     [
       {
@@ -353,7 +321,6 @@ export const advancedPushups: Record<number, Exercise> = {
         description: "Complete 8 séries de dips em anéis",
       },
     ],
-    undefined,
     ["Peso extra", "Forma perfeita", "Controle total"],
     ["Comece com pouco peso", "Aumente gradualmente", "Mantenha técnica"],
   ),

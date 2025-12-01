@@ -13,9 +13,7 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
       <div className="flex justify-between items-start mb-2">
         <div>
           <div className="text-white font-medium">{exercise.name}</div>
-          <div className="text-sm text-gray-400">
-            Nível {exercise.level} • {exercise.muscleGroup}
-          </div>
+          <div className="text-sm text-gray-400">{exercise.muscleGroup}</div>
         </div>
         <div className="text-right text-sm">
           <div className="text-white">{exercise.sets.length} sets</div>

@@ -29,7 +29,7 @@ import {
  * Mapeia o nome da aba ativa para o tipo de exercício
  */
 export function getExerciseTypeFromTab(
-  activeTab: string
+  activeTab: string,
 ): "pushup" | "pullup" | "squat" {
   switch (activeTab) {
     case "empurrar":
@@ -47,7 +47,7 @@ export function getExerciseTypeFromTab(
  * Mapeia o nome da aba ativa para o grupo muscular
  */
 export function getMuscleGroupFromTab(
-  activeTab: string
+  activeTab: string,
 ): "pushup" | "pullup" | "squat" {
   return getExerciseTypeFromTab(activeTab);
 }
@@ -58,7 +58,7 @@ export function getMuscleGroupFromTab(
 export function getExerciseName(
   exerciseId: string,
   activeTab: string,
-  selectedLevel: number
+  selectedDifficulty: string,
 ): string {
   const variations =
     activeTab === "empurrar"
@@ -67,9 +67,12 @@ export function getExerciseName(
         ? pullUpVariations
         : squatVariations;
 
-  return (
-    variations[selectedLevel]?.name || `${exerciseId} - Nível ${selectedLevel}`
+  // Procurar a primeira variação que combine com a dificuldade
+  const found = Object.values(variations).find(
+    (v: Exercise) => v.difficulty === selectedDifficulty,
   );
+  if (found) return found.name;
+  return `${exerciseId} - ${selectedDifficulty}`;
 }
 
 /**
@@ -92,25 +95,25 @@ export function getExerciseVariations(activeTab: string) {
 /**
  * Obtém o nível selecionado baseado na aba ativa
  */
-export function getSelectedLevel(
+export function getSelectedDifficulty(
   activeTab: string,
-  selectedPushUpLevel: number,
-  selectedPullUpLevel: number,
-  selectedSquatLevel: number,
-  selectedDipLevel?: number,
-  pushExerciseType?: "pushup" | "dip"
-): number {
+  selectedPushUpDifficulty: string,
+  selectedPullUpDifficulty: string,
+  selectedSquatDifficulty: string,
+  selectedDipDifficulty?: string,
+  pushExerciseType?: "pushup" | "dip",
+): string {
   switch (activeTab) {
     case "empurrar":
-      return pushExerciseType === "dip" && selectedDipLevel
-        ? selectedDipLevel
-        : selectedPushUpLevel;
+      return pushExerciseType === "dip" && selectedDipDifficulty
+        ? selectedDipDifficulty
+        : selectedPushUpDifficulty;
     case "puxar":
-      return selectedPullUpLevel;
+      return selectedPullUpDifficulty;
     case "pernas":
-      return selectedSquatLevel;
+      return selectedSquatDifficulty;
     default:
-      return selectedPushUpLevel;
+      return selectedPushUpDifficulty;
   }
 }
 
@@ -163,7 +166,6 @@ export function getPushExercisesByLevel() {
       tips: "Foca tríceps e peito inferior. Mantenha cotovelos próximos.",
       equipment: ["banco"],
       calories: 8,
-      xpReward: 15,
       estimatedTime: 240,
       category: "strength",
       emoji: "🪑",
@@ -185,7 +187,6 @@ export function getPushExercisesByLevel() {
       tips: "Mantenha o corpo reto e cotovelos próximos. Movimento completo.",
       equipment: ["barras paralelas"],
       calories: 16,
-      xpReward: 40,
       estimatedTime: 480,
       category: "strength",
       emoji: "🏗️",

@@ -64,7 +64,7 @@ export class WorkoutSaver {
     exerciseId: string,
     exerciseName: string,
     muscleGroup: "pushup" | "pullup" | "squat" | "dip",
-    level: number,
+    difficulty?: "beginner" | "intermediate" | "advanced" | "extreme",
   ): DetailedExercise {
     if (!this.currentSession) {
       throw new Error("Nenhuma sessão ativa. Chame startSession() primeiro.");
@@ -75,7 +75,7 @@ export class WorkoutSaver {
       exerciseId,
       name: exerciseName,
       muscleGroup,
-      level,
+      difficulty,
       sets: [],
       totalDuration: 0,
       startTime: new Date().toISOString(),
@@ -218,7 +218,35 @@ export class WorkoutSaver {
 
   // Carregar sessões do localStorage
   loadFromStorage(): DetailedWorkoutSession[] {
-    return JSON.parse(localStorage.getItem("detailedWorkoutSessions") || "[]");
+    const raw = JSON.parse(
+      localStorage.getItem("detailedWorkoutSessions") || "[]",
+    ) as Array<Record<string, unknown>>;
+
+    // Migração compatível: converter `level` numérico para `difficulty` caso exista
+    const mapLevelToDifficulty = (level?: number) => {
+      if (level === undefined || level === null) return undefined;
+      if (level <= 10) return "beginner";
+      if (level <= 20) return "intermediate";
+      if (level <= 30) return "advanced";
+      return "extreme";
+    };
+
+    return raw.map((session) => {
+      if (!session.exercises)
+        return session as unknown as DetailedWorkoutSession;
+      session.exercises = (
+        session.exercises as Array<Record<string, unknown>>
+      ).map((ex) => {
+        const levelVal = ex["level"] as number | undefined;
+        const difficultyVal = ex["difficulty"] as string | undefined;
+        if (levelVal !== undefined && difficultyVal === undefined) {
+          ex["difficulty"] = mapLevelToDifficulty(Number(levelVal));
+          delete ex["level"];
+        }
+        return ex;
+      });
+      return session as unknown as DetailedWorkoutSession;
+    });
   }
 
   // Atualizar o último set com tempo de descanso

@@ -19,7 +19,8 @@ export interface DetailedExercise {
   exerciseId: string; // ID do tipo (flexao, barra, agachamento)
   name: string; // Nome completo
   muscleGroup: "pushup" | "pullup" | "squat" | "dip";
-  level: number; // Nível atual
+  // Substituído: `level` numérico removido em favor de `difficulty`
+  difficulty?: "beginner" | "intermediate" | "advanced" | "extreme" | undefined; // Categoria de dificuldade (opcional)
   sets: DetailedSet[]; // Array detalhado dos sets
   totalDuration: number; // Tempo total gasto neste exercício
   startTime: string; // Quando começou o primeiro set

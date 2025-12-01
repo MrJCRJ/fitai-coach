@@ -3,10 +3,10 @@
 // ====================
 
 import type { Exercise } from "@/lib/exercises";
-import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
+import { createSquatExercise } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const intermediateSquat: Record<number, Exercise> = {
-  7: createSquatExerciseWithGamification(
+  7: createSquatExercise(
     {
       id: "full_air_squat",
       name: "Full Air Squat (Profundidade Completa)",
@@ -22,7 +22,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 12,
     },
     7,
-    35,
     300,
     [
       {
@@ -32,11 +31,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 200 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  8: createSquatExerciseWithGamification(
+  8: createSquatExercise(
     {
       id: "pause_squat",
       name: "Pause Squat (Pausa em Baixo)",
@@ -52,7 +50,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 11,
     },
     8,
-    32,
     360,
     [
       {
@@ -62,11 +59,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 250 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  9: createSquatExerciseWithGamification(
+  9: createSquatExercise(
     {
       id: "low_chair_box_squat",
       name: "Low Chair/Box Squat (Cadeira Baixa)",
@@ -82,7 +78,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 10,
     },
     9,
-    30,
     300,
     [
       {
@@ -92,11 +87,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 300 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  10: createSquatExerciseWithGamification(
+  10: createSquatExercise(
     {
       id: "cossack_squat",
       name: "Cossack Squat (Lateral)",
@@ -112,7 +106,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 9,
     },
     10,
-    28,
     300,
     [
       {
@@ -122,11 +115,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 400 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  11: createSquatExerciseWithGamification(
+  11: createSquatExercise(
     {
       id: "bulgarian_split_squat_assisted",
       name: "Bulgarian Split Squat Assisted → Full",
@@ -142,7 +134,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 11,
     },
     11,
-    35,
     360,
     [
       {
@@ -152,11 +143,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 500 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  12: createSquatExerciseWithGamification(
+  12: createSquatExercise(
     {
       id: "jump_squat",
       name: "Jump Squat (Explosão Controlada)",
@@ -172,7 +162,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 15,
     },
     12,
-    40,
     360,
     [
       {
@@ -182,11 +171,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 600 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  13: createSquatExerciseWithGamification(
+  13: createSquatExercise(
     {
       id: "180_jump_squat",
       name: "180° Jump Squat (Meia Rotação)",
@@ -202,7 +190,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 16,
     },
     13,
-    42,
     360,
     [
       {
@@ -212,11 +199,10 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 700 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 
-  14: createSquatExerciseWithGamification(
+  14: createSquatExercise(
     {
       id: "heel_elevated_squat",
       name: "Squat com Elevação de Calcanhar",
@@ -232,7 +218,6 @@ export const intermediateSquat: Record<number, Exercise> = {
       calories: 10,
     },
     14,
-    30,
     300,
     [
       {
@@ -242,7 +227,6 @@ export const intermediateSquat: Record<number, Exercise> = {
         description: "Complete 800 séries de exercícios intermediários",
       },
     ],
-    undefined,
     "intermediate",
   ),
 };

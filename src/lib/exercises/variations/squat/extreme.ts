@@ -3,10 +3,10 @@
 // ====================
 
 import type { Exercise } from "@/lib/exercises";
-import { createSquatExerciseWithGamification } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
+import { createSquatExercise } from "@/lib/exercises/variations/squat/utils/gamificationUtils";
 
 export const extremeSquat: Record<number, Exercise> = {
-  23: createSquatExerciseWithGamification(
+  23: createSquatExercise(
     {
       id: "pistol_squat_full",
       name: "Pistol Squat Full (5-10 Reps)",
@@ -22,7 +22,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 25,
     },
     23,
-    100,
     720,
     [
       {
@@ -32,11 +31,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 6400 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  24: createSquatExerciseWithGamification(
+  24: createSquatExercise(
     {
       id: "shrimp_squat_full",
       name: "Shrimp Squat Full",
@@ -52,7 +50,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 22,
     },
     24,
-    85,
     720,
     [
       {
@@ -62,11 +59,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 7200 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  25: createSquatExerciseWithGamification(
+  25: createSquatExercise(
     {
       id: "heavy_weighted_squat",
       name: "Heavy Weighted Squat (Mochila Pesada)",
@@ -82,7 +78,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 30,
     },
     25,
-    110,
     720,
     [
       {
@@ -92,11 +87,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 8000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  26: createSquatExerciseWithGamification(
+  26: createSquatExercise(
     {
       id: "360_jump_squat",
       name: "360° Jump Squat (Rotação Completa)",
@@ -112,7 +106,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 28,
     },
     26,
-    120,
     900,
     [
       {
@@ -122,11 +115,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 8800 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  27: createSquatExerciseWithGamification(
+  27: createSquatExercise(
     {
       id: "single_leg_box_jump_squat",
       name: "Single-Leg Box Jump → Squat Landing Control",
@@ -142,7 +134,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 26,
     },
     27,
-    105,
     900,
     [
       {
@@ -152,11 +143,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 9600 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  28: createSquatExerciseWithGamification(
+  28: createSquatExercise(
     {
       id: "deep_isometric_single_leg_hold",
       name: "Deep Isometric Single-Leg Hold (10-30s)",
@@ -172,7 +162,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 15,
     },
     28,
-    75,
     600,
     [
       {
@@ -182,11 +171,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 10400 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  29: createSquatExerciseWithGamification(
+  29: createSquatExercise(
     {
       id: "dragon_squat_assisted",
       name: "Dragon Squat Assisted (Pé Puxado)",
@@ -202,7 +190,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 20,
     },
     29,
-    90,
     900,
     [
       {
@@ -212,11 +199,10 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 11200 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 
-  30: createSquatExerciseWithGamification(
+  30: createSquatExercise(
     {
       id: "overload_tempo_pistol",
       name: "Overload Tempo Pistol (4-2-4 com Carga)",
@@ -232,7 +218,6 @@ export const extremeSquat: Record<number, Exercise> = {
       calories: 24,
     },
     30,
-    95,
     1080,
     [
       {
@@ -242,7 +227,6 @@ export const extremeSquat: Record<number, Exercise> = {
         description: "Complete 12000 séries de exercícios extremos",
       },
     ],
-    undefined,
     "extreme",
   ),
 };

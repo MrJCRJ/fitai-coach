@@ -10,7 +10,6 @@ interface ExerciseCardProps {
   exerciseId: string;
   icon: string;
   title: string;
-  selectedLevel: number;
   selectedDifficulty?: string;
   activeTimer: string | null;
   timers: { [key: string]: number };
@@ -19,7 +18,6 @@ interface ExerciseCardProps {
       sets: {
         reps: number;
         time: number;
-        level: number;
         exerciseName: string;
         restTime?: number;
       }[];
@@ -42,7 +40,6 @@ export default function ExerciseCard({
   exerciseId,
   icon,
   title,
-  selectedLevel,
   selectedDifficulty,
   activeTimer,
   timers,
@@ -67,11 +64,9 @@ export default function ExerciseCard({
         </div>
 
         <div className="text-center text-sm text-gray-400 mb-4">
-          {selectedDifficulty ? (
-            <span className="capitalize">{selectedDifficulty}</span>
-          ) : (
-            <>Nível {selectedLevel}</>
-          )}{" "}
+          <span className="capitalize">
+            {selectedDifficulty || exercise.difficulty || "beginner"}
+          </span>{" "}
           • {formatReps(exercise.reps)}
         </div>
 

@@ -1,13 +1,10 @@
 import type { Exercise } from "@/lib/exercises";
-import {
-  createExerciseWithGamification,
-  parseRepRange,
-} from "@/lib/exercises/gamificationUtils";
-import { EXERCISE_THRESHOLDS } from "@/lib/exercises/exerciseData";
+import { createExercise, parseRepRange } from "../../gamificationUtils";
+import { EXERCISE_THRESHOLDS } from "../../exerciseData";
 // Badge data available via gamification utilities when needed
 
 export const extremePushups: Record<number, Exercise> = {
-  31: createExerciseWithGamification(
+  31: createExercise(
     {
       id: "1-clap-push-up",
       name: "Flexão com 1 Batida",
@@ -20,14 +17,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Coordenação e potência máxima. Técnica perfeita necessária.",
       equipment: [],
       calories: 25,
-      xpReward: 65,
+      // xpReward removed
       estimatedTime: 1800,
       category: "explosive",
       emoji: "👏",
     },
     31,
     EXERCISE_THRESHOLDS,
-    65,
     1800,
     [
       {
@@ -37,11 +33,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 8 séries de dips com peso",
       },
     ],
-    undefined,
     ["Subida explosiva", "Batida de palmas", "Aterrisse controlado"],
-    ["Pratique sem batida", "Adicione batida gradual", "Foco na coordenação"]
+    ["Pratique sem batida", "Adicione batida gradual", "Foco na coordenação"],
   ),
-  32: createExerciseWithGamification(
+  32: createExercise(
     {
       id: "clap-chest-push-up",
       name: "Flexão Batida no Peito",
@@ -54,14 +49,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Movimento complexo. Requer timing perfeito.",
       equipment: [],
       calories: 26,
-      xpReward: 68,
+      // xpReward removed
       estimatedTime: 1800,
       category: "explosive",
       emoji: "🤛",
     },
     32,
     EXERCISE_THRESHOLDS,
-    68,
     1800,
     [
       {
@@ -71,11 +65,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 3 séries de flexão com 1 batida",
       },
     ],
-    undefined,
     ["Batida no peito", "Timing perfeito", "Controle de voo"],
-    ["Domine 1 batida", "Ajuste altura da batida", "Pratique coordenação"]
+    ["Domine 1 batida", "Ajuste altura da batida", "Pratique coordenação"],
   ),
-  33: createExerciseWithGamification(
+  33: createExercise(
     {
       id: "clap-thigh-push-up",
       name: "Flexão Batida na Coxa",
@@ -88,14 +81,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Movimento acrobático. Força e flexibilidade máxima.",
       equipment: [],
       calories: 27,
-      xpReward: 70,
+      // xpReward removed
       estimatedTime: 1800,
       category: "explosive",
       emoji: "🦵",
     },
     33,
     EXERCISE_THRESHOLDS,
-    70,
     1800,
     [
       {
@@ -105,11 +97,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 3 séries de flexão batida no peito",
       },
     ],
-    undefined,
     ["Batida nas coxas", "Corpo compacto", "Aterrisse preciso"],
-    ["Pratique flexibilidade", "Ajuste posição", "Foco na precisão"]
+    ["Pratique flexibilidade", "Ajuste posição", "Foco na precisão"],
   ),
-  34: createExerciseWithGamification(
+  34: createExercise(
     {
       id: "clap-behind-back-push-up",
       name: "Flexão Batida Atrás das Costas",
@@ -122,14 +113,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Movimento de elite. Requer força e coordenação excepcional.",
       equipment: [],
       calories: 28,
-      xpReward: 72,
+      // xpReward removed
       estimatedTime: 1800,
       category: "explosive",
       emoji: "🔙",
     },
     34,
     EXERCISE_THRESHOLDS,
-    72,
     1800,
     [
       {
@@ -139,11 +129,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 2 séries de flexão batida na coxa",
       },
     ],
-    undefined,
     ["Batida atrás", "Rotação controlada", "Aterrisse estável"],
-    ["Domine batidas anteriores", "Pratique rotação", "Foco na segurança"]
+    ["Domine batidas anteriores", "Pratique rotação", "Foco na segurança"],
   ),
-  35: createExerciseWithGamification(
+  35: createExercise(
     {
       id: "bear-crawl-push-up",
       name: "Flexão Andar do Urso",
@@ -156,14 +145,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Combina força com coordenação. Movimento complexo.",
       equipment: [],
       calories: 24,
-      xpReward: 60,
+      // xpReward removed
       estimatedTime: 2160,
       category: "coordination",
       emoji: "🐻",
     },
     35,
     EXERCISE_THRESHOLDS,
-    60,
     2160,
     [
       {
@@ -173,11 +161,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 2 séries de flexão batida atrás",
       },
     ],
-    undefined,
     ["Ande no topo", "Corpo coordenado", "Ritmo constante"],
-    ["Pratique andar separado", "Adicione flexão gradual", "Mantenha ritmo"]
+    ["Pratique andar separado", "Adicione flexão gradual", "Mantenha ritmo"],
   ),
-  36: createExerciseWithGamification(
+  36: createExercise(
     {
       id: "double-clap-push-up",
       name: "Flexão com 2 Batidas",
@@ -190,14 +177,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Potência e coordenação máxima. Movimento de elite.",
       equipment: [],
       calories: 29,
-      xpReward: 75,
+      // xpReward removed
       estimatedTime: 1800,
       category: "explosive",
       emoji: "👏👏",
     },
     36,
     EXERCISE_THRESHOLDS,
-    75,
     1800,
     [
       {
@@ -207,11 +193,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão andar do urso",
       },
     ],
-    undefined,
     ["Duas batidas", "Ritmo perfeito", "Controle de voo"],
-    ["Domine 1 batida", "Adicione segunda batida", "Pratique timing"]
+    ["Domine 1 batida", "Adicione segunda batida", "Pratique timing"],
   ),
-  37: createExerciseWithGamification(
+  37: createExercise(
     {
       id: "archer-push-up",
       name: "Flexão Arqueiro",
@@ -224,14 +209,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Força unilateral máxima. Equilíbrio excepcional.",
       equipment: [],
       calories: 26,
-      xpReward: 68,
+      // xpReward removed
       estimatedTime: 2160,
       category: "strength",
       emoji: "🏹",
     },
     37,
     EXERCISE_THRESHOLDS,
-    68,
     2160,
     [
       {
@@ -241,11 +225,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 2 séries de flexão com 2 batidas",
       },
     ],
-    undefined,
     ["Braço estendido", "Corpo reto", "Controle lateral"],
-    ["Pratique unilateral", "Aumente extensão", "Foco no equilíbrio"]
+    ["Pratique unilateral", "Aumente extensão", "Foco no equilíbrio"],
   ),
-  38: createExerciseWithGamification(
+  38: createExercise(
     {
       id: "triple-clap-push-up",
       name: "Flexão com 3 Batidas",
@@ -258,14 +241,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Potência, coordenação e força de elite absoluta.",
       equipment: [],
       calories: 30,
-      xpReward: 80,
+      // xpReward removed
       estimatedTime: 1800,
       category: "explosive",
       emoji: "👏👏👏",
     },
     38,
     EXERCISE_THRESHOLDS,
-    80,
     1800,
     [
       {
@@ -275,11 +257,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 4 séries de flexão arqueiro",
       },
     ],
-    undefined,
     ["Três batidas", "Ritmo impecável", "Controle absoluto"],
-    ["Domine 2 batidas", "Adicione terceira", "Foco na perfeição"]
+    ["Domine 2 batidas", "Adicione terceira", "Foco na perfeição"],
   ),
-  39: createExerciseWithGamification(
+  39: createExercise(
     {
       id: "rotating-180-push-up",
       name: "Flexão Rotação 180°",
@@ -292,14 +273,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Movimento acrobático de nível mundial.",
       equipment: [],
       calories: 32,
-      xpReward: 85,
+      // xpReward removed
       estimatedTime: 1800,
       category: "coordination",
       emoji: "🔄",
     },
     39,
     EXERCISE_THRESHOLDS,
-    85,
     1800,
     [
       {
@@ -309,11 +289,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 1 série de flexão com 3 batidas",
       },
     ],
-    undefined,
     ["Rotação 180°", "Controle de voo", "Aterrisse preciso"],
-    ["Pratique rotação", "Adicione explosão", "Foco na segurança"]
+    ["Pratique rotação", "Adicione explosão", "Foco na segurança"],
   ),
-  40: createExerciseWithGamification(
+  40: createExercise(
     {
       id: "fingertip-push-up",
       name: "Flexão na Ponta dos Dedos",
@@ -326,14 +305,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Desafia força dos dedos e pulsos. Técnica avançada.",
       equipment: [],
       calories: 28,
-      xpReward: 72,
+      // xpReward removed
       estimatedTime: 1800,
       category: "strength",
       emoji: "👆",
     },
     40,
     EXERCISE_THRESHOLDS,
-    72,
     1800,
     [
       {
@@ -343,11 +321,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 1 série de flexão rotação 180°",
       },
     ],
-    undefined,
     ["Ponta dos dedos", "Pulsos retos", "Distribua peso"],
-    ["Fortaleça dedos", "Comece com apoio parcial", "Aumente gradualmente"]
+    ["Fortaleça dedos", "Comece com apoio parcial", "Aumente gradualmente"],
   ),
-  41: createExerciseWithGamification(
+  41: createExercise(
     {
       id: "towel-slide-push-up",
       name: "Flexão Deslizar Toalha",
@@ -360,14 +337,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Coordenação e controle excepcional necessário.",
       equipment: ["toalhas"],
       calories: 27,
-      xpReward: 70,
+      // xpReward removed
       estimatedTime: 2160,
       category: "stability",
       emoji: "🧽",
     },
     41,
     EXERCISE_THRESHOLDS,
-    70,
     2160,
     [
       {
@@ -377,11 +353,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 5 séries de flexão na ponta dos dedos",
       },
     ],
-    undefined,
     ["Toalhas deslizam", "Controle constante", "Adapte posição"],
-    ["Pratique deslizar", "Adicione flexão", "Foco na estabilidade"]
+    ["Pratique deslizar", "Adicione flexão", "Foco na estabilidade"],
   ),
-  42: createExerciseWithGamification(
+  42: createExercise(
     {
       id: "tuck-planche-push-up",
       name: "Flexão Tuck Planche",
@@ -394,14 +369,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Força de planche completa. Movimento de elite.",
       equipment: [],
       calories: 31,
-      xpReward: 82,
+      // xpReward removed
       estimatedTime: 1800,
       category: "core",
       emoji: "🧘",
     },
     42,
     EXERCISE_THRESHOLDS,
-    82,
     1800,
     [
       {
@@ -411,11 +385,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 6 séries de flexão deslizar toalha",
       },
     ],
-    undefined,
     ["Joelhos no peito", "Corpo paralelo", "Core máximo"],
-    ["Domine tuck planche", "Adicione movimento", "Construa força"]
+    ["Domine tuck planche", "Adicione movimento", "Construa força"],
   ),
-  43: createExerciseWithGamification(
+  43: createExercise(
     {
       id: "planche-hold",
       name: "Sustentação Planche",
@@ -428,14 +401,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Força isométrica máxima. Base para planche push-up.",
       equipment: [],
       calories: 15,
-      xpReward: 40,
+      // xpReward removed
       estimatedTime: 1200,
       category: "core",
       emoji: "⏱️",
     },
     43,
     EXERCISE_THRESHOLDS,
-    40,
     1200,
     [
       {
@@ -445,11 +417,10 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 5 séries de flexão tuck planche",
       },
     ],
-    undefined,
     ["Corpo paralelo", "Braços retos", "Core contraído"],
-    ["Pratique holds curtos", "Aumente tempo gradualmente", "Foco na forma"]
+    ["Pratique holds curtos", "Aumente tempo gradualmente", "Foco na forma"],
   ),
-  44: createExerciseWithGamification(
+  44: createExercise(
     {
       id: "full-planche-push-up",
       name: "Flexão Planche Completa",
@@ -462,14 +433,13 @@ export const extremePushups: Record<number, Exercise> = {
       tips: "Força total do corpo. Cume da calistenia.",
       equipment: [],
       calories: 35,
-      xpReward: 100,
+      // xpReward removed
       estimatedTime: 1800,
       category: "core",
       emoji: "👑",
     },
     44,
     EXERCISE_THRESHOLDS,
-    100,
     1800,
     [
       {
@@ -479,8 +449,11 @@ export const extremePushups: Record<number, Exercise> = {
         description: "Complete 20 segundos de planche hold",
       },
     ],
-    undefined,
     ["Corpo paralelo", "Movimento controlado", "Força máxima"],
-    ["Domine tudo anterior", "Construa força gradualmente", "Foco na perfeição"]
+    [
+      "Domine tudo anterior",
+      "Construa força gradualmente",
+      "Foco na perfeição",
+    ],
   ),
 };

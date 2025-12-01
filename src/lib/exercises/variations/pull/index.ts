@@ -7,47 +7,19 @@ import type { Exercise } from "@/lib/exercises";
 export type { Exercise } from "@/lib/exercises";
 
 // Dados do jogo
-export {
-  PULL_THRESHOLDS,
-  PULL_ACHIEVEMENTS,
-  PULL_BADGES,
-  PULL_PROGRESSION_TIPS,
-  PULL_FORM_TIPS,
-} from "@/lib/exercises/variations/pull/data/pullGameData";
-
-// Utilitários
-export {
-  createPullExerciseWithGamification,
-  calculatePullLevel,
-  getSetsToNextPullLevel,
-  canUnlockPullVariation,
-  getUnlockedPullVariations,
-  calculateFormBonus,
-  calculateStreakMultiplier,
-  getContextualPullTips,
-  validatePullForm,
-} from "@/lib/exercises/variations/pull/utils/gamificationUtils";
-
-export {
-  canUnlockPullLevel,
-  canUnlockBeginnerPull,
-  canUnlockIntermediatePull,
-  canUnlockAdvancedPull,
-  canUnlockExtremePull,
-  calculatePullProgress,
-  suggestNextPullExercises,
-  validatePullProgressHealth,
-} from "@/lib/exercises/variations/pull/utils/pullUnlockRules";
-
-// Exercícios por nível
+export { PULL_THRESHOLDS } from "@/lib/exercises/variations/pull/data/pullGameData";
 export { beginnerPull } from "@/lib/exercises/variations/pull/beginner";
 export { intermediatePull } from "@/lib/exercises/variations/pull/intermediate";
 export { advancedPull } from "@/lib/exercises/variations/pull/advanced";
 export { extremePull } from "@/lib/exercises/variations/pull/extreme";
-
-// ====================
-// EXERCÍCIOS CONSOLIDADOS
-// ====================
+export {
+  canUnlockPullVariation,
+  getUnlockedPullVariations,
+  calculatePullLevel,
+  getSetsToNextPullLevel,
+  getContextualPullTips,
+  validatePullForm,
+} from "@/lib/exercises/variations/pull/utils/gamificationUtils";
 
 import { beginnerPull } from "@/lib/exercises/variations/pull/beginner";
 import { intermediatePull } from "@/lib/exercises/variations/pull/intermediate";

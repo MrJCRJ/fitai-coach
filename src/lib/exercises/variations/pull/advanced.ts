@@ -1,13 +1,13 @@
 import type { Exercise } from "@/lib/exercises";
-import { createPullExerciseWithGamification } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
-import { PULL_ACHIEVEMENTS } from "@/lib/exercises/variations/pull/data/pullGameData";
+import { createPullExercise } from "@/lib/exercises/variations/pull/utils/gamificationUtils";
+// PULL_ACHIEVEMENTS removed - no achievements used
 
 // ====================
 // EXERCÍCIOS DE PULL - NÍVEL ADVANCED
 // ====================
 
 export const advancedPull: Record<number, Exercise> = {
-  21: createPullExerciseWithGamification(
+  21: createPullExercise(
     {
       id: "archer_pull_up",
       name: "Archer Pull-up (Arqueiro)",
@@ -21,14 +21,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Força unilateral máxima. Mantenha o corpo reto. Técnica precisa para evitar compensações.",
       equipment: ["Barra"],
       calories: 25,
-      xpReward: 50,
+
       estimatedTime: 600,
       rarity: "legendary",
       category: "unilateral",
       emoji: "🏹",
     },
     21,
-    50,
     600,
     [
       {
@@ -38,11 +37,11 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 6400 séries de exercícios intermediários",
       },
     ],
-    [PULL_ACHIEVEMENTS[3]!], // pull_legend
+
     "advanced",
   ),
 
-  22: createPullExerciseWithGamification(
+  22: createPullExercise(
     {
       id: "typewriter_pull_up",
       name: "Typewriter Pull-up",
@@ -56,14 +55,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Controle absoluto do movimento. Pausa em cada 'letra'. Coordenação excepcional necessária.",
       equipment: ["Barra"],
       calories: 28,
-      xpReward: 55,
+
       estimatedTime: 660,
       rarity: "legendary",
       category: "coordination",
       emoji: "⌨️",
     },
     22,
-    55,
     660,
     [
       {
@@ -73,11 +71,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 7000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  23: createPullExerciseWithGamification(
+  23: createPullExercise(
     {
       id: "l_sit_pull_up_full",
       name: "L-sit Pull-up (Completo)",
@@ -91,14 +88,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Core completamente contraído. Pernas não se dobram. Força isométrica máxima no core.",
       equipment: ["Barra"],
       calories: 30,
-      xpReward: 60,
+
       estimatedTime: 720,
       rarity: "legendary",
       category: "core-integrated",
       emoji: "🦵",
     },
     23,
-    60,
     720,
     [
       {
@@ -108,11 +104,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 8000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  24: createPullExerciseWithGamification(
+  24: createPullExercise(
     {
       id: "chest_to_bar_full",
       name: "Chest-to-Bar (Peito na Barra)",
@@ -126,14 +121,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Extensão completa dos ombros. Momento de inércia no topo. Técnica CrossFit avançada.",
       equipment: ["Barra"],
       calories: 26,
-      xpReward: 52,
+
       estimatedTime: 600,
       rarity: "epic",
       category: "explosive",
       emoji: "👕",
     },
     24,
-    52,
     600,
     [
       {
@@ -143,11 +137,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 9000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  25: createPullExerciseWithGamification(
+  25: createPullExercise(
     {
       id: "high_pull_up",
       name: "High Pull-up (Pull-up Alto)",
@@ -161,14 +154,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Foca na contração máxima das costas. Técnica precisa. Mais alto que chest-to-bar.",
       equipment: ["Barra"],
       calories: 24,
-      xpReward: 48,
+
       estimatedTime: 540,
       rarity: "epic",
       category: "vertical",
       emoji: "⬆️",
     },
     25,
-    48,
     540,
     [
       {
@@ -178,11 +170,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 10000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  26: createPullExerciseWithGamification(
+  26: createPullExercise(
     {
       id: "explosive_pull_up",
       name: "Explosive Pull-up",
@@ -196,14 +187,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Fase excêntrica controlada, concêntrica explosiva. Desenvolve potência máxima. Técnica CrossFit.",
       equipment: ["Barra"],
       calories: 27,
-      xpReward: 54,
+
       estimatedTime: 540,
       rarity: "epic",
       category: "explosive",
       emoji: "💥",
     },
     26,
-    54,
     540,
     [
       {
@@ -213,11 +203,11 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 11000 séries de exercícios avançados",
       },
     ],
-    [PULL_ACHIEVEMENTS[4]!], // pull_god
+
     "advanced",
   ),
 
-  27: createPullExerciseWithGamification(
+  27: createPullExercise(
     {
       id: "weighted_pull_up",
       name: "Weighted Pull-up (Com Peso)",
@@ -231,14 +221,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Aumente peso gradualmente. Técnica perfeita essencial. Desenvolve força máxima absoluta.",
       equipment: ["Barra", "Cinto de peso", "Halteres"],
       calories: 32,
-      xpReward: 65,
+
       estimatedTime: 720,
       rarity: "legendary",
       category: "weighted",
       emoji: "🏋️‍♂️",
     },
     27,
-    65,
     720,
     [
       {
@@ -248,11 +237,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 12000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  28: createPullExerciseWithGamification(
+  28: createPullExercise(
     {
       id: "muscle_up_bar",
       name: "Muscle-up (Barra)",
@@ -266,14 +254,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Transição suave do pull-up para dip. Coordenação e potência. Movimento lendário da calistenia.",
       equipment: ["Barra"],
       calories: 35,
-      xpReward: 70,
+
       estimatedTime: 780,
       rarity: "legendary",
       category: "compound",
       emoji: "💪",
     },
     28,
-    70,
     780,
     [
       {
@@ -283,11 +270,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 12800 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  29: createPullExerciseWithGamification(
+  29: createPullExercise(
     {
       id: "one_arm_pull_up",
       name: "One-Arm Pull-up (Um Braço)",
@@ -301,14 +287,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Use assistência parcial inicialmente. Técnica perfeita. Força relativa excepcional necessária.",
       equipment: ["Barra"],
       calories: 38,
-      xpReward: 75,
+
       estimatedTime: 900,
       rarity: "legendary",
       category: "unilateral",
       emoji: "💪",
     },
     29,
-    75,
     900,
     [
       {
@@ -318,11 +303,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 14000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  30: createPullExerciseWithGamification(
+  30: createPullExercise(
     {
       id: "tuck_front_lever_hold",
       name: "Tuck Front Lever Hold",
@@ -336,14 +320,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Pernas dobradas facilitam. Gire os ombros para manter horizontal. Força isométrica excepcional.",
       equipment: ["Barra"],
       calories: 20,
-      xpReward: 40,
+
       estimatedTime: 480,
       rarity: "legendary",
       category: "isometric",
       emoji: "🤸‍♂️",
     },
     30,
-    40,
     480,
     [
       {
@@ -353,11 +336,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 15000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  31: createPullExerciseWithGamification(
+  31: createPullExercise(
     {
       id: "back_lever_hold",
       name: "Back Lever Hold",
@@ -371,14 +353,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Posição invertida. Contraia todos os músculos. Força isométrica máxima. Técnica precisa.",
       equipment: ["Barra"],
       calories: 22,
-      xpReward: 45,
+
       estimatedTime: 480,
       rarity: "legendary",
       category: "isometric",
       emoji: "🤸‍♂️",
     },
     31,
-    45,
     480,
     [
       {
@@ -388,11 +369,10 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 16000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 
-  32: createPullExerciseWithGamification(
+  32: createPullExercise(
     {
       id: "ice_cream_maker",
       name: "Ice Cream Maker",
@@ -406,14 +386,13 @@ export const advancedPull: Record<number, Exercise> = {
       tips: "Coordenação extrema. Combina força, controle e mobilidade. Movimento muito técnico.",
       equipment: ["Barra"],
       calories: 30,
-      xpReward: 60,
+
       estimatedTime: 720,
       rarity: "legendary",
       category: "coordination",
       emoji: "🍦",
     },
     32,
-    60,
     720,
     [
       {
@@ -423,7 +402,6 @@ export const advancedPull: Record<number, Exercise> = {
         description: "Complete 17000 séries de exercícios avançados",
       },
     ],
-    undefined,
     "advanced",
   ),
 };
