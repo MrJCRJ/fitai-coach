@@ -2,40 +2,39 @@ import { useState } from "react";
 // SimpleSession type removed to avoid referencing savedDetailed sessions (progression removed)
 
 export function useWorkoutLevels() {
+  type Difficulty = "beginner" | "intermediate" | "advanced" | "extreme";
   // Níveis/progressão removidos — valores neutros mantidos para compatibilidade
-  const [currentPushUpLevel] = useState<number>(1);
-
-  const [currentPullUpLevel] = useState<number>(1);
-
-  const [currentSquatLevel] = useState<number>(1);
-
-  const [currentDipLevel] = useState<number>(1);
+  // Dificuldade atual (neutra) para compatibilidade
+  const [currentPushUpDifficulty] = useState<Difficulty>("beginner");
+  const [currentPullUpDifficulty] = useState<Difficulty>("beginner");
+  const [currentSquatDifficulty] = useState<Difficulty>("beginner");
+  const [currentDipDifficulty] = useState<Difficulty>("beginner");
 
   // Estados para os níveis selecionados em cada carrossel (podem ser diferentes dos calculados)
-  const [selectedPushUpLevel, setSelectedPushUpLevel] =
-    useState<number>(currentPushUpLevel);
-  const [selectedPullUpLevel, setSelectedPullUpLevel] =
-    useState<number>(currentPullUpLevel);
-  const [selectedSquatLevel, setSelectedSquatLevel] =
-    useState<number>(currentSquatLevel);
-  const [selectedDipLevel, setSelectedDipLevel] =
-    useState<number>(currentDipLevel);
+  const [selectedPushUpDifficulty, setSelectedPushUpDifficulty] =
+    useState<Difficulty>(currentPushUpDifficulty);
+  const [selectedPullUpDifficulty, setSelectedPullUpDifficulty] =
+    useState<Difficulty>(currentPullUpDifficulty);
+  const [selectedSquatDifficulty, setSelectedSquatDifficulty] =
+    useState<Difficulty>(currentSquatDifficulty);
+  const [selectedDipDifficulty, setSelectedDipDifficulty] =
+    useState<Difficulty>(currentDipDifficulty);
 
   return {
-    // Níveis calculados (somente leitura)
-    currentPushUpLevel,
-    currentPullUpLevel,
-    currentSquatLevel,
-    currentDipLevel,
+    // Dificuldades calculadas (somente leitura)
+    currentPushUpDifficulty,
+    currentPullUpDifficulty,
+    currentSquatDifficulty,
+    currentDipDifficulty,
 
-    // Níveis selecionados (podem ser modificados)
-    selectedPushUpLevel,
-    selectedPullUpLevel,
-    selectedSquatLevel,
-    selectedDipLevel,
-    setSelectedPushUpLevel,
-    setSelectedPullUpLevel,
-    setSelectedSquatLevel,
-    setSelectedDipLevel,
+    // Dificuldades selecionadas (podem ser modificadas)
+    selectedPushUpDifficulty,
+    selectedPullUpDifficulty,
+    selectedSquatDifficulty,
+    selectedDipDifficulty,
+    setSelectedPushUpDifficulty,
+    setSelectedPullUpDifficulty,
+    setSelectedSquatDifficulty,
+    setSelectedDipDifficulty,
   };
 }

@@ -50,15 +50,18 @@ export function useWorkoutSession() {
     return detailedSession;
   }, []);
 
+  // Tipagem de dificuldade
+  type Difficulty = "beginner" | "intermediate" | "advanced" | "extreme";
+
   // Salvar progresso de um exercício
   const saveProgress = useCallback(
     (
       exerciseId: string,
       reps: number,
       activeTab: string,
-      selectedPushUpLevel: number,
-      selectedPullUpLevel: number,
-      selectedSquatLevel: number,
+      selectedPushUpDifficulty: Difficulty | undefined,
+      selectedPullUpDifficulty: Difficulty | undefined,
+      selectedSquatDifficulty: Difficulty | undefined,
       timers: { [key: string]: number },
       weight?: number,
       pushExerciseType?: "pushup" | "dip",
@@ -69,8 +72,13 @@ export function useWorkoutSession() {
       // Usar o exercício passado diretamente se disponível (novo sistema)
       const exerciseName = exercise?.name || `${exerciseId} - Exercício`;
       // Mapear dificuldade para nível numérico
-      // Níveis/progressão removidos — usamos um valor neutro quando necessário
-      const level = 1;
+      // Dificuldade selecionada — preferir a dificuldade fornecida
+      const difficulty: Difficulty =
+        activeTab === "empurrar"
+          ? ((selectedPushUpDifficulty || "beginner") as Difficulty)
+          : activeTab === "puxar"
+            ? ((selectedPullUpDifficulty || "beginner") as Difficulty)
+            : ((selectedSquatDifficulty || "beginner") as Difficulty);
       const targetReps = exercise ? getMinReps(exercise.reps) : 10;
 
       // Sempre iniciar exercício automaticamente com dados corretos
@@ -89,7 +97,7 @@ export function useWorkoutSession() {
           exerciseId,
           exerciseName,
           muscleGroup,
-          level,
+          difficulty,
         );
       } catch {
         // Exercício já ativo, continuar normalmente

@@ -58,7 +58,7 @@ export function getMuscleGroupFromTab(
 export function getExerciseName(
   exerciseId: string,
   activeTab: string,
-  selectedLevel: number,
+  selectedDifficulty: string,
 ): string {
   const variations =
     activeTab === "empurrar"
@@ -67,9 +67,12 @@ export function getExerciseName(
         ? pullUpVariations
         : squatVariations;
 
-  return (
-    variations[selectedLevel]?.name || `${exerciseId} - Nível ${selectedLevel}`
+  // Procurar a primeira variação que combine com a dificuldade
+  const found = Object.values(variations).find(
+    (v: Exercise) => v.difficulty === selectedDifficulty,
   );
+  if (found) return found.name;
+  return `${exerciseId} - ${selectedDifficulty}`;
 }
 
 /**
@@ -92,25 +95,25 @@ export function getExerciseVariations(activeTab: string) {
 /**
  * Obtém o nível selecionado baseado na aba ativa
  */
-export function getSelectedLevel(
+export function getSelectedDifficulty(
   activeTab: string,
-  selectedPushUpLevel: number,
-  selectedPullUpLevel: number,
-  selectedSquatLevel: number,
-  selectedDipLevel?: number,
+  selectedPushUpDifficulty: string,
+  selectedPullUpDifficulty: string,
+  selectedSquatDifficulty: string,
+  selectedDipDifficulty?: string,
   pushExerciseType?: "pushup" | "dip",
-): number {
+): string {
   switch (activeTab) {
     case "empurrar":
-      return pushExerciseType === "dip" && selectedDipLevel
-        ? selectedDipLevel
-        : selectedPushUpLevel;
+      return pushExerciseType === "dip" && selectedDipDifficulty
+        ? selectedDipDifficulty
+        : selectedPushUpDifficulty;
     case "puxar":
-      return selectedPullUpLevel;
+      return selectedPullUpDifficulty;
     case "pernas":
-      return selectedSquatLevel;
+      return selectedSquatDifficulty;
     default:
-      return selectedPushUpLevel;
+      return selectedPushUpDifficulty;
   }
 }
 

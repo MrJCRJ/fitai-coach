@@ -58,9 +58,9 @@ export default function WorkoutPage() {
       exerciseId,
       reps,
       activeTab,
-      workoutLevels.selectedPushUpLevel,
-      workoutLevels.selectedPullUpLevel,
-      workoutLevels.selectedSquatLevel,
+      workoutLevels.selectedPushUpDifficulty,
+      workoutLevels.selectedPullUpDifficulty,
+      workoutLevels.selectedSquatDifficulty,
       workoutTimers.timers,
       weight,
       "pushup", // Default para compatibilidade
@@ -99,6 +99,10 @@ export default function WorkoutPage() {
             onStartTimer={handleStartTimer}
             onStopTimer={handleStopTimer}
             onSaveProgress={handleSaveProgress}
+            selectedDifficulty={workoutLevels.selectedPushUpDifficulty}
+            onSelectedDifficultyChange={
+              workoutLevels.setSelectedPushUpDifficulty
+            }
           />
         );
       case "puxar":
@@ -111,6 +115,10 @@ export default function WorkoutPage() {
             onStartTimer={handleStartTimer}
             onStopTimer={handleStopTimer}
             onSaveProgress={handleSaveProgress}
+            selectedDifficulty={workoutLevels.selectedPullUpDifficulty}
+            onSelectedDifficultyChange={
+              workoutLevels.setSelectedPullUpDifficulty
+            }
           />
         );
       case "pernas":
@@ -123,6 +131,10 @@ export default function WorkoutPage() {
             onStartTimer={handleStartTimer}
             onStopTimer={handleStopTimer}
             onSaveProgress={handleSaveProgress}
+            selectedDifficulty={workoutLevels.selectedSquatDifficulty}
+            onSelectedDifficultyChange={
+              workoutLevels.setSelectedSquatDifficulty
+            }
           />
         );
       default:
