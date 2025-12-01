@@ -5,14 +5,9 @@ import { DetailedWorkoutSession } from "@/lib/workoutTypes";
  * Sistema de progressão: 10→25→50→100→200→400→800→800+ sets
  */
 export function calculateLevelFromSets(totalSets: number): number {
-  if (totalSets < 10) return 1;
-  if (totalSets < 25) return 2;
-  if (totalSets < 50) return 3;
-  if (totalSets < 100) return 4;
-  if (totalSets < 200) return 5;
-  if (totalSets < 400) return 6;
-  if (totalSets < 800) return 7;
-  return 8;
+  // Gamificação removida — retornar nível neutro (1) para compatibilidade
+  void totalSets;
+  return 1;
 }
 
 /**
@@ -22,27 +17,21 @@ export function calculateExerciseLevel(
   exerciseId: string,
   sessions: DetailedWorkoutSession[],
 ): number {
-  let totalSets = 0;
-
-  sessions.forEach((session) => {
-    const exercise = session.exercises.find(
-      (ex) => ex.exerciseId === exerciseId,
-    );
-    if (exercise) {
-      totalSets += exercise.sets.length;
-    }
-  });
-
-  return calculateLevelFromSets(totalSets);
+  // Gamificação removida — sempre retornar nível neutro (1)
+  void exerciseId;
+  void sessions;
+  return 1;
 }
 
 /**
  * Calcula níveis para todos os exercícios principais (push-up, pull-up, squat)
  */
 export function calculateAllExerciseLevels(sessions: DetailedWorkoutSession[]) {
+  // Gamificação removida — manter valores neutros para compatibilidade
+  void sessions;
   return {
-    pushUpLevel: calculateExerciseLevel("flexao", sessions),
-    pullUpLevel: calculateExerciseLevel("barra", sessions),
-    squatLevel: calculateExerciseLevel("agachamento", sessions),
+    pushUpLevel: 1,
+    pullUpLevel: 1,
+    squatLevel: 1,
   };
 }

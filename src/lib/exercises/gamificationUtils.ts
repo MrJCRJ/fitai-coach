@@ -40,8 +40,10 @@ export function calculateLevel(
   totalSets: number,
   thresholds: readonly number[],
 ): number {
-  const level = thresholds.findIndex((threshold) => totalSets < threshold);
-  return level === -1 ? thresholds.length : level;
+  // Gamificação removida — retornar nível neutro para compatibilidade
+  void totalSets;
+  void thresholds;
+  return 1;
 }
 
 // Utilitários para calcular sets até o próximo nível
@@ -78,11 +80,13 @@ export function canUnlockVariation(
 // Utilitários para obter variações desbloqueadas
 export function getUnlockedVariations(
   totalSets: number,
-  thresholds: number[],
+  thresholds: readonly number[],
   variations: Record<number, Exercise>,
 ): Exercise[] {
-  const currentLevel = calculateLevel(totalSets, thresholds);
-  return Object.values(variations).slice(0, currentLevel);
+  // Gamificação removida — todas as variações desbloqueadas
+  void totalSets;
+  void thresholds;
+  return Object.values(variations);
 }
 
 // Utilitários para converter string reps para RepRange
